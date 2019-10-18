@@ -1,5 +1,6 @@
 package metodos;
 
+import Entidades.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ import javax.swing.JOptionPane;
 
 public class SqlUsuarios extends Conexion {
 
-    public boolean registrar(Usuarios usr) {
+    public boolean registrar(Usuario usr) {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
