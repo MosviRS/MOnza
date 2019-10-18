@@ -1,0 +1,1 @@
+tarea:se conectara la BD con la interfaz regsitro y login y se podran hecer alta y consulta de usuarios estado:EN ESPERA
