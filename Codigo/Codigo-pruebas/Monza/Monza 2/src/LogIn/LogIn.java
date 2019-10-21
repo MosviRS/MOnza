@@ -125,7 +125,7 @@ public class LogIn extends javax.swing.JFrame {
                 PasswordMouseClicked(evt);
             }
         });
-        jPanel1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 170, 40));
+        jPanel1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 180, 40));
 
         View.setBackground(new java.awt.Color(242, 242, 242));
         View.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/oculto.png"))); // NOI18N
@@ -141,7 +141,7 @@ public class LogIn extends javax.swing.JFrame {
                 ViewActionPerformed(evt);
             }
         });
-        jPanel1.add(View, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, 20, 20));
+        jPanel1.add(View, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, 30, 20));
 
         jSeparator2.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));

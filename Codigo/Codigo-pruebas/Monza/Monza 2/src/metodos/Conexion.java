@@ -24,6 +24,11 @@ public class Conexion
      * @param pass -Password del usuario en la base de datos
      * @param manejador -para oracle (1) para mysql(2)
      */
+    
+    public Connection GetConexion(){
+        
+    }
+    
     public Connection Conecta(String host, String instancia, String usuario, String pass, int manejador) throws SQLException
     {
         String driver = "";
@@ -33,6 +38,9 @@ public class Conexion
         //com.mysql.jdbc.JDBC4Connection@94948a
 
         //ORACLE
+        
+        
+        
         if (manejador == 1 || manejador == 2)
         {
             if (manejador == 1)

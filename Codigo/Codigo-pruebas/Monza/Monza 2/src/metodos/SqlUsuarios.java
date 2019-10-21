@@ -13,7 +13,7 @@ public class SqlUsuarios extends Conexion {
 
     public boolean registrar(Usuario usr) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
+        Connection con = Conecta();
 
         String sql = "INSERT INTO usuarios (usuario, password, nombre, correo, idTipo) VALUES(?,?,?,?,?)";
 

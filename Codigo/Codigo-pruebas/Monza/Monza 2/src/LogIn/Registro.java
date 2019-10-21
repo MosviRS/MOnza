@@ -35,7 +35,7 @@ public class Registro extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        horario = new javax.swing.JComboBox<>();
+        Question = new javax.swing.JComboBox<>();
         jBGuardar = new javax.swing.JButton();
         jBLimpiar = new javax.swing.JButton();
         back = new javax.swing.JButton();
@@ -46,24 +46,31 @@ public class Registro extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
-        jTFuser2 = new javax.swing.JTextField();
+        jTFAmaterno = new javax.swing.JTextField();
         jSeparator11 = new javax.swing.JSeparator();
-        jTFuser3 = new javax.swing.JTextField();
+        jTFNombreUser = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jPassword = new javax.swing.JPasswordField();
         Ocultar = new javax.swing.JToggleButton();
         jLabel10 = new javax.swing.JLabel();
-        jTFuser1 = new javax.swing.JTextField();
+        jTFRespuesta = new javax.swing.JTextField();
         jSeparator12 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
-        jTFuser4 = new javax.swing.JTextField();
+        jTFApaterno = new javax.swing.JTextField();
         jSeparator10 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
-        jTFuser5 = new javax.swing.JTextField();
+        jTFCorreo = new javax.swing.JTextField();
         jSeparator13 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         Minimize = new javax.swing.JButton();
         Close = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jTFCorreo1 = new javax.swing.JTextField();
+        jSeparator14 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
+        jLabel12 = new javax.swing.JLabel();
+        jPassword2 = new javax.swing.JPasswordField();
+        Ocultar2 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -72,15 +79,15 @@ public class Registro extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(243, 240, 235));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        horario.setBackground(new java.awt.Color(33, 33, 33));
-        horario.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 11)); // NOI18N
-        horario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8:00AM -  3:30PM", "8:00AM -  6:00PM", "8:00AM -  8:00PM", "3:30AM -  8:30PM" }));
-        horario.addActionListener(new java.awt.event.ActionListener() {
+        Question.setBackground(new java.awt.Color(33, 33, 33));
+        Question.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 11)); // NOI18N
+        Question.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "¿Cuál fue el nombre de tu primera mascota? ", "¿Cuál es tu comida favorita? ", "¿Cuál es el nombre de tu madre? ", "¿En qué ciudad naciste?", "¿Cuál es el segundo nombre de tu padre?", "¿Cuál es el nombre de tu primer profesor?" }));
+        Question.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horarioActionPerformed(evt);
+                QuestionActionPerformed(evt);
             }
         });
-        jPanel1.add(horario, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 320, 230, 30));
+        jPanel1.add(Question, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, 290, 30));
 
         jBGuardar.setBackground(new java.awt.Color(243, 240, 235));
         jBGuardar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
@@ -125,7 +132,7 @@ public class Registro extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
-        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 490, 80, 60));
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 510, 80, 60));
 
         jLabel5.setBackground(new java.awt.Color(235, 235, 235));
         jLabel5.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
@@ -145,7 +152,7 @@ public class Registro extends javax.swing.JFrame {
                 jTFuserMouseClicked(evt);
             }
         });
-        jPanel1.add(jTFuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 230, 40));
+        jPanel1.add(jTFuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 230, 30));
 
         jSeparator3.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
@@ -153,58 +160,58 @@ public class Registro extends javax.swing.JFrame {
 
         jSeparator7.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, 250, 20));
+        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 250, 20));
 
         jLabel6.setBackground(new java.awt.Color(235, 235, 235));
         jLabel6.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel6.setText("Contraseña");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, 90, 20));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 90, 20));
 
         jLabel7.setBackground(new java.awt.Color(235, 235, 235));
         jLabel7.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jLabel7.setText("Apellido Paterno");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, 130, 20));
+        jLabel7.setText("Apellido Materno");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 130, 20));
 
         jSeparator9.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 270, 250, 20));
+        jPanel1.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 250, 10));
 
-        jTFuser2.setBackground(new java.awt.Color(243, 240, 235));
-        jTFuser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFuser2.setForeground(new java.awt.Color(102, 102, 102));
-        jTFuser2.setText("Ingrese A. Paterno");
-        jTFuser2.setBorder(null);
-        jTFuser2.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFuser2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFuser2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTFAmaterno.setBackground(new java.awt.Color(243, 240, 235));
+        jTFAmaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFAmaterno.setForeground(new java.awt.Color(102, 102, 102));
+        jTFAmaterno.setText("Ingrese A. Materno");
+        jTFAmaterno.setBorder(null);
+        jTFAmaterno.setCaretColor(new java.awt.Color(204, 51, 0));
+        jTFAmaterno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTFAmaterno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFuser2MouseClicked(evt);
+                jTFAmaternoMouseClicked(evt);
             }
         });
-        jPanel1.add(jTFuser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 230, 230, 40));
+        jPanel1.add(jTFAmaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 230, 40));
 
         jSeparator11.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator11.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 250, 20));
 
-        jTFuser3.setBackground(new java.awt.Color(243, 240, 235));
-        jTFuser3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFuser3.setForeground(new java.awt.Color(102, 102, 102));
-        jTFuser3.setText("Inserte nombre");
-        jTFuser3.setBorder(null);
-        jTFuser3.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFuser3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFuser3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTFNombreUser.setBackground(new java.awt.Color(243, 240, 235));
+        jTFNombreUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFNombreUser.setForeground(new java.awt.Color(102, 102, 102));
+        jTFNombreUser.setText("Inserte nombre");
+        jTFNombreUser.setBorder(null);
+        jTFNombreUser.setCaretColor(new java.awt.Color(204, 51, 0));
+        jTFNombreUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTFNombreUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFuser3MouseClicked(evt);
+                jTFNombreUserMouseClicked(evt);
             }
         });
-        jPanel1.add(jTFuser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 230, 40));
+        jPanel1.add(jTFNombreUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 230, 30));
 
         jLabel9.setBackground(new java.awt.Color(235, 235, 235));
         jLabel9.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel9.setText("Pregunta de seguridad");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, 160, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 410, 160, 20));
 
         jPassword.setBackground(new java.awt.Color(243, 240, 235));
         jPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -217,7 +224,7 @@ public class Registro extends javax.swing.JFrame {
                 jPasswordMouseClicked(evt);
             }
         });
-        jPanel1.add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 220, 30));
+        jPanel1.add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 220, 30));
 
         Ocultar.setBackground(new java.awt.Color(242, 242, 242));
         Ocultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/oculto.png"))); // NOI18N
@@ -233,54 +240,54 @@ public class Registro extends javax.swing.JFrame {
                 OcultarActionPerformed(evt);
             }
         });
-        jPanel1.add(Ocultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 160, 20, 20));
+        jPanel1.add(Ocultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 20, 20));
 
         jLabel10.setBackground(new java.awt.Color(235, 235, 235));
         jLabel10.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel10.setText("Nombre(s)");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 90, 20));
 
-        jTFuser1.setBackground(new java.awt.Color(243, 240, 235));
-        jTFuser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFuser1.setForeground(new java.awt.Color(102, 102, 102));
-        jTFuser1.setText("inserte respuesta");
-        jTFuser1.setBorder(null);
-        jTFuser1.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFuser1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFuser1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTFRespuesta.setBackground(new java.awt.Color(243, 240, 235));
+        jTFRespuesta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFRespuesta.setForeground(new java.awt.Color(102, 102, 102));
+        jTFRespuesta.setText("Inserte respuesta");
+        jTFRespuesta.setBorder(null);
+        jTFRespuesta.setCaretColor(new java.awt.Color(204, 51, 0));
+        jTFRespuesta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTFRespuesta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFuser1MouseClicked(evt);
+                jTFRespuestaMouseClicked(evt);
             }
         });
-        jTFuser1.addActionListener(new java.awt.event.ActionListener() {
+        jTFRespuesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFuser1ActionPerformed(evt);
+                jTFRespuestaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTFuser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 350, 230, 40));
+        jPanel1.add(jTFRespuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 480, 250, 30));
 
         jSeparator12.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator12.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, 250, 20));
+        jPanel1.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 520, 250, 20));
 
         jLabel11.setBackground(new java.awt.Color(235, 235, 235));
         jLabel11.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel11.setText("Apellido Paterno");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 130, 20));
 
-        jTFuser4.setBackground(new java.awt.Color(243, 240, 235));
-        jTFuser4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFuser4.setForeground(new java.awt.Color(102, 102, 102));
-        jTFuser4.setText("Ingrese A. Paterno");
-        jTFuser4.setBorder(null);
-        jTFuser4.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFuser4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFuser4.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTFApaterno.setBackground(new java.awt.Color(243, 240, 235));
+        jTFApaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFApaterno.setForeground(new java.awt.Color(102, 102, 102));
+        jTFApaterno.setText("Ingrese A. Paterno");
+        jTFApaterno.setBorder(null);
+        jTFApaterno.setCaretColor(new java.awt.Color(204, 51, 0));
+        jTFApaterno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTFApaterno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFuser4MouseClicked(evt);
+                jTFApaternoMouseClicked(evt);
             }
         });
-        jPanel1.add(jTFuser4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 230, 40));
+        jPanel1.add(jTFApaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 230, 30));
 
         jSeparator10.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator10.setForeground(new java.awt.Color(0, 0, 0));
@@ -289,35 +296,35 @@ public class Registro extends javax.swing.JFrame {
         jLabel13.setBackground(new java.awt.Color(235, 235, 235));
         jLabel13.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel13.setText("Correo electronico");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 130, 20));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, 130, 20));
 
-        jTFuser5.setBackground(new java.awt.Color(243, 240, 235));
-        jTFuser5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFuser5.setForeground(new java.awt.Color(102, 102, 102));
-        jTFuser5.setText("Inserte un correo electronico");
-        jTFuser5.setBorder(null);
-        jTFuser5.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFuser5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFuser5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTFCorreo.setBackground(new java.awt.Color(243, 240, 235));
+        jTFCorreo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFCorreo.setForeground(new java.awt.Color(102, 102, 102));
+        jTFCorreo.setText("Inserte un correo electronico");
+        jTFCorreo.setBorder(null);
+        jTFCorreo.setCaretColor(new java.awt.Color(204, 51, 0));
+        jTFCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTFCorreo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFuser5MouseClicked(evt);
+                jTFCorreoMouseClicked(evt);
             }
         });
-        jTFuser5.addActionListener(new java.awt.event.ActionListener() {
+        jTFCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFuser5ActionPerformed(evt);
+                jTFCorreoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTFuser5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 230, 40));
+        jPanel1.add(jTFCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 230, 30));
 
         jSeparator13.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator13.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 250, 20));
+        jPanel1.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 390, 250, 20));
 
         jLabel8.setFont(new java.awt.Font("Microsoft Tai Le", 0, 36)); // NOI18N
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/Register.png"))); // NOI18N
         jLabel8.setText("Registro");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 340, 80));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 380, 70));
 
         Minimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/Minimize.png"))); // NOI18N
         Minimize.setBorder(null);
@@ -349,14 +356,80 @@ public class Registro extends javax.swing.JFrame {
         });
         jPanel1.add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 10, -1, 40));
 
+        jLabel14.setBackground(new java.awt.Color(235, 235, 235));
+        jLabel14.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel14.setText("Correo electronico");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, 130, 20));
+
+        jTFCorreo1.setBackground(new java.awt.Color(243, 240, 235));
+        jTFCorreo1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFCorreo1.setForeground(new java.awt.Color(102, 102, 102));
+        jTFCorreo1.setText("Inserte un correo electronico");
+        jTFCorreo1.setBorder(null);
+        jTFCorreo1.setCaretColor(new java.awt.Color(204, 51, 0));
+        jTFCorreo1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTFCorreo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTFCorreo1MouseClicked(evt);
+            }
+        });
+        jTFCorreo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFCorreo1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTFCorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 230, 30));
+
+        jSeparator14.setBackground(new java.awt.Color(235, 235, 235));
+        jSeparator14.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 390, 250, 20));
+
+        jSeparator8.setBackground(new java.awt.Color(235, 235, 235));
+        jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 300, 250, 20));
+
+        jLabel12.setBackground(new java.awt.Color(235, 235, 235));
+        jLabel12.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel12.setText("Confirmar Contraseña");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, 170, 20));
+
+        jPassword2.setBackground(new java.awt.Color(243, 240, 235));
+        jPassword2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPassword2.setForeground(new java.awt.Color(102, 102, 102));
+        jPassword2.setText("Inserte contraseña");
+        jPassword2.setBorder(null);
+        jPassword2.setCaretColor(new java.awt.Color(204, 51, 0));
+        jPassword2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPassword2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jPassword2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 220, 30));
+
+        Ocultar2.setBackground(new java.awt.Color(242, 242, 242));
+        Ocultar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/oculto.png"))); // NOI18N
+        Ocultar2.setBorder(null);
+        Ocultar2.setBorderPainted(false);
+        Ocultar2.setContentAreaFilled(false);
+        Ocultar2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
+        Ocultar2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
+        Ocultar2.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
+        Ocultar2.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
+        Ocultar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Ocultar2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Ocultar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 270, 20, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void horarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horarioActionPerformed
+    private void QuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuestionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_horarioActionPerformed
+    }//GEN-LAST:event_QuestionActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 //        java.awt.EventQueue.invokeLater(new Runnable() {
@@ -378,13 +451,13 @@ public class Registro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTFuserMouseClicked
 
-    private void jTFuser2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuser2MouseClicked
+    private void jTFAmaternoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFAmaternoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFuser2MouseClicked
+    }//GEN-LAST:event_jTFAmaternoMouseClicked
 
-    private void jTFuser3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuser3MouseClicked
+    private void jTFNombreUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFNombreUserMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFuser3MouseClicked
+    }//GEN-LAST:event_jTFNombreUserMouseClicked
 
     private void jPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordMouseClicked
         // TODO add your handling code here:
@@ -402,25 +475,25 @@ public class Registro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_OcultarActionPerformed
 
-    private void jTFuser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuser1MouseClicked
+    private void jTFRespuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFRespuestaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFuser1MouseClicked
+    }//GEN-LAST:event_jTFRespuestaMouseClicked
 
-    private void jTFuser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFuser1ActionPerformed
+    private void jTFRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFRespuestaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFuser1ActionPerformed
+    }//GEN-LAST:event_jTFRespuestaActionPerformed
 
-    private void jTFuser4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuser4MouseClicked
+    private void jTFApaternoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFApaternoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFuser4MouseClicked
+    }//GEN-LAST:event_jTFApaternoMouseClicked
 
-    private void jTFuser5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuser5MouseClicked
+    private void jTFCorreoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFCorreoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFuser5MouseClicked
+    }//GEN-LAST:event_jTFCorreoMouseClicked
 
-    private void jTFuser5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFuser5ActionPerformed
+    private void jTFCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCorreoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFuser5ActionPerformed
+    }//GEN-LAST:event_jTFCorreoActionPerformed
 
     private void MinimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinimizeActionPerformed
         this.setState(LogIn.ICONIFIED);
@@ -448,6 +521,22 @@ public class Registro extends javax.swing.JFrame {
         });
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
+
+    private void jTFCorreo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFCorreo1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFCorreo1MouseClicked
+
+    private void jTFCorreo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCorreo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFCorreo1ActionPerformed
+
+    private void jPassword2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPassword2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPassword2MouseClicked
+
+    private void Ocultar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ocultar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Ocultar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -488,13 +577,16 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JButton Close;
     private javax.swing.JButton Minimize;
     private javax.swing.JToggleButton Ocultar;
+    private javax.swing.JToggleButton Ocultar2;
+    private javax.swing.JComboBox<String> Question;
     private javax.swing.JButton back;
-    private javax.swing.JComboBox<String> horario;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -502,18 +594,22 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPassword;
+    private javax.swing.JPasswordField jPassword2;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator13;
+    private javax.swing.JSeparator jSeparator14;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JTextField jTFAmaterno;
+    private javax.swing.JTextField jTFApaterno;
+    private javax.swing.JTextField jTFCorreo;
+    private javax.swing.JTextField jTFCorreo1;
+    private javax.swing.JTextField jTFNombreUser;
+    private javax.swing.JTextField jTFRespuesta;
     private javax.swing.JTextField jTFuser;
-    private javax.swing.JTextField jTFuser1;
-    private javax.swing.JTextField jTFuser2;
-    private javax.swing.JTextField jTFuser3;
-    private javax.swing.JTextField jTFuser4;
-    private javax.swing.JTextField jTFuser5;
     // End of variables declaration//GEN-END:variables
 }
