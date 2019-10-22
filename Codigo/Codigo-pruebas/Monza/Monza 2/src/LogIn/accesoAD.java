@@ -5,8 +5,11 @@
  */
 package LogIn;
 
+import Entidades.Usuario;
+import clases.Hash;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import metodos.SqlUsuarios;
 
 /**
  *
@@ -61,6 +64,7 @@ public class accesoAD extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 80, 50));
 
         jLabel2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Contraseña de Administrador");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 260, 30));
 
@@ -187,16 +191,35 @@ public class accesoAD extends javax.swing.JFrame {
     }//GEN-LAST:event_okMouseReleased
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
-        int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "El acceso fue exitoso :3","Exit",dialog);
-        if (result==0){
-            this.dispose();
-             java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        new Registro().setVisible(true);
+        
+            SqlUsuarios ModSQL= new SqlUsuarios();
+            Usuario mod= new Usuario();
+            String password= new String(txtvalida.getPassword());
+            if(!txtvalida.getText().equals("") && !txtvalida.getText().equals("Inserte contraseña")){
+                    String encriptado= Hash.sha1(password);                    
+                    mod.setPassword(encriptado);
+                    if(ModSQL.validaSA(mod)){
+                        Registro ir= new Registro();
+                        ir.setVisible(true);
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Datos Incorrectos");
                     }
-                });
-        }
+                }else{
+                JOptionPane.showMessageDialog(null, "Debe Ingresar sus Datos");
+            }  
+
+//
+//        int dialog = JOptionPane.YES_NO_OPTION;
+//        int result = JOptionPane.showConfirmDialog(null, "El acceso fue exitoso :3","Exit",dialog);
+//        if (result==0){
+//            this.dispose();
+//             java.awt.EventQueue.invokeLater(new Runnable() {
+//                    public void run() {
+//                        new Registro().setVisible(true);
+//                    }
+//                });
+//        }
     }//GEN-LAST:event_okActionPerformed
 
     private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed

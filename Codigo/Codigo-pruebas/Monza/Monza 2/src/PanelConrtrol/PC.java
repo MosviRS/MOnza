@@ -5,10 +5,26 @@
  */
 package PanelConrtrol;
 
+import Entidades.Provedores;
 import Entidades.Usuario;
+import Entidades.clientes;
 import LogIn.*;
+import cjb.ci.Mensaje;
+import clases.IMGtabla;
+import clases.editTable;
+import java.awt.FileDialog;
+import java.awt.Image;
+import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import metodos.Querys;
+import java.sql.Connection;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import metodos.ManipulaDBC;
 
 /**
  *
@@ -16,6 +32,12 @@ import javax.swing.JOptionPane;
  */
 public class PC extends javax.swing.JFrame {
     Usuario mod;
+    Connection con;
+    clientes cli;
+    Provedores prov;
+    Querys q = new Querys();
+    public static DefaultTableModel atm=new editTable();
+    JFileChooser jf;
     /**
      * Creates new form Registro
      */
@@ -26,6 +48,9 @@ public class PC extends javax.swing.JFrame {
         //Nav.setEnabledAt(4, false);
         ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
         this.setIconImage(icon.getImage());
+        String []titulo=new String[] {"Nombre","Descripcion","PrecioG","precioN","Imagen"};
+         
+       
     }
     public PC(Usuario mod){
         initComponents();
@@ -36,6 +61,7 @@ public class PC extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
         this.setIconImage(icon.getImage());
         if(mod.getTipo()==1){
+            
             Nav.setEnabledAt(0, true);
             Nav.setEnabledAt(1, true);
             Nav.setEnabledAt(2, true);
@@ -51,6 +77,13 @@ public class PC extends javax.swing.JFrame {
             Nav.setEnabledAt(4, true);
             Nav.setEnabledAt(5, false);
         }
+        
+         String []titulo=new String[] {"Modelo","Nombre","Precio","Marca/Provedor","Cantidad","Categoria","Imagen"};
+         agenda1.setDefaultRenderer(Object.class,new IMGtabla());
+         atm.setColumnIdentifiers(titulo);
+         agenda1.setRowHeight(70);
+         agenda1.setModel(atm);
+       
     }
 
     /**
@@ -123,6 +156,8 @@ public class PC extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         agenda1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        txtFile = new javax.swing.JTextField();
         Clientes = new javax.swing.JPanel();
         Clean = new javax.swing.JButton();
         buscar = new javax.swing.JTextField();
@@ -141,23 +176,23 @@ public class PC extends javax.swing.JFrame {
         agenda3 = new javax.swing.JTable();
         Minimize1 = new javax.swing.JButton();
         Proveedores = new javax.swing.JPanel();
-        email = new javax.swing.JTextField();
+        Nomprov = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         buscar3 = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
-        email2 = new javax.swing.JTextField();
+        dirccprove = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
-        email3 = new javax.swing.JTextField();
+        emailprov = new javax.swing.JTextField();
         jSeparator17 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        email4 = new javax.swing.JTextField();
+        telprov = new javax.swing.JTextField();
         jSeparator18 = new javax.swing.JSeparator();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jSeparator19 = new javax.swing.JSeparator();
-        email5 = new javax.swing.JTextField();
+        mercprov = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         jScrollPane12 = new javax.swing.JScrollPane();
         agenda4 = new javax.swing.JTable();
@@ -175,6 +210,14 @@ public class PC extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(243, 240, 235));
@@ -444,6 +487,16 @@ public class PC extends javax.swing.JFrame {
 
         am1.setBackground(new java.awt.Color(243, 240, 235));
         am1.setBorder(null);
+        am1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                am1ActionPerformed(evt);
+            }
+        });
+        am1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                am1KeyTyped(evt);
+            }
+        });
         Productos.add(am1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 250, 20));
 
         name1.setBackground(new java.awt.Color(243, 240, 235));
@@ -457,10 +510,20 @@ public class PC extends javax.swing.JFrame {
 
         email1.setBackground(new java.awt.Color(243, 240, 235));
         email1.setBorder(null);
+        email1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email1ActionPerformed(evt);
+            }
+        });
         Productos.add(email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 250, 20));
 
         nmm1.setBackground(new java.awt.Color(243, 240, 235));
         nmm1.setBorder(null);
+        nmm1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nmm1ActionPerformed(evt);
+            }
+        });
         Productos.add(nmm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 250, 20));
 
         jSeparator10.setBackground(new java.awt.Color(235, 235, 235));
@@ -506,23 +569,28 @@ public class PC extends javax.swing.JFrame {
         jBGuardar1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
         jBGuardar1.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
         jBGuardar1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
+        jBGuardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardar1ActionPerformed(evt);
+            }
+        });
         Productos.add(jBGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 150, 60));
 
         agenda1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Modelo", "Nombre", "Precio", "Marca/Proveedor", "Catidad", "Categoria"
+                "Modelo", "Nombre", "Precio", "Marca/Proveedor", "Catidad", "Categoria", "Imagen"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -533,6 +601,8 @@ public class PC extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        agenda1.setRowHeight(70);
+        agenda1.setSelectionBackground(new java.awt.Color(206, 166, 8));
         agenda1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 agenda1MouseClicked(evt);
@@ -542,7 +612,16 @@ public class PC extends javax.swing.JFrame {
 
         jScrollPane8.setViewportView(jScrollPane3);
 
-        Productos.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 720, 350));
+        Productos.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 720, 350));
+
+        jButton1.setText("Selecciona la imagen");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        Productos.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
+        Productos.add(txtFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 130, -1));
 
         jPanel4.add(Productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 520));
 
@@ -703,22 +782,27 @@ public class PC extends javax.swing.JFrame {
         Proveedores.setBackground(new java.awt.Color(243, 240, 235));
         Proveedores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        email.setBackground(new java.awt.Color(243, 240, 235));
-        email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        email.setForeground(new java.awt.Color(102, 102, 102));
-        email.setText("Inserta Nombre");
-        email.setBorder(null);
-        email.addMouseListener(new java.awt.event.MouseAdapter() {
+        Nomprov.setBackground(new java.awt.Color(243, 240, 235));
+        Nomprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Nomprov.setForeground(new java.awt.Color(102, 102, 102));
+        Nomprov.setText("Inserta Nombre");
+        Nomprov.setBorder(null);
+        Nomprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                emailMouseClicked(evt);
+                NomprovMouseClicked(evt);
             }
         });
-        email.addKeyListener(new java.awt.event.KeyAdapter() {
+        Nomprov.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NomprovActionPerformed(evt);
+            }
+        });
+        Nomprov.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                emailKeyReleased(evt);
+                NomprovKeyReleased(evt);
             }
         });
-        Proveedores.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 44, 170, 20));
+        Proveedores.add(Nomprov, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 44, 170, 20));
 
         jSeparator8.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
@@ -738,27 +822,27 @@ public class PC extends javax.swing.JFrame {
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-search-48_1.png"))); // NOI18N
         Proveedores.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, 50, 40));
 
-        email2.setBackground(new java.awt.Color(243, 240, 235));
-        email2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        email2.setForeground(new java.awt.Color(102, 102, 102));
-        email2.setText("Inserta Dirección");
-        email2.setBorder(null);
-        email2.addMouseListener(new java.awt.event.MouseAdapter() {
+        dirccprove.setBackground(new java.awt.Color(243, 240, 235));
+        dirccprove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        dirccprove.setForeground(new java.awt.Color(102, 102, 102));
+        dirccprove.setText("Inserta Dirección");
+        dirccprove.setBorder(null);
+        dirccprove.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                email2MouseClicked(evt);
+                dirccproveMouseClicked(evt);
             }
         });
-        email2.addActionListener(new java.awt.event.ActionListener() {
+        dirccprove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email2ActionPerformed(evt);
+                dirccproveActionPerformed(evt);
             }
         });
-        email2.addKeyListener(new java.awt.event.KeyAdapter() {
+        dirccprove.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                email2KeyReleased(evt);
+                dirccproveKeyReleased(evt);
             }
         });
-        Proveedores.add(email2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 240, 20));
+        Proveedores.add(dirccprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 240, 20));
 
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel3.setText("Direccón:");
@@ -768,27 +852,27 @@ public class PC extends javax.swing.JFrame {
         jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
         Proveedores.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 250, 10));
 
-        email3.setBackground(new java.awt.Color(243, 240, 235));
-        email3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        email3.setForeground(new java.awt.Color(102, 102, 102));
-        email3.setText("Inserta Correo Electronico");
-        email3.setBorder(null);
-        email3.addMouseListener(new java.awt.event.MouseAdapter() {
+        emailprov.setBackground(new java.awt.Color(243, 240, 235));
+        emailprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        emailprov.setForeground(new java.awt.Color(102, 102, 102));
+        emailprov.setText("Inserta Correo Electronico");
+        emailprov.setBorder(null);
+        emailprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                email3MouseClicked(evt);
+                emailprovMouseClicked(evt);
             }
         });
-        email3.addActionListener(new java.awt.event.ActionListener() {
+        emailprov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email3ActionPerformed(evt);
+                emailprovActionPerformed(evt);
             }
         });
-        email3.addKeyListener(new java.awt.event.KeyAdapter() {
+        emailprov.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                email3KeyReleased(evt);
+                emailprovKeyReleased(evt);
             }
         });
-        Proveedores.add(email3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 190, 20));
+        Proveedores.add(emailprov, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 190, 20));
 
         jSeparator17.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator17.setForeground(new java.awt.Color(0, 0, 0));
@@ -798,27 +882,27 @@ public class PC extends javax.swing.JFrame {
         jLabel4.setText("Correo Electronico:");
         Proveedores.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 130, 30));
 
-        email4.setBackground(new java.awt.Color(243, 240, 235));
-        email4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        email4.setForeground(new java.awt.Color(102, 102, 102));
-        email4.setText("Inserta Correo Electronico");
-        email4.setBorder(null);
-        email4.addMouseListener(new java.awt.event.MouseAdapter() {
+        telprov.setBackground(new java.awt.Color(243, 240, 235));
+        telprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        telprov.setForeground(new java.awt.Color(102, 102, 102));
+        telprov.setText("Inserta Telefono");
+        telprov.setBorder(null);
+        telprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                email4MouseClicked(evt);
+                telprovMouseClicked(evt);
             }
         });
-        email4.addActionListener(new java.awt.event.ActionListener() {
+        telprov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email4ActionPerformed(evt);
+                telprovActionPerformed(evt);
             }
         });
-        email4.addKeyListener(new java.awt.event.KeyAdapter() {
+        telprov.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                email4KeyReleased(evt);
+                telprovKeyReleased(evt);
             }
         });
-        Proveedores.add(email4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 290, 20));
+        Proveedores.add(telprov, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 290, 20));
 
         jSeparator18.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator18.setForeground(new java.awt.Color(0, 0, 0));
@@ -836,27 +920,27 @@ public class PC extends javax.swing.JFrame {
         jSeparator19.setForeground(new java.awt.Color(0, 0, 0));
         Proveedores.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 250, 10));
 
-        email5.setBackground(new java.awt.Color(243, 240, 235));
-        email5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        email5.setForeground(new java.awt.Color(102, 102, 102));
-        email5.setText("Inserta Correo Electronico");
-        email5.setBorder(null);
-        email5.addMouseListener(new java.awt.event.MouseAdapter() {
+        mercprov.setBackground(new java.awt.Color(243, 240, 235));
+        mercprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mercprov.setForeground(new java.awt.Color(102, 102, 102));
+        mercprov.setText("Inserta Mercancia");
+        mercprov.setBorder(null);
+        mercprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                email5MouseClicked(evt);
+                mercprovMouseClicked(evt);
             }
         });
-        email5.addActionListener(new java.awt.event.ActionListener() {
+        mercprov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email5ActionPerformed(evt);
+                mercprovActionPerformed(evt);
             }
         });
-        email5.addKeyListener(new java.awt.event.KeyAdapter() {
+        mercprov.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                email5KeyReleased(evt);
+                mercprovKeyReleased(evt);
             }
         });
-        Proveedores.add(email5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 240, 20));
+        Proveedores.add(mercprov, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 240, 20));
 
         agenda4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1118,10 +1202,13 @@ public class PC extends javax.swing.JFrame {
 
     private void name1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name1ActionPerformed
         // TODO add your handling code here:
+        ap1.requestFocus ();
+        
     }//GEN-LAST:event_name1ActionPerformed
 
     private void ap1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ap1ActionPerformed
         // TODO add your handling code here:
+        am1.requestFocus ();
     }//GEN-LAST:event_ap1ActionPerformed
 
     private void Minimize1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Minimize1ActionPerformed
@@ -1223,6 +1310,25 @@ public class PC extends javax.swing.JFrame {
 
     private void Add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add1ActionPerformed
         // TODO add your handling code here:
+        q = new Querys();
+         llenarclaseprovedores();
+             String valores1 =("'"+prov.getNombre() + "',");
+                                    valores1 +=("'"+prov.getDireccion()+ "',");
+                                    valores1 += ("'"+prov.getCorreo() + "',");
+                                    valores1 += ("'"+prov.getTelefono() + "',");
+                                    valores1 += ("'"+prov.getTipoMer()+"'");
+                                   
+                                    
+            
+        String s1 = q.Insertar(con, "provedores"," nombre_empresa, direccion, correo, telefono, mercancia ", valores1);
+        if (s1 != null)
+        {    Mensaje.error(this, s1);
+            System.out.println("valio queso");
+        } else
+        {
+             System.out.println("Exito");
+        }
+        
     }//GEN-LAST:event_Add1ActionPerformed
 
     private void Add1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Add1MouseReleased
@@ -1237,70 +1343,74 @@ public class PC extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_agenda4MouseClicked
 
-    private void email5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_email5KeyReleased
+    private void mercprovKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mercprovKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_email5KeyReleased
+    }//GEN-LAST:event_mercprovKeyReleased
 
-    private void email5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email5ActionPerformed
+    private void mercprovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mercprovActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_email5ActionPerformed
+        ((JTextField) evt.getSource()).transferFocus();
+    }//GEN-LAST:event_mercprovActionPerformed
 
-    private void email5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_email5MouseClicked
+    private void mercprovMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mercprovMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_email5MouseClicked
+    }//GEN-LAST:event_mercprovMouseClicked
 
-    private void email4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_email4KeyReleased
+    private void telprovKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telprovKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_email4KeyReleased
+    }//GEN-LAST:event_telprovKeyReleased
 
-    private void email4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email4ActionPerformed
+    private void telprovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telprovActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_email4ActionPerformed
+        ((JTextField) evt.getSource()).transferFocus();
+    }//GEN-LAST:event_telprovActionPerformed
 
-    private void email4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_email4MouseClicked
+    private void telprovMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_telprovMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_email4MouseClicked
+    }//GEN-LAST:event_telprovMouseClicked
 
-    private void email3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_email3KeyReleased
+    private void emailprovKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailprovKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_email3KeyReleased
+    }//GEN-LAST:event_emailprovKeyReleased
 
-    private void email3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email3ActionPerformed
+    private void emailprovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailprovActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_email3ActionPerformed
+        ((JTextField) evt.getSource()).transferFocus();
+    }//GEN-LAST:event_emailprovActionPerformed
 
-    private void email3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_email3MouseClicked
+    private void emailprovMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailprovMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_email3MouseClicked
+    }//GEN-LAST:event_emailprovMouseClicked
 
-    private void email2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_email2KeyReleased
+    private void dirccproveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dirccproveKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_email2KeyReleased
+    }//GEN-LAST:event_dirccproveKeyReleased
 
-    private void email2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email2ActionPerformed
+    private void dirccproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dirccproveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_email2ActionPerformed
+        ((JTextField) evt.getSource()).transferFocus();
+    }//GEN-LAST:event_dirccproveActionPerformed
 
-    private void email2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_email2MouseClicked
+    private void dirccproveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dirccproveMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_email2MouseClicked
+    }//GEN-LAST:event_dirccproveMouseClicked
 
     private void buscar3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar3KeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_buscar3KeyReleased
 
-    private void emailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyReleased
-        if (email.getText().equals("Inserta un correo electronico")) {
-            email.setText("");
+    private void NomprovKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NomprovKeyReleased
+        if (Nomprov.getText().equals("Inserta un correo electronico")) {
+            Nomprov.setText("");
         }
-    }//GEN-LAST:event_emailKeyReleased
+    }//GEN-LAST:event_NomprovKeyReleased
 
-    private void emailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseClicked
+    private void NomprovMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NomprovMouseClicked
         // TODO add your handling code here:
-        if (email.getText().equals("Inserta un correo electronico")) {
-            email.setText("");
+        if (Nomprov.getText().equals("Inserta un correo electronico")) {
+            Nomprov.setText("");
         }
-    }//GEN-LAST:event_emailMouseClicked
+    }//GEN-LAST:event_NomprovMouseClicked
 
     private void agenda5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agenda5MouseClicked
         // TODO add your handling code here:
@@ -1310,6 +1420,124 @@ public class PC extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Minimize2ActionPerformed
 
+    private void jBGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardar1ActionPerformed
+        // TODO add your handling code here:
+        try{
+            q = new Querys();
+         llenarclaseproductos();
+             String valores1 =("'"+cli.getModeloPro() + "',");
+                                    valores1 +=("'"+cli.getNombrePro()+ "',");
+                                    valores1 += (cli.getPrecio() + ",");
+                                    valores1 += (cli.getExistencia() + ",");
+                                    valores1 += ("'"+cli.getCategoria()+"',");
+                                    valores1 += ("'"+cli.getProvedMarca()+ "'");
+                                    
+        agregarProductos(cli.getModeloPro(),cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath().replace("\\","/"));     
+        String s1 = q.Insertar(con, "productos"," idmodelo, nombre, precio, existencia, clasificacion, provedores_id ", valores1);
+        if (s1 != null)
+        {    Mensaje.error(this, s1);
+            System.out.println("valio queso");
+        } else
+        {
+             System.out.println("Exito");
+        }
+       
+        
+        }catch(Exception e){
+            if(txtFile.getText().equals("")){
+                JOptionPane.showMessageDialog(this,"Falta Seleccionar una imagen ","Selecciona Imagen",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+          
+         
+    }//GEN-LAST:event_jBGuardar1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+         con = ManipulaDBC.conectaDB();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        ManipulaDBC.desconectaDB(con);
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         jf = new JFileChooser();
+        FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
+        jf.setFileFilter(fil);
+        jf.setCurrentDirectory(new File("D:\\ejercicios\\OceansCoffe System IotEarth\\src\\IMG2"));
+        int el = jf.showOpenDialog(this);
+        if(el == JFileChooser.APPROVE_OPTION){
+            //txtRuta.setText(jf.getSelectedFile().getAbsolutePath());
+            txtFile.setText(jf.getSelectedFile().getName());
+           
+            //lblFoto.setIcon(new ImageIcon(txtRuta.getText()));
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void am1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_am1KeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(Character.isLetter(c) ) {
+		getToolkit().beep();
+ 
+		evt.consume();
+ 
+	}  
+    }//GEN-LAST:event_am1KeyTyped
+
+    private void NomprovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomprovActionPerformed
+        // TODO add your handling code here:
+        ((JTextField) evt.getSource()).transferFocus();
+    }//GEN-LAST:event_NomprovActionPerformed
+
+    private void am1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_am1ActionPerformed
+        // TODO add your handling code here:
+        email1.requestFocus ();
+    }//GEN-LAST:event_am1ActionPerformed
+
+    private void email1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email1ActionPerformed
+        // TODO add your handling code here:
+        nmm1.requestFocus ();
+    }//GEN-LAST:event_email1ActionPerformed
+
+    private void nmm1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nmm1ActionPerformed
+        // TODO add your handling code here:
+        nmo1.requestFocus ();
+    }//GEN-LAST:event_nmm1ActionPerformed
+    public void llenarclaseproductos(){
+        cli= new clientes();
+        cli.setModeloPro(name1.getText());
+        cli.setNombrePro(ap1.getText());
+        cli.setPrecio(Double.parseDouble(am1.getText()));
+        cli.setProvedMarca(email1.getText());
+        cli.setExistencia(Integer.parseInt(nmm1.getText()));
+        cli.setCategoria(nmo1.getText());
+    }
+    public void llenarclaseprovedores(){
+        prov=new Provedores();
+        prov.setNombre(Nomprov.getText());
+        prov.setCorreo(emailprov.getText());
+        prov.setTipoMer(mercprov.getText());
+        prov.setDireccion(dirccprove.getText());
+        prov.setTelefono(telprov.getText());
+    }
+     public void agregarProductos(String mod,String nom,Double preci, int exis,String cate,String provM,String im){
+      atm.addRow(new Object[]{
+          mod,nom,preci,exis,cate,provM,new JLabel(reducirtamamo(im))
+      });
+   }
+   public ImageIcon reducirtamamo(String im){
+      ImageIcon img= new ImageIcon(im);
+      Image conver=img.getImage();
+      Image tam=conver.getScaledInstance(100,120,Image.SCALE_SMOOTH);
+      ImageIcon imgfinal=new ImageIcon(tam);
+      
+      return imgfinal;
+   }
+   
     /**
      * @param args the command line arguments
      */
@@ -1361,6 +1589,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JButton Minimize2;
     private javax.swing.JLabel NNote;
     public javax.swing.JTabbedPane Nav;
+    private javax.swing.JTextField Nomprov;
     private javax.swing.JPanel Nota;
     private javax.swing.JPanel Productos;
     private javax.swing.JPanel Proveedores;
@@ -1377,14 +1606,12 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTextField buscar1;
     private javax.swing.JTextField buscar2;
     private javax.swing.JTextField buscar3;
-    private javax.swing.JTextField email;
+    private javax.swing.JTextField dirccprove;
     private javax.swing.JTextField email1;
-    private javax.swing.JTextField email2;
-    private javax.swing.JTextField email3;
-    private javax.swing.JTextField email4;
-    private javax.swing.JTextField email5;
+    private javax.swing.JTextField emailprov;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBGuardar1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -1454,8 +1681,11 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTextField jTFuser3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField mercprov;
     private javax.swing.JTextField name1;
     private javax.swing.JTextField nmm1;
     private javax.swing.JTextField nmo1;
+    private javax.swing.JTextField telprov;
+    private javax.swing.JTextField txtFile;
     // End of variables declaration//GEN-END:variables
 }

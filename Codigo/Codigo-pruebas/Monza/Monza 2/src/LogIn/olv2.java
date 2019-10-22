@@ -65,9 +65,9 @@ public class olv2 extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel2.setText("Introduzca el correo con el que fue registrado");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 320, 50));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 320, 30));
 
-        email.setBackground(new java.awt.Color(242, 242, 242));
+        email.setBackground(new java.awt.Color(243, 240, 235));
         email.setForeground(new java.awt.Color(102, 102, 102));
         email.setText("Inserta un correo electronico");
         email.setBorder(null);
@@ -81,11 +81,11 @@ public class olv2 extends javax.swing.JFrame {
                 emailKeyReleased(evt);
             }
         });
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 240, -1));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 250, 30));
 
         jSeparator6.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 250, 20));
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 250, 20));
 
         jButton1.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ok1.png"))); // NOI18N
@@ -110,13 +110,13 @@ public class olv2 extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 130, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 130, 40));
 
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel3.setText("Pregunta de seguridad");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 260, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 260, 20));
 
-        Answer.setBackground(new java.awt.Color(242, 242, 242));
+        Answer.setBackground(new java.awt.Color(243, 240, 235));
         Answer.setForeground(new java.awt.Color(102, 102, 102));
         Answer.setText("inserte la respuesta correcta");
         Answer.setBorder(null);
@@ -130,14 +130,14 @@ public class olv2 extends javax.swing.JFrame {
                 AnswerKeyReleased(evt);
             }
         });
-        jPanel1.add(Answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 240, -1));
+        jPanel1.add(Answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 250, 30));
 
         jSeparator7.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 250, 20));
+        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 250, 10));
 
-        Question.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(Question, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 240, -1));
+        Question.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una pregunta", "¿Cuál fue el nombre de tu primera mascota? ", "¿Cuál es tu comida favorita? ", "¿Cuál es el nombre de tu madre? ", "¿En qué ciudad naciste?", "¿Cuál es el segundo nombre de tu padre?", "¿Cuál es el nombre de tu primer profesor?" }));
+        jPanel1.add(Question, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 240, -1));
 
         Minimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/Minimize.png"))); // NOI18N
         Minimize.setBorder(null);

@@ -31,6 +31,7 @@ public class LogIn extends javax.swing.JFrame {
         this.setTitle("Muebleria ¨MONZA¨");
         ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
         this.setIconImage(icon.getImage());
+     
         
     }
 
@@ -243,7 +244,7 @@ public class LogIn extends javax.swing.JFrame {
                 AboutUsActionPerformed(evt);
             }
         });
-        jPanel1.add(AboutUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 140, 90));
+        jPanel1.add(AboutUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 521, 100, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 

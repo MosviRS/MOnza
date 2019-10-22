@@ -48,7 +48,7 @@ public class SqlUsuarios extends Conexion {
         Connection con;
         con= ManipulaDBC.conectaDB();
 
-        String sql = "SELECT idcuenta,nombre, tipo, Apaterno, Amaterno, password, tipo_pregunta, respuesta, correo FROM usuario WHERE idcuenta = ?";
+        String sql = "SELECT idcuenta,nombre, tipo, Apaterno, Amaterno, password, tipo_pregunta, respuesta, correo FROM usuario WHERE idcuenta =?";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, usr.getUser());
@@ -114,28 +114,30 @@ public class SqlUsuarios extends Conexion {
 //            }
         }
     }
-     public int validaSA(String valida) {
+     public boolean validaSA(Usuario usr) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con;
         con= ManipulaDBC.conectaDB();
 
-        String sql = "SELECT count(password) FROM usuario WHERE password= ?";
-
+        String sql = "SELECT idcuenta,nombre, tipo, Apaterno, Amaterno, password, tipo_pregunta, respuesta, correo FROM usuario WHERE password =? and tipo=1";
+        
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, valida);
+            ps.setString(1, usr.getPassword());
             rs = ps.executeQuery();
 
-            if (rs.next()) {
-                return rs.getInt(1);
+            if (rs.next()) {                
+                usr.setNombreUser(rs.getString(2));                
+                System.out.println("Nombre: "+usr.getNombreUser());
+                return true;
             }
 
-            return 1;
+            return false;
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
-            return 1;
+            return false;
 //        } finally {
 //            try {
 //                con.close();
