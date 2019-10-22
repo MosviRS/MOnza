@@ -152,15 +152,15 @@ public class LogIn extends javax.swing.JFrame {
 
         Forget.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
         Forget.setForeground(new java.awt.Color(102, 102, 102));
-        Forget.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/pregunta_Off.png"))); // NOI18N
+        Forget.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/pregunta_Off.png"))); // NOI18N
         Forget.setText("Olvide mi contraseña");
         Forget.setBorder(null);
         Forget.setBorderPainted(false);
         Forget.setContentAreaFilled(false);
         Forget.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Forget.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/pregunta.png"))); // NOI18N
-        Forget.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/pregunta.png"))); // NOI18N
-        Forget.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/pregunta.png"))); // NOI18N
+        Forget.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/pregunta.png"))); // NOI18N
+        Forget.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/pregunta.png"))); // NOI18N
+        Forget.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/pregunta.png"))); // NOI18N
         Forget.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ForgetActionPerformed(evt);

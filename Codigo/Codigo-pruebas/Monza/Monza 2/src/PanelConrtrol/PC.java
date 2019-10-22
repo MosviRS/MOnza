@@ -991,7 +991,7 @@ public class PC extends javax.swing.JFrame {
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Microsoft Tai Le", 1, 28)); // NOI18N
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/engranajes.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/engranajes.png"))); // NOI18N
         jLabel8.setText("Centro de trabajo");
         jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 70));
 

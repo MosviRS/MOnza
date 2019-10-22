@@ -257,7 +257,7 @@
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/pregunta_Off.png"/>
+              <Image iconType="3" name="/IMGM/pregunta_Off.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Olvide mi contrase&#xf1;a"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -269,13 +269,13 @@
               <Color id="Default Cursor"/>
             </Property>
             <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/pregunta.png"/>
+              <Image iconType="3" name="/IMGM/pregunta.png"/>
             </Property>
             <Property name="rolloverSelectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/pregunta.png"/>
+              <Image iconType="3" name="/IMGM/pregunta.png"/>
             </Property>
             <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/pregunta.png"/>
+              <Image iconType="3" name="/IMGM/pregunta.png"/>
             </Property>
           </Properties>
           <Events>
