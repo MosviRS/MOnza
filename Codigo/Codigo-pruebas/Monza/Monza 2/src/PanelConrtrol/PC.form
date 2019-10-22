@@ -2026,7 +2026,7 @@
               <Font name="Microsoft Tai Le" size="28" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/IMGM/engranajes.png"/>
+              <Image iconType="3" name="/Imagen/engranajes.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Centro de trabajo"/>
           </Properties>
