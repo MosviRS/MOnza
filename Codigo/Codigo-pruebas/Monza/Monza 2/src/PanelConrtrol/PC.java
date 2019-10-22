@@ -5,6 +5,7 @@
  */
 package PanelConrtrol;
 
+import Entidades.Usuario;
 import LogIn.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author Rasteck7
  */
 public class PC extends javax.swing.JFrame {
-
+    Usuario mod;
     /**
      * Creates new form Registro
      */
@@ -25,6 +26,31 @@ public class PC extends javax.swing.JFrame {
         //Nav.setEnabledAt(4, false);
         ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
         this.setIconImage(icon.getImage());
+    }
+    public PC(Usuario mod){
+        initComponents();
+        this.mod= mod;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Registro");
+        //Nav.setEnabledAt(4, false);
+        ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
+        this.setIconImage(icon.getImage());
+        if(mod.getTipo()==1){
+            Nav.setEnabledAt(0, true);
+            Nav.setEnabledAt(1, true);
+            Nav.setEnabledAt(2, true);
+            Nav.setEnabledAt(3, true);
+            Nav.setEnabledAt(4, true);
+            Nav.setEnabledAt(5, true);
+            
+        }else if(mod.getTipo()==2){
+            Nav.setEnabledAt(0, true);
+            Nav.setEnabledAt(1, true);
+            Nav.setEnabledAt(2, true);
+            Nav.setEnabledAt(3, true);
+            Nav.setEnabledAt(4, true);
+            Nav.setEnabledAt(5, false);
+        }
     }
 
     /**
@@ -225,7 +251,7 @@ public class PC extends javax.swing.JFrame {
         jLabel24.setBackground(new java.awt.Color(235, 235, 235));
         jLabel24.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel24.setText("Total:");
-        Nota.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 370, 60, 20));
+        Nota.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 370, 40, 20));
 
         jLabel7.setBackground(new java.awt.Color(235, 235, 235));
         jLabel7.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
@@ -366,7 +392,7 @@ public class PC extends javax.swing.JFrame {
             }
         });
         Nota.add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 390, 60, 60));
-        Nota.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
+        Nota.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, -1));
         Nota.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 450, 150, -1));
 
         jScrollPane1.setViewportView(Nota);
@@ -1334,7 +1360,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JButton Minimize1;
     private javax.swing.JButton Minimize2;
     private javax.swing.JLabel NNote;
-    private javax.swing.JTabbedPane Nav;
+    public javax.swing.JTabbedPane Nav;
     private javax.swing.JPanel Nota;
     private javax.swing.JPanel Productos;
     private javax.swing.JPanel Proveedores;

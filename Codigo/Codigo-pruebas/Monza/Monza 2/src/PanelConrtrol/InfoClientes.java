@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogIn;
+package PanelConrtrol;
 
+import LogIn.LogIn;
 import javax.swing.JOptionPane;
 
 /**

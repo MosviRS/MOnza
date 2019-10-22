@@ -42,7 +42,7 @@ public class accesoAD extends javax.swing.JFrame {
         Close = new javax.swing.JButton();
         back = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        Password = new javax.swing.JPasswordField();
+        txtvalida = new javax.swing.JPasswordField();
         jSeparator2 = new javax.swing.JSeparator();
         View = new javax.swing.JToggleButton();
 
@@ -135,18 +135,23 @@ public class accesoAD extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/Acces92.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 90, 80));
 
-        Password.setBackground(new java.awt.Color(243, 240, 235));
-        Password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Password.setForeground(new java.awt.Color(102, 102, 102));
-        Password.setText("Inserte contraseña");
-        Password.setBorder(null);
-        Password.setCaretColor(new java.awt.Color(204, 51, 0));
-        Password.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtvalida.setBackground(new java.awt.Color(243, 240, 235));
+        txtvalida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtvalida.setForeground(new java.awt.Color(102, 102, 102));
+        txtvalida.setText("Inserte contraseña");
+        txtvalida.setBorder(null);
+        txtvalida.setCaretColor(new java.awt.Color(204, 51, 0));
+        txtvalida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PasswordMouseClicked(evt);
+                txtvalidaMouseClicked(evt);
             }
         });
-        jPanel1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 200, 40));
+        txtvalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtvalidaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtvalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 210, 30));
 
         jSeparator2.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
@@ -220,21 +225,25 @@ public class accesoAD extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
-    private void PasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PasswordMouseClicked
+    private void txtvalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtvalidaMouseClicked
         // TODO add your handling code here:
-        if (Password.getText().equals("Inserte contraseña")) {
-            Password.setText("");
+        if (txtvalida.getText().equals("Inserte contraseña")) {
+            txtvalida.setText("");
         }
-    }//GEN-LAST:event_PasswordMouseClicked
+    }//GEN-LAST:event_txtvalidaMouseClicked
 
     private void ViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewActionPerformed
         if (View.isSelected()==true) {
-            Password.setEchoChar((char)0);
+            txtvalida.setEchoChar((char)0);
         }else{
-            Password.setEchoChar('•');
+            txtvalida.setEchoChar('•');
 
         }
     }//GEN-LAST:event_ViewActionPerformed
+
+    private void txtvalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtvalidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,7 +284,6 @@ public class accesoAD extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Close;
     private javax.swing.JButton Minimize;
-    private javax.swing.JPasswordField Password;
     private javax.swing.JToggleButton View;
     private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
@@ -284,5 +292,6 @@ public class accesoAD extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton ok;
+    private javax.swing.JPasswordField txtvalida;
     // End of variables declaration//GEN-END:variables
 }

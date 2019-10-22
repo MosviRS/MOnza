@@ -51,13 +51,14 @@
               <Font name="Leelawadee UI Semilight" size="11" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="&#xbf;Cu&#xe1;l fue el nombre de tu primera mascota? "/>
-                <StringItem index="1" value="&#xbf;Cu&#xe1;l es tu comida favorita? "/>
-                <StringItem index="2" value="&#xbf;Cu&#xe1;l es el nombre de tu madre? "/>
-                <StringItem index="3" value="&#xbf;En qu&#xe9; ciudad naciste?"/>
-                <StringItem index="4" value="&#xbf;Cu&#xe1;l es el segundo nombre de tu padre?"/>
-                <StringItem index="5" value="&#xbf;Cu&#xe1;l es el nombre de tu primer profesor?"/>
+              <StringArray count="7">
+                <StringItem index="0" value="Seleccione una pregunta"/>
+                <StringItem index="1" value="&#xbf;Cu&#xe1;l fue el nombre de tu primera mascota? "/>
+                <StringItem index="2" value="&#xbf;Cu&#xe1;l es tu comida favorita? "/>
+                <StringItem index="3" value="&#xbf;Cu&#xe1;l es el nombre de tu madre? "/>
+                <StringItem index="4" value="&#xbf;En qu&#xe9; ciudad naciste?"/>
+                <StringItem index="5" value="&#xbf;Cu&#xe1;l es el segundo nombre de tu padre?"/>
+                <StringItem index="6" value="&#xbf;Cu&#xe1;l es el nombre de tu primer profesor?"/>
               </StringArray>
             </Property>
           </Properties>
@@ -193,7 +194,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTFuser">
+        <Component class="javax.swing.JTextField" name="txtuser">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="eb" green="f0" red="f3" type="rgb"/>
@@ -217,7 +218,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTFuserMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtuserMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtuserActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -302,7 +304,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTFAmaterno">
+        <Component class="javax.swing.JTextField" name="txtAmaterno">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="eb" green="f0" red="f3" type="rgb"/>
@@ -325,7 +327,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTFAmaternoMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtAmaternoMouseClicked"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -348,7 +350,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTFNombreUser">
+        <Component class="javax.swing.JTextField" name="txtNombreUser">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="eb" green="f0" red="f3" type="rgb"/>
@@ -359,7 +361,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Inserte nombre"/>
+            <Property name="text" type="java.lang.String" value="Ingrese Nombre"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -371,7 +373,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTFNombreUserMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtNombreUserMouseClicked"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -395,7 +397,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="jPassword">
+        <Component class="javax.swing.JPasswordField" name="txtPassword">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="eb" green="f0" red="f3" type="rgb"/>
@@ -415,7 +417,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPasswordMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtPasswordMouseClicked"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -474,7 +476,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTFRespuesta">
+        <Component class="javax.swing.JTextField" name="txtRespuesta">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="eb" green="f0" red="f3" type="rgb"/>
@@ -485,7 +487,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Inserte respuesta"/>
+            <Property name="text" type="java.lang.String" value="Ingrese una respuesta"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -497,12 +499,12 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTFRespuestaMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFRespuestaActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtRespuestaMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRespuestaActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="610" y="480" width="250" height="30"/>
+              <AbsoluteConstraints x="590" y="480" width="270" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -517,7 +519,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="610" y="520" width="250" height="20"/>
+              <AbsoluteConstraints x="590" y="520" width="270" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -537,7 +539,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTFApaterno">
+        <Component class="javax.swing.JTextField" name="txtApaterno">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="eb" green="f0" red="f3" type="rgb"/>
@@ -560,7 +562,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTFApaternoMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtApaternoMouseClicked"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -599,7 +601,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTFCorreo">
+        <Component class="javax.swing.JTextField" name="txtCorreo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="eb" green="f0" red="f3" type="rgb"/>
@@ -610,7 +612,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Inserte un correo electronico"/>
+            <Property name="text" type="java.lang.String" value="Ingrese un correo electronico"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -622,8 +624,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTFCorreoMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFCorreoActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCorreoMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCorreoActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -820,7 +822,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="jPassword2">
+        <Component class="javax.swing.JPasswordField" name="txtPassword2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="eb" green="f0" red="f3" type="rgb"/>
@@ -840,7 +842,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPassword2MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtPassword2MouseClicked"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

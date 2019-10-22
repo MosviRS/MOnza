@@ -5,12 +5,15 @@
  */
 package LogIn;
 
+import Entidades.Usuario;
 import PanelConrtrol.PC;
+import clases.Hash;
 import java.sql.Connection;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import metodos.ManipulaDBC;
+import metodos.SqlUsuarios;
 
 /**
  *
@@ -96,7 +99,7 @@ public class LogIn extends javax.swing.JFrame {
                 UserMouseClicked(evt);
             }
         });
-        jPanel1.add(User, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 180, 40));
+        jPanel1.add(User, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 180, 30));
 
         jLabel3.setBackground(new java.awt.Color(235, 235, 235));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/usuario.png"))); // NOI18N
@@ -125,7 +128,7 @@ public class LogIn extends javax.swing.JFrame {
                 PasswordMouseClicked(evt);
             }
         });
-        jPanel1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 180, 40));
+        jPanel1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 180, 30));
 
         View.setBackground(new java.awt.Color(242, 242, 242));
         View.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/oculto.png"))); // NOI18N
@@ -293,11 +296,11 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_MinimizeActionPerformed
 
     private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
-        int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "Desea Salir?","Exit",dialog);
-        if (result==0){
+//        int dialog = JOptionPane.YES_NO_OPTION;
+//        int result = JOptionPane.showConfirmDialog(null, "Desea Salir?","Exit",dialog);
+//        if (result==0){
             System.exit(0);
-        }
+//        }
     }//GEN-LAST:event_CloseActionPerformed
 
     private void AboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutUsActionPerformed
@@ -311,16 +314,24 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_AboutUsActionPerformed
 
     private void AccesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccesActionPerformed
-        int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "El acceso fue exitoso :3","Exit",dialog);
-        if (result==0){
-            this.dispose();
-             java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        new PC().setVisible(true);
+            
+            SqlUsuarios ModSQL= new SqlUsuarios();
+            Usuario mod= new Usuario();
+            String password= new String(Password.getPassword());
+            if(!User.getText().equals("") && !password.equals("") && !User.getText().equals("Ingrese Usuario") && !password.equals("Inserte contraseña")){
+                    String encriptado= Hash.sha1(password);
+                    mod.setUser(User.getText());
+                    mod.setPassword(encriptado);
+                    if(ModSQL.login(mod)){
+                        PC ir= new PC(mod);
+                        ir.setVisible(true);
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Datos Incorrectos");
                     }
-                });
-        }
+                }else{
+                JOptionPane.showMessageDialog(null, "Debe Ingresar sus Datos");
+            }                            
     }//GEN-LAST:event_AccesActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

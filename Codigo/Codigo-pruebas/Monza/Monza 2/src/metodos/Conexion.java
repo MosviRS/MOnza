@@ -6,7 +6,7 @@ package metodos;
  */
 /**
  *
- * @author Oscar
+ * @author Uriel
  */
 import java.sql.*;
 
@@ -25,9 +25,12 @@ public class Conexion
      * @param manejador -para oracle (1) para mysql(2)
      */
     
-    public Connection GetConexion(){
-        
-    }
+//    public Connection GetConexion(){
+//        String base="mydb";
+//        String user="root";
+//        String password="";
+//        
+//    }
     
     public Connection Conecta(String host, String instancia, String usuario, String pass, int manejador) throws SQLException
     {

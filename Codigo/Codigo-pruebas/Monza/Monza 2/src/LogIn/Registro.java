@@ -5,8 +5,11 @@
  */
 package LogIn;
 
+import Entidades.Usuario;
+import clases.Hash;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import metodos.SqlUsuarios;
 
 /**
  *
@@ -40,26 +43,26 @@ public class Registro extends javax.swing.JFrame {
         jBLimpiar = new javax.swing.JButton();
         back = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTFuser = new javax.swing.JTextField();
+        txtuser = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
-        jTFAmaterno = new javax.swing.JTextField();
+        txtAmaterno = new javax.swing.JTextField();
         jSeparator11 = new javax.swing.JSeparator();
-        jTFNombreUser = new javax.swing.JTextField();
+        txtNombreUser = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jPassword = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         Ocultar = new javax.swing.JToggleButton();
         jLabel10 = new javax.swing.JLabel();
-        jTFRespuesta = new javax.swing.JTextField();
+        txtRespuesta = new javax.swing.JTextField();
         jSeparator12 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
-        jTFApaterno = new javax.swing.JTextField();
+        txtApaterno = new javax.swing.JTextField();
         jSeparator10 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
-        jTFCorreo = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         jSeparator13 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         Minimize = new javax.swing.JButton();
@@ -69,7 +72,7 @@ public class Registro extends javax.swing.JFrame {
         jSeparator14 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
         jLabel12 = new javax.swing.JLabel();
-        jPassword2 = new javax.swing.JPasswordField();
+        txtPassword2 = new javax.swing.JPasswordField();
         Ocultar2 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,7 +84,7 @@ public class Registro extends javax.swing.JFrame {
 
         Question.setBackground(new java.awt.Color(33, 33, 33));
         Question.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 11)); // NOI18N
-        Question.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "¿Cuál fue el nombre de tu primera mascota? ", "¿Cuál es tu comida favorita? ", "¿Cuál es el nombre de tu madre? ", "¿En qué ciudad naciste?", "¿Cuál es el segundo nombre de tu padre?", "¿Cuál es el nombre de tu primer profesor?" }));
+        Question.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una pregunta", "¿Cuál fue el nombre de tu primera mascota? ", "¿Cuál es tu comida favorita? ", "¿Cuál es el nombre de tu madre? ", "¿En qué ciudad naciste?", "¿Cuál es el segundo nombre de tu padre?", "¿Cuál es el nombre de tu primer profesor?" }));
         Question.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 QuestionActionPerformed(evt);
@@ -139,20 +142,25 @@ public class Registro extends javax.swing.JFrame {
         jLabel5.setText("Usuario");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 60, 20));
 
-        jTFuser.setBackground(new java.awt.Color(243, 240, 235));
-        jTFuser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFuser.setForeground(new java.awt.Color(102, 102, 102));
-        jTFuser.setText("Ingrese Usuario");
-        jTFuser.setBorder(null);
-        jTFuser.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFuser.setCaretPosition(0);
-        jTFuser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFuser.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtuser.setBackground(new java.awt.Color(243, 240, 235));
+        txtuser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtuser.setForeground(new java.awt.Color(102, 102, 102));
+        txtuser.setText("Ingrese Usuario");
+        txtuser.setBorder(null);
+        txtuser.setCaretColor(new java.awt.Color(204, 51, 0));
+        txtuser.setCaretPosition(0);
+        txtuser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtuser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFuserMouseClicked(evt);
+                txtuserMouseClicked(evt);
             }
         });
-        jPanel1.add(jTFuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 230, 30));
+        txtuser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtuserActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 230, 30));
 
         jSeparator3.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
@@ -176,55 +184,55 @@ public class Registro extends javax.swing.JFrame {
         jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 250, 10));
 
-        jTFAmaterno.setBackground(new java.awt.Color(243, 240, 235));
-        jTFAmaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFAmaterno.setForeground(new java.awt.Color(102, 102, 102));
-        jTFAmaterno.setText("Ingrese A. Materno");
-        jTFAmaterno.setBorder(null);
-        jTFAmaterno.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFAmaterno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFAmaterno.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtAmaterno.setBackground(new java.awt.Color(243, 240, 235));
+        txtAmaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtAmaterno.setForeground(new java.awt.Color(102, 102, 102));
+        txtAmaterno.setText("Ingrese A. Materno");
+        txtAmaterno.setBorder(null);
+        txtAmaterno.setCaretColor(new java.awt.Color(204, 51, 0));
+        txtAmaterno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtAmaterno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFAmaternoMouseClicked(evt);
+                txtAmaternoMouseClicked(evt);
             }
         });
-        jPanel1.add(jTFAmaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 230, 40));
+        jPanel1.add(txtAmaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 230, 40));
 
         jSeparator11.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator11.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 250, 20));
 
-        jTFNombreUser.setBackground(new java.awt.Color(243, 240, 235));
-        jTFNombreUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFNombreUser.setForeground(new java.awt.Color(102, 102, 102));
-        jTFNombreUser.setText("Inserte nombre");
-        jTFNombreUser.setBorder(null);
-        jTFNombreUser.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFNombreUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFNombreUser.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtNombreUser.setBackground(new java.awt.Color(243, 240, 235));
+        txtNombreUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNombreUser.setForeground(new java.awt.Color(102, 102, 102));
+        txtNombreUser.setText("Ingrese Nombre");
+        txtNombreUser.setBorder(null);
+        txtNombreUser.setCaretColor(new java.awt.Color(204, 51, 0));
+        txtNombreUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtNombreUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFNombreUserMouseClicked(evt);
+                txtNombreUserMouseClicked(evt);
             }
         });
-        jPanel1.add(jTFNombreUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 230, 30));
+        jPanel1.add(txtNombreUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 230, 30));
 
         jLabel9.setBackground(new java.awt.Color(235, 235, 235));
         jLabel9.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel9.setText("Pregunta de seguridad");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 410, 160, 20));
 
-        jPassword.setBackground(new java.awt.Color(243, 240, 235));
-        jPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPassword.setForeground(new java.awt.Color(102, 102, 102));
-        jPassword.setText("Inserte contraseña");
-        jPassword.setBorder(null);
-        jPassword.setCaretColor(new java.awt.Color(204, 51, 0));
-        jPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtPassword.setBackground(new java.awt.Color(243, 240, 235));
+        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPassword.setForeground(new java.awt.Color(102, 102, 102));
+        txtPassword.setText("Inserte contraseña");
+        txtPassword.setBorder(null);
+        txtPassword.setCaretColor(new java.awt.Color(204, 51, 0));
+        txtPassword.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPasswordMouseClicked(evt);
+                txtPasswordMouseClicked(evt);
             }
         });
-        jPanel1.add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 220, 30));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 220, 30));
 
         Ocultar.setBackground(new java.awt.Color(242, 242, 242));
         Ocultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/oculto.png"))); // NOI18N
@@ -247,47 +255,47 @@ public class Registro extends javax.swing.JFrame {
         jLabel10.setText("Nombre(s)");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 90, 20));
 
-        jTFRespuesta.setBackground(new java.awt.Color(243, 240, 235));
-        jTFRespuesta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFRespuesta.setForeground(new java.awt.Color(102, 102, 102));
-        jTFRespuesta.setText("Inserte respuesta");
-        jTFRespuesta.setBorder(null);
-        jTFRespuesta.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFRespuesta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFRespuesta.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtRespuesta.setBackground(new java.awt.Color(243, 240, 235));
+        txtRespuesta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtRespuesta.setForeground(new java.awt.Color(102, 102, 102));
+        txtRespuesta.setText("Ingrese una respuesta");
+        txtRespuesta.setBorder(null);
+        txtRespuesta.setCaretColor(new java.awt.Color(204, 51, 0));
+        txtRespuesta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtRespuesta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFRespuestaMouseClicked(evt);
+                txtRespuestaMouseClicked(evt);
             }
         });
-        jTFRespuesta.addActionListener(new java.awt.event.ActionListener() {
+        txtRespuesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFRespuestaActionPerformed(evt);
+                txtRespuestaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTFRespuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 480, 250, 30));
+        jPanel1.add(txtRespuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, 270, 30));
 
         jSeparator12.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator12.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 520, 250, 20));
+        jPanel1.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 520, 270, 20));
 
         jLabel11.setBackground(new java.awt.Color(235, 235, 235));
         jLabel11.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel11.setText("Apellido Paterno");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 130, 20));
 
-        jTFApaterno.setBackground(new java.awt.Color(243, 240, 235));
-        jTFApaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFApaterno.setForeground(new java.awt.Color(102, 102, 102));
-        jTFApaterno.setText("Ingrese A. Paterno");
-        jTFApaterno.setBorder(null);
-        jTFApaterno.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFApaterno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFApaterno.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtApaterno.setBackground(new java.awt.Color(243, 240, 235));
+        txtApaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtApaterno.setForeground(new java.awt.Color(102, 102, 102));
+        txtApaterno.setText("Ingrese A. Paterno");
+        txtApaterno.setBorder(null);
+        txtApaterno.setCaretColor(new java.awt.Color(204, 51, 0));
+        txtApaterno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtApaterno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFApaternoMouseClicked(evt);
+                txtApaternoMouseClicked(evt);
             }
         });
-        jPanel1.add(jTFApaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 230, 30));
+        jPanel1.add(txtApaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 230, 30));
 
         jSeparator10.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator10.setForeground(new java.awt.Color(0, 0, 0));
@@ -298,24 +306,24 @@ public class Registro extends javax.swing.JFrame {
         jLabel13.setText("Correo electronico");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, 130, 20));
 
-        jTFCorreo.setBackground(new java.awt.Color(243, 240, 235));
-        jTFCorreo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFCorreo.setForeground(new java.awt.Color(102, 102, 102));
-        jTFCorreo.setText("Inserte un correo electronico");
-        jTFCorreo.setBorder(null);
-        jTFCorreo.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFCorreo.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtCorreo.setBackground(new java.awt.Color(243, 240, 235));
+        txtCorreo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCorreo.setForeground(new java.awt.Color(102, 102, 102));
+        txtCorreo.setText("Ingrese un correo electronico");
+        txtCorreo.setBorder(null);
+        txtCorreo.setCaretColor(new java.awt.Color(204, 51, 0));
+        txtCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtCorreo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFCorreoMouseClicked(evt);
+                txtCorreoMouseClicked(evt);
             }
         });
-        jTFCorreo.addActionListener(new java.awt.event.ActionListener() {
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFCorreoActionPerformed(evt);
+                txtCorreoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTFCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 230, 30));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 230, 30));
 
         jSeparator13.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator13.setForeground(new java.awt.Color(0, 0, 0));
@@ -393,18 +401,18 @@ public class Registro extends javax.swing.JFrame {
         jLabel12.setText("Confirmar Contraseña");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, 170, 20));
 
-        jPassword2.setBackground(new java.awt.Color(243, 240, 235));
-        jPassword2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPassword2.setForeground(new java.awt.Color(102, 102, 102));
-        jPassword2.setText("Inserte contraseña");
-        jPassword2.setBorder(null);
-        jPassword2.setCaretColor(new java.awt.Color(204, 51, 0));
-        jPassword2.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtPassword2.setBackground(new java.awt.Color(243, 240, 235));
+        txtPassword2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPassword2.setForeground(new java.awt.Color(102, 102, 102));
+        txtPassword2.setText("Inserte contraseña");
+        txtPassword2.setBorder(null);
+        txtPassword2.setCaretColor(new java.awt.Color(204, 51, 0));
+        txtPassword2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPassword2MouseClicked(evt);
+                txtPassword2MouseClicked(evt);
             }
         });
-        jPanel1.add(jPassword2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 220, 30));
+        jPanel1.add(txtPassword2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 220, 30));
 
         Ocultar2.setBackground(new java.awt.Color(242, 242, 242));
         Ocultar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/oculto.png"))); // NOI18N
@@ -432,68 +440,143 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_QuestionActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new exa().setVisible(true);
-//            }
-//        });
-//        this.dispose();
+        SqlUsuarios ModSQL= new SqlUsuarios();
+        Usuario mod= new Usuario();
+        
+        String password= new String(txtPassword.getPassword());
+        String passwordconfirma= new String(txtPassword2.getPassword());
+        if(txtuser.getText().equals(" ") || txtuser.getText().equals("Ingrese Usuario") || txtNombreUser.getText().equals("Ingrese Nombre") || txtNombreUser.getText().equals("")||txtApaterno.getText().equals("Ingrese A. Paterno")|| txtApaterno.getText().equals("")||txtAmaterno.getText().equals("Ingrese A. Materno")||txtAmaterno.getText().equals("")
+            || txtPassword.getText().equals("Inserte contraseña")|| txtPassword.getText().equals("")||txtPassword2.getText().equals("Inserte contraseña") ||txtPassword2.getText().equals("") || txtCorreo.getText().equals("Ingrese un correo electronico") ||txtCorreo.getText().equals("") ||txtRespuesta.getText().equals("")  ||txtRespuesta.getText().equals("Ingrese una respuesta")   ){
+        JOptionPane.showMessageDialog(null,"Faltan Campos Por Llenar");
+        }else{
+            if(password.equals(passwordconfirma)){
+                if(ModSQL.existeUsuario(txtuser.getText()) ==0){
+                    if(ModSQL.esEmail(txtCorreo.getText())){
+                        String encriptado= Hash.sha1(password);
+                        //alta de los datos
+                        mod.setUser(txtuser.getText());
+                        mod.setNombreUser(txtNombreUser.getText());
+                        mod.setTipo(2);
+                        mod.setApaterno(txtApaterno.getText());
+                        mod.setAmaterno(txtAmaterno.getText());
+                        mod.setPassword(encriptado);
+                        //alta de la pregunta
+                        int preg=Question.getSelectedIndex();           
+                            switch (preg){
+                                case 1:
+                                    mod.setPregunta(1);
+                                    break;
+                                case 2:
+                                    mod.setPregunta(2);
+                                    break;
+                                case 3:
+                                    mod.setPregunta(3);
+                                    break;
+                                case 4:
+                                    mod.setPregunta(4);
+                                    break;
+                                case 5:
+                                    mod.setPregunta(5);
+                                    break;
+                                case 6:
+                                    mod.setPregunta(6);
+                                    break;
+                                default:
+                                    JOptionPane.showMessageDialog(null, "Seleccione una Pregunta");
+                                    break;
+                            }
+                         mod.setRespuesta(txtRespuesta.getText());
+                         mod.setCorreo(txtCorreo.getText());                    
+                         //confirma alta
+                         if(ModSQL.registrar(mod)){
+                             JOptionPane.showMessageDialog(null, "Registro Guardado");
+                             limpiar();
+                         }else {
+                            JOptionPane.showMessageDialog(null, "Error al guardar");
+                         }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Correo Electronico NO es correcto");
+                    }     
+                }else{
+                    JOptionPane.showMessageDialog(null, "El usuario ya existe");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"La contraseñas no coincide \n Favor de Verificar");
+            }
+        
+        }//
+        
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
-        // TODO add your handling code here:
+        limpiar();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
-    private void jTFuserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuserMouseClicked
+    private void txtuserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtuserMouseClicked
         // TODO add your handling code here:
-        if (jTFuser.getText().equals("Ingrese Usuario")) {
-            jTFuser.setText("");
+        if (txtuser.getText().equals("Ingrese Usuario")) {
+            txtuser.setText("");
         }
-    }//GEN-LAST:event_jTFuserMouseClicked
+    }//GEN-LAST:event_txtuserMouseClicked
 
-    private void jTFAmaternoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFAmaternoMouseClicked
+    private void txtAmaternoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAmaternoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFAmaternoMouseClicked
-
-    private void jTFNombreUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFNombreUserMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFNombreUserMouseClicked
-
-    private void jPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordMouseClicked
-        // TODO add your handling code here:
-        if (jPassword.getText().equals("Inserte contraseña")) {
-            jPassword.setText("");
+        if (txtAmaterno.getText().equals("Ingrese A. Materno")) {
+            txtAmaterno.setText("");
         }
-    }//GEN-LAST:event_jPasswordMouseClicked
+    }//GEN-LAST:event_txtAmaternoMouseClicked
+
+    private void txtNombreUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreUserMouseClicked
+        // TODO add your handling code here:
+        if (txtNombreUser.getText().equals("Ingrese Nombre")) {
+            txtNombreUser.setText("");
+        }
+    }//GEN-LAST:event_txtNombreUserMouseClicked
+
+    private void txtPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseClicked
+        // TODO add your handling code here:
+        if (txtPassword.getText().equals("Inserte contraseña")) {
+            txtPassword.setText("");
+        }
+    }//GEN-LAST:event_txtPasswordMouseClicked
 
     private void OcultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OcultarActionPerformed
         if (Ocultar.isSelected()==true) {
-            jPassword.setEchoChar((char)0);
+            txtPassword.setEchoChar((char)0);
         }else{
-            jPassword.setEchoChar('•');
+            txtPassword.setEchoChar('•');
 
         }
     }//GEN-LAST:event_OcultarActionPerformed
 
-    private void jTFRespuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFRespuestaMouseClicked
+    private void txtRespuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRespuestaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFRespuestaMouseClicked
+        if (txtRespuesta.getText().equals("Ingrese una respuesta")) {
+            txtRespuesta.setText("");
+        }
+    }//GEN-LAST:event_txtRespuestaMouseClicked
 
-    private void jTFRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFRespuestaActionPerformed
+    private void txtRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRespuestaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFRespuestaActionPerformed
+    }//GEN-LAST:event_txtRespuestaActionPerformed
 
-    private void jTFApaternoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFApaternoMouseClicked
+    private void txtApaternoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtApaternoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFApaternoMouseClicked
+        if (txtApaterno.getText().equals("Ingrese A. Paterno")) {
+            txtApaterno.setText("");
+        }
+    }//GEN-LAST:event_txtApaternoMouseClicked
 
-    private void jTFCorreoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFCorreoMouseClicked
+    private void txtCorreoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCorreoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFCorreoMouseClicked
+        if (txtCorreo.getText().equals("Ingrese un correo electronico")) {
+            txtCorreo.setText("");
+        }
+    }//GEN-LAST:event_txtCorreoMouseClicked
 
-    private void jTFCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCorreoActionPerformed
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFCorreoActionPerformed
+    }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void MinimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinimizeActionPerformed
         this.setState(LogIn.ICONIFIED);
@@ -530,14 +613,36 @@ public class Registro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFCorreo1ActionPerformed
 
-    private void jPassword2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPassword2MouseClicked
+    private void txtPassword2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPassword2MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPassword2MouseClicked
+        if (txtPassword2.getText().equals("Inserte contraseña")) {
+            txtPassword2.setText("");
+        }
+    }//GEN-LAST:event_txtPassword2MouseClicked
 
     private void Ocultar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ocultar2ActionPerformed
         // TODO add your handling code here:
+        if (Ocultar2.isSelected()==true) {
+            txtPassword2.setEchoChar((char)0);
+        }else{
+            txtPassword2.setEchoChar('•');
+
+        }
     }//GEN-LAST:event_Ocultar2ActionPerformed
 
+    private void txtuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtuserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtuserActionPerformed
+    private void limpiar (){
+        txtuser.setText("Ingrese Usuario");
+        txtNombreUser.setText("Ingrese Nombre");
+        txtApaterno.setText("Ingrese A. Paterno");
+        txtAmaterno.setText("Ingrese A. Materno");
+        txtPassword.setText("Inserte contraseña");
+        txtPassword2.setText("Inserte contraseña");
+        txtCorreo.setText("Ingrese un correo electronico");
+        txtRespuesta.setText("Ingrese una respuesta");
+    }
     /**
      * @param args the command line arguments
      */
@@ -593,8 +698,6 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPassword;
-    private javax.swing.JPasswordField jPassword2;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
@@ -604,12 +707,14 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextField jTFAmaterno;
-    private javax.swing.JTextField jTFApaterno;
-    private javax.swing.JTextField jTFCorreo;
     private javax.swing.JTextField jTFCorreo1;
-    private javax.swing.JTextField jTFNombreUser;
-    private javax.swing.JTextField jTFRespuesta;
-    private javax.swing.JTextField jTFuser;
+    private javax.swing.JTextField txtAmaterno;
+    private javax.swing.JTextField txtApaterno;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtNombreUser;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JPasswordField txtPassword2;
+    private javax.swing.JTextField txtRespuesta;
+    private javax.swing.JTextField txtuser;
     // End of variables declaration//GEN-END:variables
 }
