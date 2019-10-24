@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class SqlUsuarios extends Conexion {
-
+    
     public boolean registrar(Usuario usr) {
         PreparedStatement ps = null;
         Connection con;
@@ -83,7 +83,42 @@ public class SqlUsuarios extends Conexion {
 //            }
         }
     }
-  
+    public boolean Olvide(Usuario usr){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con;
+        con= ManipulaDBC.conectaDB();
+        String sql = "SELECT idcuenta,nombre, tipo, Apaterno, Amaterno, password, tipo_pregunta, respuesta, correo FROM usuario WHERE idcuenta =?";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, usr.getUser());
+            rs = ps.executeQuery();
+            if(rs.next()){
+                usr.setNombreUser(rs.getString(2));
+                usr.setTipo(rs.getInt(3));
+                usr.setApaterno(rs.getString(4));
+                usr.setAmaterno(rs.getString(5));
+                usr.setPassword(rs.getString(6));
+                usr.setPregunta(rs.getInt(7));
+                usr.setRespuesta(rs.getString(8));
+                usr.setCorreo(rs.getString(9));
+                return true;                
+            }
+            return false;
+            
+        }catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+            return false;
+//        } finally {
+//            try {
+//                con.close();
+//            } catch (SQLException e) {
+//                JOptionPane.showMessageDialog(null, e.toString());
+//            }
+        }
+            
+        
+    }
     public int existeUsuario(String usuario) {
         PreparedStatement ps = null;
         ResultSet rs = null;

@@ -32,6 +32,7 @@ import metodos.ManipulaDBC;
  */
 public class PC extends javax.swing.JFrame {
     Usuario mod;
+    
     Connection con;
     clientes cli;
     Provedores prov;

@@ -17,8 +17,7 @@ public class Hash {
             System.out.println(e.getMessage());
         }
         return null;
-    }
- 
+    } 
     /* Retorna un hash MD5 a partir de un texto */
     public static String md5(String txt) {
         return Hash.getHash(txt, "MD5");
@@ -28,5 +27,4 @@ public class Hash {
     public static String sha1(String txt) {
         return Hash.getHash(txt, "SHA1");
     }
-
 }

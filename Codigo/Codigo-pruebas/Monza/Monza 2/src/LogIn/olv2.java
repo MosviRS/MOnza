@@ -4,6 +4,17 @@
  * and open the template in the editor.
  */
 package LogIn;
+import Entidades.Usuario;
+import com.mysql.cj.Session;
+import com.mysql.cj.protocol.Message;
+import com.sun.jdi.connect.Transport;
+import java.awt.Cursor;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -12,7 +23,7 @@ import javax.swing.JOptionPane;
  * @author Rasteck7
  */
 public class olv2 extends javax.swing.JFrame {
-
+        Usuario mod;
     /**
      * Creates new form olv2
      */
@@ -23,6 +34,39 @@ public class olv2 extends javax.swing.JFrame {
         this.setTitle("Recuperacion");
         ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
         this.setIconImage(icon.getImage());
+    }
+    public olv2(Usuario mod){
+        initComponents();
+        this.mod= mod;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Registro");        
+        ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
+        this.setIconImage(icon.getImage()); 
+        
+         switch (mod.getPregunta()){
+            case 1:                
+                Question.setSelectedIndex(1);
+                break;
+            case 2:
+                Question.setSelectedIndex(2);
+                break;
+            case 3:
+                Question.setSelectedIndex(3);
+                break;
+            case 4:
+                Question.setSelectedIndex(4);
+                break;
+            case 5:
+                Question.setSelectedIndex(5);
+                break;
+            case 6:
+                Question.setSelectedIndex(6);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Seleccione una Pregunta");
+                break;
+        }
+        
     }
 
     /**
@@ -48,6 +92,7 @@ public class olv2 extends javax.swing.JFrame {
         Close = new javax.swing.JButton();
         back = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -64,16 +109,21 @@ public class olv2 extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 330, 50));
 
         jLabel2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jLabel2.setText("Introduzca el correo con el que fue registrado");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 320, 30));
+        jLabel2.setText("Introduzca el correo que Asigno Cuando de Registro");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 360, 20));
 
         email.setBackground(new java.awt.Color(243, 240, 235));
         email.setForeground(new java.awt.Color(102, 102, 102));
-        email.setText("Inserta un correo electronico");
+        email.setText("Ingrese un correo electronico");
         email.setBorder(null);
         email.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 emailMouseClicked(evt);
+            }
+        });
+        email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailActionPerformed(evt);
             }
         });
         email.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -81,11 +131,11 @@ public class olv2 extends javax.swing.JFrame {
                 emailKeyReleased(evt);
             }
         });
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 250, 30));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 340, 30));
 
         jSeparator6.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 250, 20));
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 340, 20));
 
         jButton1.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ok1.png"))); // NOI18N
@@ -113,16 +163,22 @@ public class olv2 extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 130, 40));
 
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jLabel3.setText("Pregunta de seguridad");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 260, 20));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Ó");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 350, 20));
 
         Answer.setBackground(new java.awt.Color(243, 240, 235));
         Answer.setForeground(new java.awt.Color(102, 102, 102));
-        Answer.setText("inserte la respuesta correcta");
+        Answer.setText("Ingrese la respuesta correcta");
         Answer.setBorder(null);
         Answer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AnswerMouseClicked(evt);
+            }
+        });
+        Answer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnswerActionPerformed(evt);
             }
         });
         Answer.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -130,14 +186,14 @@ public class olv2 extends javax.swing.JFrame {
                 AnswerKeyReleased(evt);
             }
         });
-        jPanel1.add(Answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 250, 30));
+        jPanel1.add(Answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 350, 30));
 
         jSeparator7.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 250, 10));
+        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 350, 10));
 
         Question.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una pregunta", "¿Cuál fue el nombre de tu primera mascota? ", "¿Cuál es tu comida favorita? ", "¿Cuál es el nombre de tu madre? ", "¿En qué ciudad naciste?", "¿Cuál es el segundo nombre de tu padre?", "¿Cuál es el nombre de tu primer profesor?" }));
-        jPanel1.add(Question, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 240, -1));
+        jPanel1.add(Question, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 350, -1));
 
         Minimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/Minimize.png"))); // NOI18N
         Minimize.setBorder(null);
@@ -185,6 +241,10 @@ public class olv2 extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/Forget.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 60));
 
+        jLabel5.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel5.setText("Pregunta de seguridad");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 350, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -212,6 +272,68 @@ public class olv2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(!Answer.getText().equals("") && !Answer.getText().equals("Ingrese la respuesta correcta")){
+            if(Answer.getText().equals(mod.getRespuesta())){
+                Decoder decoder = Base64.getDecoder();
+                byte[] bytes = decoder.decode(mod.getPassword());
+                String decodedString = new String(bytes, UTF_8);  
+                System.out.println("contraseña: "+ decodedString);
+                JOptionPane.showMessageDialog(null, "Usuario: "+(mod.getNombreUser())+ "\nContraseña: "+ decodedString);                                
+            }else{
+                JOptionPane.showMessageDialog(null,"\tLo siento \nLos Datos NO Coinciden");                
+            }
+        }else if(!email.getText().equals("") && !email.getText().equals("Ingrese un correo electronico")){
+            if(email.getText().equals(mod.getCorreo())){
+                Properties propiedad = new Properties();
+                propiedad.setProperty("mail.smtp.host","smtp.gmail.com");
+                propiedad.setProperty("mail.smtp.starttls.enable","true");
+                propiedad.setProperty("mail.smtp.port","587");
+                propiedad.setProperty("mail.smtp.auth","true");
+
+                Session sesion = Session.getDefaultInstance(propiedad);
+
+                String correoEnvia = "urielgarciamartinez105@gmail.com";///
+                String contrasenia = "1416308A";///
+                String destinatario=email.getText();///
+                String asunto = "Recuperacion de Contraseña MONZA";
+                String mensaje="Hola "+mod.getNombreUser()+" Su Usuario: "+mod.getUser()+" nos has solicitado reestablecer su password, para ingresar de nuevo a la plataforma"///
+                + "\n Tu contraseña es: "+mod.getPassword();///
+
+                MimeMessage mail = new MimeMessage(sesion);
+                try {
+                    mail.setFrom(new InternetAddress(correoEnvia));
+                    mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+                    mail.setSubject(asunto);
+                    mail.setText(mensaje);
+
+                    Transport transporte = sesion.getTransport("smtp");
+                    transporte.connect(correoEnvia, contrasenia);
+                    transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+                    transporte.close();
+
+                    JOptionPane.showMessageDialog(null, "Correo Enviado\n Verifica tu bandeja de entrada");
+
+                } catch (AddressException ex) {
+                    Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (MessagingException ex) {
+                    Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new LogIn().setVisible(true);
+                    }
+                });
+                this.dispose();
+            }else{
+               JOptionPane.showMessageDialog(null, "Correo incorrecto o no esta registrado");
+               setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+               email.setText(""); ///
+            }
+        }
+
+
 //        int bandera=0;
 //        String recup=CorreoRecuperar.getText();
 //        String name="",ape="",pass="";
@@ -368,6 +490,14 @@ public class olv2 extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
+
+    private void AnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnswerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AnswerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -415,6 +545,7 @@ public class olv2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;

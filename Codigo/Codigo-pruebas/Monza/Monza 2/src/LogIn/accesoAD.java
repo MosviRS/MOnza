@@ -191,7 +191,6 @@ public class accesoAD extends javax.swing.JFrame {
     }//GEN-LAST:event_okMouseReleased
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
-        
             SqlUsuarios ModSQL= new SqlUsuarios();
             Usuario mod= new Usuario();
             String password= new String(txtvalida.getPassword());
@@ -209,7 +208,7 @@ public class accesoAD extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Debe Ingresar sus Datos");
             }  
 
-//
+
 //        int dialog = JOptionPane.YES_NO_OPTION;
 //        int result = JOptionPane.showConfirmDialog(null, "El acceso fue exitoso :3","Exit",dialog);
 //        if (result==0){

@@ -275,12 +275,29 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_ViewActionPerformed
 
     private void ForgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForgetActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new olv2().setVisible(true);
-            }
-        });
-        this.dispose();
+        SqlUsuarios ModSQL= new SqlUsuarios();
+        Usuario mod= new Usuario();        
+        
+        if(!User.getText().equals("") && !User.getText().equals("Ingrese Usuario")){
+            mod.setUser(User.getText());
+            if(ModSQL.Olvide(mod)){                
+                olv2 ir= new olv2(mod);
+                ir.setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuario No Existe");
+            }        
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe Ingresar al menos el nombre del Usuario Para Identificar sus Datos");
+        }
+
+
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new olv2().setVisible(true);
+//            }
+//        });
+//        this.dispose();
     }//GEN-LAST:event_ForgetActionPerformed
 
     private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed
