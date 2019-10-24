@@ -283,55 +283,55 @@ public class olv2 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"\tLo siento \nLos Datos NO Coinciden");                
             }
         }else if(!email.getText().equals("") && !email.getText().equals("Ingrese un correo electronico")){
-            if(email.getText().equals(mod.getCorreo())){
-                Properties propiedad = new Properties();
-                propiedad.setProperty("mail.smtp.host","smtp.gmail.com");
-                propiedad.setProperty("mail.smtp.starttls.enable","true");
-                propiedad.setProperty("mail.smtp.port","587");
-                propiedad.setProperty("mail.smtp.auth","true");
-
-                Session sesion = Session.getDefaultInstance(propiedad);
-
-                String correoEnvia = "urielgarciamartinez105@gmail.com";///
-                String contrasenia = "1416308A";///
-                String destinatario=email.getText();///
-                String asunto = "Recuperacion de Contraseña MONZA";
-                String mensaje="Hola "+mod.getNombreUser()+" Su Usuario: "+mod.getUser()+" nos has solicitado reestablecer su password, para ingresar de nuevo a la plataforma"///
-                + "\n Tu contraseña es: "+mod.getPassword();///
-
-                MimeMessage mail = new MimeMessage(sesion);
-                try {
-                    mail.setFrom(new InternetAddress(correoEnvia));
-                    mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
-                    mail.setSubject(asunto);
-                    mail.setText(mensaje);
-
-                    Transport transporte = sesion.getTransport("smtp");
-                    transporte.connect(correoEnvia, contrasenia);
-                    transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
-                    transporte.close();
-
-                    JOptionPane.showMessageDialog(null, "Correo Enviado\n Verifica tu bandeja de entrada");
-
-                } catch (AddressException ex) {
-                    Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (MessagingException ex) {
-                    Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        new LogIn().setVisible(true);
-                    }
-                });
-                this.dispose();
-            }else{
-               JOptionPane.showMessageDialog(null, "Correo incorrecto o no esta registrado");
-               setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-               email.setText(""); ///
-            }
-        }
+//            if(email.getText().equals(mod.getCorreo())){
+//                Properties propiedad = new Properties();
+//                propiedad.setProperty("mail.smtp.host","smtp.gmail.com");
+//                propiedad.setProperty("mail.smtp.starttls.enable","true");
+//                propiedad.setProperty("mail.smtp.port","587");
+//                propiedad.setProperty("mail.smtp.auth","true");
+//
+//                Session sesion = Session.getDefaultInstance(propiedad);
+//
+//                String correoEnvia = "urielgarciamartinez105@gmail.com";///
+//                String contrasenia = "1416308A";///
+//                String destinatario=email.getText();///
+//                String asunto = "Recuperacion de Contraseña MONZA";
+//                String mensaje="Hola "+mod.getNombreUser()+" Su Usuario: "+mod.getUser()+" nos has solicitado reestablecer su password, para ingresar de nuevo a la plataforma"///
+//                + "\n Tu contraseña es: "+mod.getPassword();///
+//
+//                MimeMessage mail = new MimeMessage(sesion);
+//                try {
+//                    mail.setFrom(new InternetAddress(correoEnvia));
+//                    mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+//                    mail.setSubject(asunto);
+//                    mail.setText(mensaje);
+//
+//                    Transport transporte = sesion.getTransport("smtp");
+//                    transporte.connect(correoEnvia, contrasenia);
+//                    transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+//                    transporte.close();
+//
+//                    JOptionPane.showMessageDialog(null, "Correo Enviado\n Verifica tu bandeja de entrada");
+//
+//                } catch (AddressException ex) {
+//                    Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (MessagingException ex) {
+//                    Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+//
+//                java.awt.EventQueue.invokeLater(new Runnable() {
+//                    public void run() {
+//                        new LogIn().setVisible(true);
+//                    }
+//                });
+//                this.dispose();
+//            }else{
+//               JOptionPane.showMessageDialog(null, "Correo incorrecto o no esta registrado");
+//               setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+//               email.setText(""); ///
+//            }
+//        }
 
 
 //        int bandera=0;
