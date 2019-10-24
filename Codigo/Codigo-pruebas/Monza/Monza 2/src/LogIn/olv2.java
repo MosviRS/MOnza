@@ -15,6 +15,12 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.util.Base64;
 import java.util.Base64.Decoder;
 import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -319,9 +325,9 @@ public class olv2 extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Correo Enviado\n Verifica tu bandeja de entrada");
 
                 } catch (AddressException ex) {
-                    Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
+                    //Logger.getLogger(olv2.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (MessagingException ex) {
-                    Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
+                    //Logger.getLogger(olv2.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
