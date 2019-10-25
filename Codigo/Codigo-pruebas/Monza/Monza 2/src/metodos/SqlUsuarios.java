@@ -181,7 +181,40 @@ public class SqlUsuarios extends Conexion {
 //            }
         }
     }
+    
+     public void modificar(Usuario usr) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con;
+        con= ManipulaDBC.conectaDB();
 
+        String sql = "SELECT idcuenta FROM usuario WHERE password =?";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, usr.getPassword());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {                
+                usr.setNombreUser(rs.getString(2));                
+                System.out.println("Nombre: "+usr.getNombreUser());
+              //  
+            }
+
+            //
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+            //
+//        } finally {
+//            try {
+//                con.close();
+//            } catch (SQLException e) {
+//                JOptionPane.showMessageDialog(null, e.toString());
+//            }
+        }
+    }
+     
     public boolean esEmail(String correo) {
         // Patrón para validar el email
         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");

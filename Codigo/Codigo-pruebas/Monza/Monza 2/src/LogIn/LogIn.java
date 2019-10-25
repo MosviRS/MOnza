@@ -284,6 +284,7 @@ public class LogIn extends javax.swing.JFrame {
                 olv2 ir= new olv2(mod);
                 ir.setVisible(true);
                 this.dispose();
+                JOptionPane.showMessageDialog(null, "Por Motivos de Seguridad se le asignara una NUEVA contraseña", "Warning",JOptionPane.WARNING_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario No Existe");
             }        

@@ -455,11 +455,11 @@ public class Registro extends javax.swing.JFrame {
             if(password.equals(passwordconfirma)){
                 if(ModSQL.existeUsuario(txtuser.getText()) ==0){
                     if(ModSQL.esEmail(txtCorreo.getText())){
-                        //String encriptado= Hash.sha1(password);
+                        String encriptado= Hash.sha1(password);
                         
-                        Encoder encoder = Base64.getEncoder();
-                        byte[] data = password.getBytes(UTF_8);
-                        String encriptado = encoder.encodeToString(data);
+//                        Encoder encoder = Base64.getEncoder();
+//                        byte[] data = password.getBytes(UTF_8);
+//                        String encriptado = encoder.encodeToString(data);
                         //alta de los datos
                         mod.setUser(txtuser.getText());
                         mod.setNombreUser(txtNombreUser.getText());

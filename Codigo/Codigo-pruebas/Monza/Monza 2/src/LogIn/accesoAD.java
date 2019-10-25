@@ -208,7 +208,7 @@ public class accesoAD extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Debe Ingresar sus Datos");
             }  
 
-
+//
 //        int dialog = JOptionPane.YES_NO_OPTION;
 //        int result = JOptionPane.showConfirmDialog(null, "El acceso fue exitoso :3","Exit",dialog);
 //        if (result==0){
