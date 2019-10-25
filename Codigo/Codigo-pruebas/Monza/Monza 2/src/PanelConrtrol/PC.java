@@ -21,10 +21,12 @@ import metodos.Querys;
 import java.sql.Connection;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import metodos.ManipulaDBC;
+import metodos.SqLImagen;
 
 /**
  *
@@ -39,6 +41,7 @@ public class PC extends javax.swing.JFrame {
     Querys q = new Querys();
     public static DefaultTableModel atm=new editTable();
     JFileChooser jf;
+    SqLImagen sqli=new SqLImagen();
     /**
      * Creates new form Registro
      */
@@ -97,6 +100,9 @@ public class PC extends javax.swing.JFrame {
     private void initComponents() {
 
         jLocaleChooser1 = new com.toedter.components.JLocaleChooser();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuEliminar = new javax.swing.JMenuItem();
+        jMenuCargar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         Nav = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -209,6 +215,12 @@ public class PC extends javax.swing.JFrame {
         Minimize = new javax.swing.JButton();
         Close = new javax.swing.JButton();
 
+        jMenuEliminar.setText("Eliminar");
+        jPopupMenu1.add(jMenuEliminar);
+
+        jMenuCargar.setText("Cargar");
+        jPopupMenu1.add(jMenuCargar);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -227,6 +239,11 @@ public class PC extends javax.swing.JFrame {
         Nav.setBackground(new java.awt.Color(243, 240, 235));
         Nav.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         Nav.setToolTipText("");
+        Nav.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                NavStateChanged(evt);
+            }
+        });
         Nav.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 NavMousePressed(evt);
@@ -602,6 +619,7 @@ public class PC extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        agenda1.setComponentPopupMenu(jPopupMenu1);
         agenda1.setRowHeight(70);
         agenda1.setSelectionBackground(new java.awt.Color(206, 166, 8));
         agenda1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1424,23 +1442,23 @@ public class PC extends javax.swing.JFrame {
     private void jBGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardar1ActionPerformed
         // TODO add your handling code here:
         try{
-            q = new Querys();
+          sqli=new SqLImagen();
+           
          llenarclaseproductos();
-             String valores1 =("'"+cli.getModeloPro() + "',");
-                                    valores1 +=("'"+cli.getNombrePro()+ "',");
-                                    valores1 += (cli.getPrecio() + ",");
-                                    valores1 += (cli.getExistencia() + ",");
-                                    valores1 += ("'"+cli.getCategoria()+"',");
-                                    valores1 += ("'"+cli.getProvedMarca()+ "'");
+         
                                     
-        agregarProductos(cli.getModeloPro(),cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath().replace("\\","/"));     
-        String s1 = q.Insertar(con, "productos"," idmodelo, nombre, precio, existencia, clasificacion, provedores_id ", valores1);
+        
+        String s1=sqli.guardarProductos(con,cli.getModeloPro(), cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath());
+       
+       // String s1 = q.Insertar(con, "productos"," idmodelo, nombre, precio, existencia, clasificacion, provedores_id ", valores1);
         if (s1 != null)
         {    Mensaje.error(this, s1);
             System.out.println("valio queso");
         } else
         {
              System.out.println("Exito");
+             sqli.visualizar_tabla(agenda1, con);
+             //agregarProductos(cli.getModeloPro(),cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath().replace("\\","/"));
         }
        
         
@@ -1449,7 +1467,6 @@ public class PC extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Falta Seleccionar una imagen ","Selecciona Imagen",JOptionPane.INFORMATION_MESSAGE);
             }
         }
-          
          
     }//GEN-LAST:event_jBGuardar1ActionPerformed
 
@@ -1468,7 +1485,7 @@ public class PC extends javax.swing.JFrame {
          jf = new JFileChooser();
         FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
         jf.setFileFilter(fil);
-        jf.setCurrentDirectory(new File("D:\\ejercicios\\OceansCoffe System IotEarth\\src\\IMG2"));
+        jf.setCurrentDirectory(new File("\\Downloads"));
         int el = jf.showOpenDialog(this);
         if(el == JFileChooser.APPROVE_OPTION){
             //txtRuta.setText(jf.getSelectedFile().getAbsolutePath());
@@ -1508,6 +1525,39 @@ public class PC extends javax.swing.JFrame {
         // TODO add your handling code here:
         nmo1.requestFocus ();
     }//GEN-LAST:event_nmm1ActionPerformed
+
+    private void NavStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_NavStateChanged
+        // TODO add your handling code here:
+         System.out.println();
+           if (evt.getSource() instanceof JTabbedPane) {
+             
+                            JTabbedPane pane = (JTabbedPane) evt.getSource();
+                            
+                           switch(pane.getSelectedIndex()){
+                               case 0:
+                                   
+                               break;    
+                               case 1:
+                                   
+                               sqli.visualizar_tabla(agenda1, con);
+                               break;
+                               case 2:
+                                   
+                               break;    
+                               case 3:
+                               
+                               break;
+                               case 4:
+                                   
+                               break;    
+                               case 5:
+                               
+                               break;
+                               
+                           }
+            }
+        
+    }//GEN-LAST:event_NavStateChanged
     public void llenarclaseproductos(){
         cli= new clientes();
         cli.setModeloPro(name1.getText());
@@ -1525,20 +1575,20 @@ public class PC extends javax.swing.JFrame {
         prov.setDireccion(dirccprove.getText());
         prov.setTelefono(telprov.getText());
     }
-     public void agregarProductos(String mod,String nom,Double preci, int exis,String cate,String provM,String im){
-      atm.addRow(new Object[]{
-          mod,nom,preci,exis,cate,provM,new JLabel(reducirtamamo(im))
-      });
-   }
-   public ImageIcon reducirtamamo(String im){
-      ImageIcon img= new ImageIcon(im);
-      Image conver=img.getImage();
-      Image tam=conver.getScaledInstance(100,120,Image.SCALE_SMOOTH);
-      ImageIcon imgfinal=new ImageIcon(tam);
-      
-      return imgfinal;
-   }
-   
+//     public void agregarProductos(String mod,String nom,Double preci, int exis,String cate,String provM,String im){
+//      atm.addRow(new Object[]{
+//          mod,nom,preci,exis,cate,provM,new JLabel(reducirtamamo(im))
+//      });
+//   }
+//   public ImageIcon reducirtamamo(String im){
+//      ImageIcon img= new ImageIcon(im);
+//      Image conver=img.getImage();
+//      Image tam=conver.getScaledInstance(100,120,Image.SCALE_SMOOTH);
+//      ImageIcon imgfinal=new ImageIcon(tam);
+//      
+//      return imgfinal;
+//   }
+//   
     /**
      * @param args the command line arguments
      */
@@ -1643,9 +1693,12 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private com.toedter.components.JLocaleChooser jLocaleChooser1;
+    private javax.swing.JMenuItem jMenuCargar;
+    private javax.swing.JMenuItem jMenuEliminar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
