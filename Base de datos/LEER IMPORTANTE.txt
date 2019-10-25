@@ -1,0 +1,2 @@
+.-En la tabla provedores el campo "idprovedores" hacerlo autoincrementable (phpadmin)
+.-En la tabla productos en el campo "imagen" cambiar el tipo de dato a mediumblob (phpadmin)
