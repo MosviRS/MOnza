@@ -11,9 +11,12 @@ package metodos;
  *
  *
  */
+import clases.editTable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 public class Querys
 {
@@ -198,6 +201,46 @@ public class Querys
              System.out.println("Exception, no hay datos");
         }
         return reg;
+    }
+     public DefaultTableModel SeleccionTable(Connection con, String campos, String tabla, String condicion,String[] titulo)
+    {   
+        DefaultTableModel modelatm=new editTable();
+        modelatm.setColumnIdentifiers(titulo);
+       
+        String cond = "";
+        
+        if (!condicion.equals(""))
+        {
+            cond = " where " + condicion;
+        }
+        try
+        {
+            Statement stmt = con.createStatement();
+            String myquery = " select " + campos + " from " + tabla;
+            System.out.println(myquery); //impresion de pureba
+            ResultSet rs = stmt.executeQuery(myquery);
+//            System.out.println("rs=" + rs.getNString("idLigas"));
+            while (rs.next())
+            {   Vector<Object> reg = new Vector();
+                for (int i = 1; i < (rs.getMetaData().getColumnCount()) + 1; i++)
+                {  
+                    reg.add(rs.getObject(i));
+                }
+                modelatm.addRow(reg);
+            }
+            //System.out.println("reg= " + reg.toString());
+//            String cadena = reg.toString();
+//            cadena = cadena.substring(1);
+//            cadena = cadena.replace("]", " ");
+//            System.out.println("salida xxx : " + cadena); //impresion de prueba 
+//            reg=SepararCadena(cadena);
+            return modelatm;
+            
+        } catch (Exception e)
+        {
+             System.out.println("Exception, no hay datos");
+        }
+        return modelatm;
     }
 
     public ArrayList SepararCadena(String cadena)

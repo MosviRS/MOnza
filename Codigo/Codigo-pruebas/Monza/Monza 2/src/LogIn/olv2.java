@@ -10,8 +10,8 @@ import clases.Hash;
 //import com.mysql.cj.protocol.Message;
 //import com.sun.jdi.connect.Transport;
 import java.awt.Cursor;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
+//import java.lang.System.Logger;
+//import java.lang.System.Logger.Level;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import java.util.Base64;
 import java.util.Base64.Decoder;
@@ -312,8 +312,8 @@ public class olv2 extends javax.swing.JFrame {
 
                 Session sesion = Session.getDefaultInstance(propiedad);
 
-                String correoEnvia = "urielgarciamartinez105@gmail.com";///
-                String contrasenia = "1416308A";///
+                String correoEnvia = "";///
+                String contrasenia = "";///se tiene que generar una contraseña de aplicacion en tu cuenta google y esa contraseña generada se pega aqui
                 String destinatario=email.getText();///
                 String asunto = "Recuperacion de Contraseña MONZA";
                 String mensaje="Hola "+mod.getNombreUser()+" Su Usuario: "+mod.getUser()+" nos has solicitado reestablecer su password, para ingresar de nuevo a la plataforma"///
@@ -334,9 +334,11 @@ public class olv2 extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Correo Enviado\n Verifica tu bandeja de entrada");
 
                 } catch (AddressException ex) {
-                    //Logger.getLogger(olv2.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Correo incorrecto o no esta registrado"+ex.getStackTrace());
+ //                   Logger.getLogger(olv2.class.getName()).log(Level.WARNING, null, ex);
                 } catch (MessagingException ex) {
-                    //Logger.getLogger(olv2.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Correo incorrecto o no esta registrado"+ex.getStackTrace());
+ //                   Logger.getLogger(olv2.class.getName()).log(Level.WARNING, null, ex);
                 }
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 

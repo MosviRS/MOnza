@@ -9,7 +9,8 @@ import cjb.ci.Mensaje;
 import clases.IMGtabla;
 import clases.editTable;
 import com.mysql.cj.Query;
-import com.sun.jdi.connect.spi.Connection;
+import java.sql.Connection;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,11 +19,12 @@ import javax.swing.table.DefaultTableModel;
  * @author mosvi
  */
 public class SqLProvedores {
-    public void visualizar_tabla(JTable tabla,Connection con){
+  public void visualizar_tabla(JTable tabla,Connection con){
+        Querys q = new Querys();
         DefaultTableModel atm=new editTable();
-        String []titulo=new String[] {"Nombre","Direccion","No. Telefonico","Correo","Tipo Mercansia"};
-         atm.setColumnIdentifiers(titulo);
+        String []titulo=new String[] {"id","Nombre","Direccion","No. Telefonico","Correo","Tipo Mercansia"};
          
+         atm= q.SeleccionTable(con,"idprovedores, nombre_empresa, direccion, correo, telefono, mercancia","provedores","idprovedores = ?", titulo);
          
          
          tabla.setRowHeight(16);

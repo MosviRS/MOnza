@@ -27,6 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import metodos.ManipulaDBC;
 import metodos.SqLImagen;
+import metodos.SqLProvedores;
 
 /**
  *
@@ -42,6 +43,7 @@ public class PC extends javax.swing.JFrame {
     public static DefaultTableModel atm=new editTable();
     JFileChooser jf;
     SqLImagen sqli=new SqLImagen();
+    SqLProvedores sqlprov=new SqLProvedores();
     /**
      * Creates new form Registro
      */
@@ -1329,9 +1331,9 @@ public class PC extends javax.swing.JFrame {
 
     private void Add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add1ActionPerformed
         // TODO add your handling code here:
-        q = new Querys();
+         q = new Querys();
          llenarclaseprovedores();
-             String valores1 =("'"+prov.getNombre() + "',");
+        String valores1 =("'"+prov.getNombre() + "',");
                                     valores1 +=("'"+prov.getDireccion()+ "',");
                                     valores1 += ("'"+prov.getCorreo() + "',");
                                     valores1 += ("'"+prov.getTelefono() + "',");
@@ -1344,10 +1346,9 @@ public class PC extends javax.swing.JFrame {
         {    Mensaje.error(this, s1);
             System.out.println("valio queso");
         } else
-        {
+        {    sqlprov.visualizar_tabla(agenda4, con);
              System.out.println("Exito");
         }
-        
     }//GEN-LAST:event_Add1ActionPerformed
 
     private void Add1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Add1MouseReleased
@@ -1548,6 +1549,7 @@ public class PC extends javax.swing.JFrame {
                                
                                break;
                                case 4:
+                               sqlprov.visualizar_tabla(agenda4, con);
                                    
                                break;    
                                case 5:

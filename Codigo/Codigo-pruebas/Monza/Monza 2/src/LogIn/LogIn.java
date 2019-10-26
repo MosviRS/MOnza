@@ -341,7 +341,7 @@ public class LogIn extends javax.swing.JFrame {
                     String encriptado= Hash.sha1(password);
                     mod.setUser(User.getText());
                     mod.setPassword(encriptado);
-                    if(ModSQL.login(mod)){
+                    if(!ModSQL.login(mod)){
                         PC ir= new PC(mod);
                         ir.setVisible(true);
                         this.dispose();
