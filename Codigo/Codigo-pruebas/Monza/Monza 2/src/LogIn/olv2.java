@@ -5,6 +5,7 @@
  */
 package LogIn;
 import Entidades.Usuario;
+import clases.Hash;
 //import com.mysql.cj.Session;
 //import com.mysql.cj.protocol.Message;
 //import com.sun.jdi.connect.Transport;
@@ -23,6 +24,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import metodos.PasswordGenerator;
+import metodos.SqlUsuarios;
 
 /**
  *
@@ -278,18 +281,24 @@ public class olv2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SqlUsuarios ModSQL= new SqlUsuarios();
+        //PasswordGenerator t= new PasswordGenerator();
         if(!Answer.getText().equals("") && !Answer.getText().equals("Ingrese la respuesta correcta")){
             if(Answer.getText().equals(mod.getRespuesta())){                
-                //Descodificar
-                Decoder decoder = Base64.getDecoder();
-                byte[] bytes = decoder.decode(mod.getPassword());
-                String decodedString = new String(bytes, UTF_8);  
-                System.out.println("contraseña: "+ decodedString);
+                //Asignar nuevo Password                
                 
-                //Pasar los resumenes a hexadecimal                            
+                String decodedString=PasswordGenerator.getPassword(PasswordGenerator.MINUSCULAS+PasswordGenerator. MAYUSCULAS + PasswordGenerator.ESPECIALES,6);                
+                System.out.println("PASSSS:    "+ decodedString);                                                
+                System.out.println("antes   "+mod.getPassword());                
+                JOptionPane.showMessageDialog(null, "Usuario: "+(mod.getNombreUser())+ "\nContraseña: "+ decodedString);                                                
+                //Encriptar
+                String encriptado= Hash.sha1(decodedString);
+                mod.setPassword(encriptado);
+                //Actualizar BD
+                System.out.println("nuevo  "+mod.getPassword());
+                ModSQL.modificar(mod);
                 
-                //
-                JOptionPane.showMessageDialog(null, "Usuario: "+(mod.getNombreUser())+ "\nContraseña: "+ decodedString);                                
+                
             }else{
                 JOptionPane.showMessageDialog(null,"\tLo siento \nLos Datos NO Coinciden");                
             }
@@ -508,7 +517,7 @@ public class olv2 extends javax.swing.JFrame {
     private void AnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnswerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AnswerActionPerformed
-
+   
     /**
      * @param args the command line arguments
      */

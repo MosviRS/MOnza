@@ -33,12 +33,12 @@ public class SqlUsuarios extends Conexion {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
             return false;
-//        } finally {
-//            try {
-//                ManipulaDBC.desconectaDB(con);
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(null, e.toString());
-//            }
+        } finally {
+            try {
+                ManipulaDBC.desconectaDB(con);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
         }
     }
 
@@ -75,12 +75,12 @@ public class SqlUsuarios extends Conexion {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
             return false;
-//        } finally {
-//            try {
-//                con.close();
-//            } catch (SQLException e) {
-//                JOptionPane.showMessageDialog(null, e.toString());
-//            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
         }
     }
     public boolean Olvide(Usuario usr){
@@ -94,6 +94,7 @@ public class SqlUsuarios extends Conexion {
             ps.setString(1, usr.getUser());
             rs = ps.executeQuery();
             if(rs.next()){
+                usr.setUser(rs.getString(1));
                 usr.setNombreUser(rs.getString(2));
                 usr.setTipo(rs.getInt(3));
                 usr.setApaterno(rs.getString(4));
@@ -109,12 +110,12 @@ public class SqlUsuarios extends Conexion {
         }catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
             return false;
-//        } finally {
-//            try {
-//                con.close();
-//            } catch (SQLException e) {
-//                JOptionPane.showMessageDialog(null, e.toString());
-//            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
         }
             
         
@@ -141,12 +142,12 @@ public class SqlUsuarios extends Conexion {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
             return 1;
-//        } finally {
-//            try {
-//                con.close();
-//            } catch (SQLException e) {
-//                JOptionPane.showMessageDialog(null, e.toString());
-//            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
         }
     }
      public boolean validaSA(Usuario usr) {
@@ -173,12 +174,12 @@ public class SqlUsuarios extends Conexion {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
             return false;
-//        } finally {
-//            try {
-//                con.close();
-//            } catch (SQLException e) {
-//                JOptionPane.showMessageDialog(null, e.toString());
-//            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
         }
     }
     
@@ -188,30 +189,37 @@ public class SqlUsuarios extends Conexion {
         Connection con;
         con= ManipulaDBC.conectaDB();
 
-        String sql = "SELECT idcuenta FROM usuario WHERE password =?";
+        String sql = "UPDATE usuario SET idcuenta=?,nombre=?, tipo=?, Apaterno=?, Amaterno=?, password=?, tipo_pregunta=?, respuesta=?, correo=?  WHERE idcuenta =?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, usr.getPassword());
-            rs = ps.executeQuery();
+            //ps.setString(1, usr.getPassword());
+            //rs = ps.executeQuery();
 
-            if (rs.next()) {                
-                usr.setNombreUser(rs.getString(2));                
-                System.out.println("Nombre: "+usr.getNombreUser());
-              //  
-            }
+            ps.setString(1, usr.getUser());
+            ps.setString(2, usr.getNombreUser());
+            ps.setInt(3, usr.getTipo());
+            ps.setString(4, usr.getApaterno());
+            ps.setString(5, usr.getAmaterno());
+            ps.setString(6,usr.getPassword());
+            ps.setInt(7, usr.getPregunta());
+            ps.setString(8, usr.getRespuesta());
+            ps.setString(9, usr.getCorreo());
+            ps.setString(10, usr.getUser());
+            int res = ps.executeUpdate();
+            
 
             //
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
             //
-//        } finally {
-//            try {
-//                con.close();
-//            } catch (SQLException e) {
-//                JOptionPane.showMessageDialog(null, e.toString());
-//            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
         }
     }
      
