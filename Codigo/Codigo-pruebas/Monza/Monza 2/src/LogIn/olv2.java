@@ -261,13 +261,13 @@ public class olv2 extends javax.swing.JFrame {
 
     private void emailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseClicked
         // TODO add your handling code here:
-        if (email.getText().equals("Inserta un correo electronico")) {
+        if (email.getText().equals("Ingrese un correo electronico")) {
             email.setText("");
         }
     }//GEN-LAST:event_emailMouseClicked
 
     private void emailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyReleased
-        if (email.getText().equals("Inserta un correo electronico")) {
+        if (email.getText().equals("Ingresa un correo electronico")) {
             email.setText("");
         }
     }//GEN-LAST:event_emailKeyReleased
@@ -311,14 +311,28 @@ public class olv2 extends javax.swing.JFrame {
                 propiedad.setProperty("mail.smtp.auth","true");
 
                 Session sesion = Session.getDefaultInstance(propiedad);
-
-                String correoEnvia = "";///
-                String contrasenia = "";///se tiene que generar una contraseña de aplicacion en tu cuenta google y esa contraseña generada se pega aqui
+                
+                //Asignar nuevo Password                
+                
+                String decodedString=PasswordGenerator.getPassword(PasswordGenerator.MINUSCULAS+PasswordGenerator. MAYUSCULAS + PasswordGenerator.ESPECIALES,6);                
+                System.out.println("PASSSS:    "+ decodedString);                                                
+                System.out.println("antes   "+mod.getPassword());   
+                
+                
+                String correoEnvia = "muebleriamonza@gmail.com";///
+                String contrasenia = "212092249A";///se tiene que generar una contraseña de aplicacion en tu cuenta google y esa contraseña generada se pega aqui
                 String destinatario=email.getText();///
                 String asunto = "Recuperacion de Contraseña MONZA";
                 String mensaje="Hola "+mod.getNombreUser()+" Su Usuario: "+mod.getUser()+" nos has solicitado reestablecer su password, para ingresar de nuevo a la plataforma"///
-                + "\n Tu contraseña es: "+mod.getPassword();///
-
+                + "\n Tu contraseña es: "+decodedString;///
+                System.out.println("Contraseña enviada: "+decodedString);
+                 //Encriptar
+                String encriptado= Hash.sha1(decodedString);
+                mod.setPassword(encriptado);
+                //Actualizar BD
+                System.out.println("nuevo  "+mod.getPassword());
+                ModSQL.modificar(mod);
+                
                 MimeMessage mail = new MimeMessage(sesion);
                 try {
                     mail.setFrom(new InternetAddress(correoEnvia));
@@ -332,6 +346,7 @@ public class olv2 extends javax.swing.JFrame {
                     transporte.close();
 
                     JOptionPane.showMessageDialog(null, "Correo Enviado\n Verifica tu bandeja de entrada");
+                    
 
                 } catch (AddressException ex) {
                     JOptionPane.showMessageDialog(null, "Correo incorrecto o no esta registrado"+ex.getStackTrace());
@@ -480,6 +495,9 @@ public class olv2 extends javax.swing.JFrame {
 
     private void AnswerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnswerMouseClicked
         // TODO add your handling code here:
+        if (Answer.getText().equals("Ingrese la respuesta correcta")) {
+            Answer.setText("");
+        }
     }//GEN-LAST:event_AnswerMouseClicked
 
     private void AnswerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AnswerKeyReleased
