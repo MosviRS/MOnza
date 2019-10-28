@@ -24,7 +24,7 @@ public class accesoAD extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Acceso");
-        ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
+        ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
         this.setIconImage(icon.getImage());
     }
 

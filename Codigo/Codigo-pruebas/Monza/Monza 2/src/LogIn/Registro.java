@@ -27,7 +27,7 @@ public class Registro extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Registro");
-        ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
+        ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
         this.setIconImage(icon.getImage());
     }
 

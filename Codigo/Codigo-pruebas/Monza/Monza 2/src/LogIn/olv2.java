@@ -41,7 +41,7 @@ public class olv2 extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         this.setTitle("Recuperacion");
-        ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
+        ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
         this.setIconImage(icon.getImage());
     }
     public olv2(Usuario mod){

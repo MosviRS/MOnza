@@ -29,7 +29,7 @@ public class LogIn extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);        
         this.setTitle("Muebleria ¨MONZA¨");
-        ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
+        ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
         this.setIconImage(icon.getImage());
      
         
