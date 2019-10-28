@@ -64,7 +64,7 @@ public class PC extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Registro");
         //Nav.setEnabledAt(4, false);
-        ImageIcon icon = new ImageIcon("src/Imagen/LogoMonza.png");
+        ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
         this.setIconImage(icon.getImage());
         if(mod.getTipo()==1){
             
