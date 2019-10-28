@@ -132,14 +132,14 @@ public class LogIn extends javax.swing.JFrame {
         jPanel1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 180, 30));
 
         View.setBackground(new java.awt.Color(242, 242, 242));
-        View.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/oculto.png"))); // NOI18N
+        View.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/oculto.png"))); // NOI18N
         View.setBorder(null);
         View.setBorderPainted(false);
         View.setContentAreaFilled(false);
         View.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
-        View.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
-        View.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
-        View.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
+        View.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ver.png"))); // NOI18N
+        View.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ver.png"))); // NOI18N
+        View.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ver.png"))); // NOI18N
         View.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ViewActionPerformed(evt);
