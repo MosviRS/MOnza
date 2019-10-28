@@ -238,14 +238,14 @@ public class Registro extends javax.swing.JFrame {
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 220, 30));
 
         Ocultar.setBackground(new java.awt.Color(242, 242, 242));
-        Ocultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/oculto.png"))); // NOI18N
+        Ocultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/oculto.png"))); // NOI18N
         Ocultar.setBorder(null);
         Ocultar.setBorderPainted(false);
         Ocultar.setContentAreaFilled(false);
         Ocultar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
-        Ocultar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
-        Ocultar.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
-        Ocultar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
+        Ocultar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ver.png"))); // NOI18N
+        Ocultar.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ver.png"))); // NOI18N
+        Ocultar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ver.png"))); // NOI18N
         Ocultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OcultarActionPerformed(evt);
@@ -335,7 +335,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Microsoft Tai Le", 0, 36)); // NOI18N
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/Register.png"))); // NOI18N
         jLabel8.setText("Registro");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 380, 70));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 380, 80));
 
         Minimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/Minimize.png"))); // NOI18N
         Minimize.setBorder(null);
@@ -418,14 +418,14 @@ public class Registro extends javax.swing.JFrame {
         jPanel1.add(txtPassword2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 220, 30));
 
         Ocultar2.setBackground(new java.awt.Color(242, 242, 242));
-        Ocultar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/oculto.png"))); // NOI18N
+        Ocultar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/oculto.png"))); // NOI18N
         Ocultar2.setBorder(null);
         Ocultar2.setBorderPainted(false);
         Ocultar2.setContentAreaFilled(false);
         Ocultar2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
-        Ocultar2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
-        Ocultar2.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
-        Ocultar2.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ver.png"))); // NOI18N
+        Ocultar2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ver.png"))); // NOI18N
+        Ocultar2.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ver.png"))); // NOI18N
+        Ocultar2.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ver.png"))); // NOI18N
         Ocultar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Ocultar2ActionPerformed(evt);

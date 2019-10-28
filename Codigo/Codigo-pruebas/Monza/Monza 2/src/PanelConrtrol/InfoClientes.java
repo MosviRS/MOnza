@@ -62,7 +62,7 @@ public class InfoClientes extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 159, 28));
         jLabel1.setText("Datos del Cliente");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 50));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 400, 50));
 
         jButton1.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/ok1.png"))); // NOI18N
@@ -154,7 +154,7 @@ public class InfoClientes extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
-        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 80, 60));
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 80, 60));
 
         jLabel4.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel4.setText("Apellido Paterno");
