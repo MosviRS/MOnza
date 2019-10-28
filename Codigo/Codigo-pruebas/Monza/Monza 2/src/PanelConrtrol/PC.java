@@ -570,7 +570,7 @@ public class PC extends javax.swing.JFrame {
         jSeparator15.setForeground(new java.awt.Color(0, 0, 0));
         Productos.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 250, 10));
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-search-48_1.png"))); // NOI18N
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/icons8-search-48_1.png"))); // NOI18N
         Productos.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, 50, 40));
 
         buscar1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -666,7 +666,7 @@ public class PC extends javax.swing.JFrame {
         });
         Clientes.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 170, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-search-48_1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/icons8-search-48_1.png"))); // NOI18N
         Clientes.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, 50, 40));
 
         jTFuser3.setBackground(new java.awt.Color(243, 240, 235));
@@ -1096,7 +1096,7 @@ public class PC extends javax.swing.JFrame {
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Microsoft Tai Le", 1, 28)); // NOI18N
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/engranajes.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/engranajes.png"))); // NOI18N
         jLabel8.setText("Centro de trabajo");
         jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 70));
 
