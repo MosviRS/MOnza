@@ -1443,7 +1443,15 @@ public class PC extends javax.swing.JFrame {
     private void jBGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardar1ActionPerformed
         // TODO add your handling code here:
         try{
-          sqli=new SqLImagen();
+            if(name1.getText().equals("") || ap1.getText().equals("") || am1.getText().equals("") || email1.getText().equals("") || nmm1.getText().equals("")
+                    || nmo1.getText().equals("")) mensaje("Upss! Faltan campos por llenar");
+            else{
+                
+            
+           
+                
+            
+         sqli=new SqLImagen();
            
          llenarclaseproductos();
          
@@ -1461,7 +1469,7 @@ public class PC extends javax.swing.JFrame {
              sqli.visualizar_tabla(agenda1, con);
              //agregarProductos(cli.getModeloPro(),cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath().replace("\\","/"));
         }
-       
+            }     
         
         }catch(Exception e){
             if(txtFile.getText().equals("")){
@@ -1576,6 +1584,9 @@ public class PC extends javax.swing.JFrame {
         prov.setTipoMer(mercprov.getText());
         prov.setDireccion(dirccprove.getText());
         prov.setTelefono(telprov.getText());
+    }
+     public void mensaje(String texto){
+        JOptionPane.showMessageDialog(null, texto);
     }
 //     public void agregarProductos(String mod,String nom,Double preci, int exis,String cate,String provM,String im){
 //      atm.addRow(new Object[]{
