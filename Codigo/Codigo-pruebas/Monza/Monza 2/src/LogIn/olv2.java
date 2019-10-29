@@ -319,8 +319,8 @@ public class olv2 extends javax.swing.JFrame {
                 System.out.println("antes   "+mod.getPassword());   
                 
                 
-                String correoEnvia = "muebleriamonza@gmail.com";///
-                String contrasenia = "212092249A";///se tiene que generar una contraseña de aplicacion en tu cuenta google y esa contraseña generada se pega aqui
+                String correoEnvia = "monzamuebleria@gmail.com";///
+                String contrasenia = " lrgvudhqamqvjgwh";///se tiene que generar una contraseña de aplicacion en tu cuenta google y esa contraseña generada se pega aqui
                 String destinatario=email.getText();///
                 String asunto = "Recuperacion de Contraseña MONZA";
                 String mensaje="Hola "+mod.getNombreUser()+" Su Usuario: "+mod.getUser()+" nos has solicitado reestablecer su password, para ingresar de nuevo a la plataforma"///
