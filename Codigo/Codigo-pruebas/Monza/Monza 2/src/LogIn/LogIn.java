@@ -337,11 +337,12 @@ public class LogIn extends javax.swing.JFrame {
             SqlUsuarios ModSQL= new SqlUsuarios();
             Usuario mod= new Usuario();
             String password= new String(Password.getPassword());
+            
             if(!User.getText().equals("") && !password.equals("") && !User.getText().equals("Ingrese Usuario") && !password.equals("Inserte contraseña")){
                     String encriptado= Hash.sha1(password);
                     mod.setUser(User.getText());
-                    mod.setPassword(encriptado);
-                    if(!ModSQL.login(mod)){
+                    mod.setPassword(encriptado);                    
+                    if(ModSQL.login(mod)){
                         PC ir= new PC(mod);
                         ir.setVisible(true);
                         this.dispose();
