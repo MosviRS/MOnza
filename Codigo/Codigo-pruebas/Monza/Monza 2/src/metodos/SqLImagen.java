@@ -131,10 +131,9 @@ public class SqLImagen {
        public void elimnar(JTable tabla,Connection con){
       Querys q = new Querys();
       try{
-            String s1=q.Delete(con,"productos","modela", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
-            DefaultTableModel atm=new editTable();
-           
-                    if (s1 != null)
+            String s1=q.Delete(con,"productos","idmodelo", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
+            DefaultTableModel atm=(editTable) tabla.getModel();
+                if (s1 != null)
                {    
                    System.out.println("valio queso");
                } else

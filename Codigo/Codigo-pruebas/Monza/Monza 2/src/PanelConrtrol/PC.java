@@ -44,6 +44,7 @@ public class PC extends javax.swing.JFrame {
     JFileChooser jf;
     SqLImagen sqli=new SqLImagen();
     SqLProvedores sqlprov=new SqLProvedores();
+    int notabbPane;
     /**
      * Creates new form Registro
      */
@@ -826,7 +827,6 @@ public class PC extends javax.swing.JFrame {
         Nomprov.setBackground(new java.awt.Color(243, 240, 235));
         Nomprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Nomprov.setForeground(new java.awt.Color(102, 102, 102));
-        Nomprov.setText("Inserta Nombre");
         Nomprov.setBorder(null);
         Nomprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -866,7 +866,6 @@ public class PC extends javax.swing.JFrame {
         dirccprove.setBackground(new java.awt.Color(243, 240, 235));
         dirccprove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dirccprove.setForeground(new java.awt.Color(102, 102, 102));
-        dirccprove.setText("Inserta Dirección");
         dirccprove.setBorder(null);
         dirccprove.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -896,7 +895,6 @@ public class PC extends javax.swing.JFrame {
         emailprov.setBackground(new java.awt.Color(243, 240, 235));
         emailprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         emailprov.setForeground(new java.awt.Color(102, 102, 102));
-        emailprov.setText("Inserta Correo Electronico");
         emailprov.setBorder(null);
         emailprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -926,7 +924,6 @@ public class PC extends javax.swing.JFrame {
         telprov.setBackground(new java.awt.Color(243, 240, 235));
         telprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         telprov.setForeground(new java.awt.Color(102, 102, 102));
-        telprov.setText("Inserta Telefono");
         telprov.setBorder(null);
         telprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -964,7 +961,6 @@ public class PC extends javax.swing.JFrame {
         mercprov.setBackground(new java.awt.Color(243, 240, 235));
         mercprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mercprov.setForeground(new java.awt.Color(102, 102, 102));
-        mercprov.setText("Inserta Mercancia");
         mercprov.setBorder(null);
         mercprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1008,6 +1004,7 @@ public class PC extends javax.swing.JFrame {
             }
         });
         agenda4.setColumnSelectionAllowed(true);
+        agenda4.setComponentPopupMenu(jPopupMenu1);
         agenda4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 agenda4MouseClicked(evt);
@@ -1477,7 +1474,7 @@ public class PC extends javax.swing.JFrame {
          
                                     
         
-        String s1=sqli.guardarProductos(con,cli.getModeloPro(), cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath());
+        String s1=sqli.guardarProductos(con,cli.getModeloPro().replace(" ",""), cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath());
        
        // String s1 = q.Insertar(con, "productos"," idmodelo, nombre, precio, existencia, clasificacion, provedores_id ", valores1);
         if (s1 != null)
@@ -1561,7 +1558,7 @@ public class PC extends javax.swing.JFrame {
            if (evt.getSource() instanceof JTabbedPane) {
              
                             JTabbedPane pane = (JTabbedPane) evt.getSource();
-                            
+                            notabbPane=pane.getSelectedIndex();
                            switch(pane.getSelectedIndex()){
                                case 0:
                                    
@@ -1602,11 +1599,10 @@ public class PC extends javax.swing.JFrame {
     private void jMenuEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEliminarActionPerformed
         // TODO add your handling code here:
            
-           if (evt.getSource() instanceof JTabbedPane) {
-             
-                            JTabbedPane pane = (JTabbedPane) evt.getSource();
-                            
-                           switch(pane.getSelectedIndex()){
+           
+                           
+                            ;
+                           switch(notabbPane){
                                case 0:
                                    
                                break;    
@@ -1626,11 +1622,11 @@ public class PC extends javax.swing.JFrame {
                                break;
                                
                            }
-            }
+            
     }//GEN-LAST:event_jMenuEliminarActionPerformed
     public void llenarclaseproductos(){
         cli= new clientes();
-        cli.setModeloPro(name1.getText());
+        cli.setModeloPro(name1.getText().replace(" ",""));
         cli.setNombrePro(ap1.getText());
         cli.setPrecio(Double.parseDouble(am1.getText()));
         cli.setProvedMarca(email1.getText());

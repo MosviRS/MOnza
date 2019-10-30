@@ -18,8 +18,8 @@ public class SqLEntregas {
      public void elimnar(JTable tabla,Connection con){
       Querys q = new Querys();
       try{
-            String s1=q.Delete(con,"entregas","modela", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
-            DefaultTableModel atm=new DefaultTableModel();
+            String s1=q.Delete(con,"entregas","nota_entregas", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
+            DefaultTableModel atm=(editTable) tabla.getModel();
            
                     if (s1 != null)
                {    
