@@ -31,38 +31,5 @@ public class SqLProvedores {
          tabla.setModel(atm);
    
     }
-   public void elimnar(JTable tabla,Connection con){
-      Querys q = new Querys();
-      try{
-            String s1=q.Delete(con,"provedores","idprovedores", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
-            DefaultTableModel atm=new editTable();
-           
-                    if (s1 != null)
-               {    
-                   System.out.println("valio queso");
-               } else
-               {
-                    System.out.println("Exito");
-                    atm.removeRow(tabla.getSelectedRow());
-                    tabla.setModel(atm);
-                    //agregarProductos(cli.getModeloPro(),cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath().replace("\\","/"));
-               }
-                    
-      }catch(Exception e){
-          
-      }
-      
-  }
-  public void modificar(JTable tabla,Connection con){
-      
-                tabla.addKeyListener(new java.awt.event.KeyAdapter() {
-                public void tablakeyReleased(java.awt.event.KeyEvent evt) {
-                    
-                }
-            });
-        
-                       
-                            
-  }
  
 }

@@ -104,9 +104,7 @@ public class PC extends javax.swing.JFrame {
         jLocaleChooser1 = new com.toedter.components.JLocaleChooser();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuEliminar = new javax.swing.JMenuItem();
-        jPopupMenu2 = new javax.swing.JPopupMenu();
-        Eliminar2 = new javax.swing.JMenuItem();
-        Cargar = new javax.swing.JMenuItem();
+        jMenuCargar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         Nav = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -220,28 +218,10 @@ public class PC extends javax.swing.JFrame {
         Close = new javax.swing.JButton();
 
         jMenuEliminar.setText("Eliminar");
-        jMenuEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuEliminarActionPerformed(evt);
-            }
-        });
         jPopupMenu1.add(jMenuEliminar);
 
-        Eliminar2.setText("Eliminar");
-        Eliminar2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Eliminar2ActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Eliminar2);
-
-        Cargar.setText("Cargar");
-        Cargar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CargarActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Cargar);
+        jMenuCargar.setText("Cargar");
+        jPopupMenu1.add(jMenuCargar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -641,7 +621,7 @@ public class PC extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        agenda1.setComponentPopupMenu(jPopupMenu2);
+        agenda1.setComponentPopupMenu(jPopupMenu1);
         agenda1.setRowHeight(70);
         agenda1.setSelectionBackground(new java.awt.Color(206, 166, 8));
         agenda1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1588,46 +1568,6 @@ public class PC extends javax.swing.JFrame {
             }
         
     }//GEN-LAST:event_NavStateChanged
-
-    private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
-        // TODO add your handling code here:
-        sqli.cargar(agenda1, con);
-    }//GEN-LAST:event_CargarActionPerformed
-
-    private void Eliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar2ActionPerformed
-        // TODO add your handling code here:
-        sqli.elimnar(agenda1, con);
-    }//GEN-LAST:event_Eliminar2ActionPerformed
-
-    private void jMenuEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEliminarActionPerformed
-        // TODO add your handling code here:
-           
-           if (evt.getSource() instanceof JTabbedPane) {
-             
-                            JTabbedPane pane = (JTabbedPane) evt.getSource();
-                            
-                           switch(pane.getSelectedIndex()){
-                               case 0:
-                                   
-                               break;    
-                               
-                               case 2:
-                                   
-                               break;    
-                               case 3:
-                               
-                               break;
-                               case 4:
-                               sqlprov.elimnar(agenda4, con);
-                                   
-                               break;    
-                               case 5:
-                               
-                               break;
-                               
-                           }
-            }
-    }//GEN-LAST:event_jMenuEliminarActionPerformed
     public void llenarclaseproductos(){
         cli= new clientes();
         cli.setModeloPro(name1.getText());
@@ -1702,13 +1642,11 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JButton Add;
     private javax.swing.JButton Add1;
     private javax.swing.JPanel Bitacora;
-    private javax.swing.JMenuItem Cargar;
     private javax.swing.JButton Clean;
     private javax.swing.JPanel Clientes;
     private javax.swing.JButton Close;
     private javax.swing.JLabel Date;
     private javax.swing.JLabel Date1;
-    private javax.swing.JMenuItem Eliminar2;
     private javax.swing.JPanel Entregas;
     private javax.swing.JButton Minimize;
     private javax.swing.JButton Minimize1;
@@ -1726,14 +1664,14 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTable agenda3;
     private javax.swing.JTable agenda4;
     private javax.swing.JTable agenda5;
-    public static javax.swing.JTextField am1;
-    public static javax.swing.JTextField ap1;
+    private javax.swing.JTextField am1;
+    private javax.swing.JTextField ap1;
     private javax.swing.JTextField buscar;
     private javax.swing.JTextField buscar1;
     private javax.swing.JTextField buscar2;
     private javax.swing.JTextField buscar3;
     private javax.swing.JTextField dirccprove;
-    public static javax.swing.JTextField email1;
+    private javax.swing.JTextField email1;
     private javax.swing.JTextField emailprov;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBGuardar1;
@@ -1768,12 +1706,12 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private com.toedter.components.JLocaleChooser jLocaleChooser1;
+    private javax.swing.JMenuItem jMenuCargar;
     private javax.swing.JMenuItem jMenuEliminar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1811,9 +1749,9 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField mercprov;
-    public static javax.swing.JTextField name1;
-    public static javax.swing.JTextField nmm1;
-    public static javax.swing.JTextField nmo1;
+    private javax.swing.JTextField name1;
+    private javax.swing.JTextField nmm1;
+    private javax.swing.JTextField nmo1;
     private javax.swing.JTextField telprov;
     private javax.swing.JTextField txtFile;
     // End of variables declaration//GEN-END:variables

@@ -5,8 +5,7 @@
  */
 package metodos;
 
-import static PanelConrtrol.PC.ap1;
-import static PanelConrtrol.PC.*;
+import static PanelConrtrol.PC.atm;
 import clases.IMGtabla;
 import clases.editTable;
 import java.awt.Image;
@@ -128,35 +127,4 @@ public class SqLImagen {
       
       return imgfinal;
    }
-       public void elimnar(JTable tabla,Connection con){
-      Querys q = new Querys();
-      try{
-            String s1=q.Delete(con,"productos","modela", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
-            DefaultTableModel atm=new editTable();
-           
-                    if (s1 != null)
-               {    
-                   System.out.println("valio queso");
-               } else
-               {
-                    System.out.println("Exito");
-                    atm.removeRow(tabla.getSelectedRow());
-                    tabla.setModel(atm);
-                    //agregarProductos(cli.getModeloPro(),cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath().replace("\\","/"));
-               }
-                    
-      }catch(Exception e){
-          
-      }
-  }
-     public void cargar(JTable tabla,Connection con){
-         
-        name1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 0)));
-        ap1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 1)));
-        am1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 2)));
-        email1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 3)));
-        nmm1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 4)));
-        nmo1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 5)));
-        
-     }
 }
