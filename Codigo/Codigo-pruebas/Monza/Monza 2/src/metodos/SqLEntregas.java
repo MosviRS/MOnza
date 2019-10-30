@@ -5,37 +5,21 @@
  */
 package metodos;
 
-import cjb.ci.Mensaje;
-import clases.IMGtabla;
 import clases.editTable;
-import com.mysql.cj.Query;
 import java.sql.Connection;
-
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author mosvi
+ * @author LAPROMA1-18
  */
-public class SqLProvedores {
-  public void visualizar_tabla(JTable tabla,Connection con){
-        Querys q = new Querys();
-        DefaultTableModel atm=new editTable();
-        String []titulo=new String[] {"id","Nombre","Direccion","No. Telefonico","Correo","Tipo Mercansia"};
-         
-         atm= q.SeleccionTable(con,"idprovedores, nombre_empresa, direccion, correo, telefono, mercancia","provedores","idprovedores = ?", titulo);
-         
-         
-         tabla.setRowHeight(16);
-         tabla.setModel(atm);
-   
-    }
-   public void elimnar(JTable tabla,Connection con){
+public class SqLEntregas {
+     public void elimnar(JTable tabla,Connection con){
       Querys q = new Querys();
       try{
-            String s1=q.Delete(con,"provedores","idprovedores", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
-            DefaultTableModel atm=new editTable();
+            String s1=q.Delete(con,"entregas","modela", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
+            DefaultTableModel atm=new DefaultTableModel();
            
                     if (s1 != null)
                {    
@@ -53,10 +37,11 @@ public class SqLProvedores {
       }
       
   }
-  public void modificar(JTable tabla,Connection con){
+     public void modificar(JTable tabla,Connection con){
       
                 tabla.addKeyListener(new java.awt.event.KeyAdapter() {
                 public void tablakeyReleased(java.awt.event.KeyEvent evt) {
+                    
                     
                 }
             });
@@ -64,5 +49,4 @@ public class SqLProvedores {
                        
                             
   }
- 
 }
