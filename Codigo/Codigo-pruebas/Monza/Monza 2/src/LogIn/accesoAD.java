@@ -65,7 +65,7 @@ public class accesoAD extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Contraseña de Administrador");
+        jLabel2.setText("Contraseña de Super-Administrador ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 260, 30));
 
         ok.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
