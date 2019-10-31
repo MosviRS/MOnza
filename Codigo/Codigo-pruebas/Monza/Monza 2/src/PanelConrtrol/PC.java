@@ -112,39 +112,36 @@ public class PC extends javax.swing.JFrame {
         Nav = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         Nota = new javax.swing.JPanel();
-        DeliveryType = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
-        amount = new javax.swing.JTextField();
+        jTFuser2 = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel25 = new javax.swing.JLabel();
-        credit = new javax.swing.JRadioButton();
-        counted = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        Total = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel24 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        product = new javax.swing.JTextField();
+        jTFuser1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         NNote = new javax.swing.JLabel();
         Date = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        AddNote = new javax.swing.JButton();
+        jTFuser = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        Add = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
-        TNote = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
-        Reference = new javax.swing.JTextArea();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        save = new javax.swing.JButton();
-        dateofpurchase = new com.toedter.calendar.JDateChooser();
-        Deadline = new com.toedter.calendar.JDateChooser();
-        Quantity = new javax.swing.JTextField();
-        jSeparator20 = new javax.swing.JSeparator();
-        NumNote = new javax.swing.JTextField();
-        jSeparator21 = new javax.swing.JSeparator();
-        model = new javax.swing.JTextField();
-        jSeparator7 = new javax.swing.JSeparator();
-        Total = new javax.swing.JLabel();
+        jBGuardar = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         Productos = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -281,27 +278,32 @@ public class PC extends javax.swing.JFrame {
         Nota.setBackground(new java.awt.Color(243, 240, 235));
         Nota.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        DeliveryType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Nota.add(DeliveryType, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 100, -1));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Nota.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 100, -1));
 
         jLabel26.setBackground(new java.awt.Color(235, 235, 235));
         jLabel26.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel26.setText("Fecha de Entrega:");
         Nota.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 420, 120, 20));
 
-        amount.setBackground(new java.awt.Color(243, 240, 235));
-        amount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        amount.setForeground(new java.awt.Color(102, 102, 102));
-        amount.setText("00.00");
-        amount.setBorder(null);
-        amount.setCaretColor(new java.awt.Color(204, 51, 0));
-        amount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        amount.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTFuser2.setBackground(new java.awt.Color(243, 240, 235));
+        jTFuser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFuser2.setForeground(new java.awt.Color(102, 102, 102));
+        jTFuser2.setText("00.00");
+        jTFuser2.setBorder(null);
+        jTFuser2.setCaretColor(new java.awt.Color(204, 51, 0));
+        jTFuser2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTFuser2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                amountMouseClicked(evt);
+                jTFuser2MouseClicked(evt);
             }
         });
-        Nota.add(amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 140, 20));
+        jTFuser2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFuser2ActionPerformed(evt);
+            }
+        });
+        Nota.add(jTFuser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 140, 20));
 
         jSeparator6.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
@@ -312,15 +314,19 @@ public class PC extends javax.swing.JFrame {
         jLabel25.setText("Monto Recibido:");
         Nota.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 120, 20));
 
-        credit.setBackground(new java.awt.Color(243, 240, 235));
-        credit.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        credit.setText("Credito");
-        Nota.add(credit, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 90, -1));
+        jRadioButton2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jRadioButton2.setText("Credito");
+        Nota.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 90, -1));
 
-        counted.setBackground(new java.awt.Color(243, 240, 235));
-        counted.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        counted.setText("Contado");
-        Nota.add(counted, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 90, -1));
+        jRadioButton1.setBackground(new java.awt.Color(243, 240, 235));
+        jRadioButton1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jRadioButton1.setText("Contado");
+        Nota.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 90, -1));
+
+        Total.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Total.setForeground(new java.awt.Color(102, 102, 102));
+        Total.setText("XXXXXX");
+        Nota.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 370, 160, 20));
 
         jSeparator5.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
@@ -340,19 +346,19 @@ public class PC extends javax.swing.JFrame {
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
         Nota.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 190, 10));
 
-        product.setBackground(new java.awt.Color(243, 240, 235));
-        product.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        product.setForeground(new java.awt.Color(102, 102, 102));
-        product.setText("Nombre del Producto");
-        product.setBorder(null);
-        product.setCaretColor(new java.awt.Color(204, 51, 0));
-        product.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        product.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTFuser1.setBackground(new java.awt.Color(243, 240, 235));
+        jTFuser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFuser1.setForeground(new java.awt.Color(102, 102, 102));
+        jTFuser1.setText("Nombre del Producto");
+        jTFuser1.setBorder(null);
+        jTFuser1.setCaretColor(new java.awt.Color(204, 51, 0));
+        jTFuser1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTFuser1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                productMouseClicked(evt);
+                jTFuser1MouseClicked(evt);
             }
         });
-        Nota.add(product, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 170, 20));
+        Nota.add(jTFuser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 170, 20));
 
         jLabel6.setBackground(new java.awt.Color(235, 235, 235));
         jLabel6.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
@@ -360,8 +366,8 @@ public class PC extends javax.swing.JFrame {
         Nota.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 160, 20));
 
         NNote.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        NNote.setText("Numero de Nota:");
-        Nota.add(NNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, 120, 40));
+        NNote.setText("Numero de Nota:XXXXX");
+        Nota.add(NNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, 180, 40));
 
         Date.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         Date.setText("Fecha de Compra:");
@@ -372,31 +378,52 @@ public class PC extends javax.swing.JFrame {
         jLabel5.setText("Modelo:");
         Nota.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 60, 20));
 
-        AddNote.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
-        AddNote.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add2.png"))); // NOI18N
-        AddNote.setBorder(null);
-        AddNote.setBorderPainted(false);
-        AddNote.setContentAreaFilled(false);
-        AddNote.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        AddNote.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
-        AddNote.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
-        AddNote.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
-        AddNote.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTFuser.setBackground(new java.awt.Color(243, 240, 235));
+        jTFuser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFuser.setForeground(new java.awt.Color(102, 102, 102));
+        jTFuser.setText("Ingrese Modelo ");
+        jTFuser.setBorder(null);
+        jTFuser.setCaretColor(new java.awt.Color(204, 51, 0));
+        jTFuser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTFuser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTFuserMouseClicked(evt);
+            }
+        });
+        Nota.add(jTFuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 140, 20));
+
+        jSeparator3.setBackground(new java.awt.Color(235, 235, 235));
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        Nota.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 160, 10));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Nota.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 100, -1));
+
+        Add.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
+        Add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add2.png"))); // NOI18N
+        Add.setBorder(null);
+        Add.setBorderPainted(false);
+        Add.setContentAreaFilled(false);
+        Add.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Add.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
+        Add.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
+        Add.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
+        Add.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                AddNoteMousePressed(evt);
+                AddMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                AddNoteMouseReleased(evt);
+                AddMouseReleased(evt);
             }
         });
-        AddNote.addActionListener(new java.awt.event.ActionListener() {
+        Add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddNoteActionPerformed(evt);
+                AddActionPerformed(evt);
             }
         });
-        Nota.add(AddNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, -1, 40));
+        Nota.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, -1, 40));
 
-        TNote.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -415,13 +442,13 @@ public class PC extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane6.setViewportView(TNote);
+        jScrollPane6.setViewportView(jTable1);
 
-        Nota.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 900, 240));
+        Nota.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 900, 220));
 
-        Reference.setColumns(20);
-        Reference.setRows(5);
-        jScrollPane7.setViewportView(Reference);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane7.setViewportView(jTextArea1);
 
         Nota.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 340, 60));
 
@@ -435,83 +462,22 @@ public class PC extends javax.swing.JFrame {
         jLabel28.setText("Referencia de entrega:");
         Nota.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 390, 160, 20));
 
-        save.setBackground(new java.awt.Color(243, 240, 235));
-        save.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s1.png"))); // NOI18N
-        save.setBorder(null);
-        save.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
-        save.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
-        save.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
-        save.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
-        save.addActionListener(new java.awt.event.ActionListener() {
+        jBGuardar.setBackground(new java.awt.Color(243, 240, 235));
+        jBGuardar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s1.png"))); // NOI18N
+        jBGuardar.setBorder(null);
+        jBGuardar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
+        jBGuardar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
+        jBGuardar.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
+        jBGuardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveActionPerformed(evt);
+                jBGuardarActionPerformed(evt);
             }
         });
-        Nota.add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 390, 60, 60));
-
-        dateofpurchase.setBackground(new java.awt.Color(243, 240, 235));
-        Nota.add(dateofpurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, -1));
-        Nota.add(Deadline, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 450, 150, -1));
-
-        Quantity.setBackground(new java.awt.Color(243, 240, 235));
-        Quantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Quantity.setForeground(new java.awt.Color(102, 102, 102));
-        Quantity.setText("Ingrese Cantidad");
-        Quantity.setBorder(null);
-        Quantity.setCaretColor(new java.awt.Color(204, 51, 0));
-        Quantity.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Quantity.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                QuantityMouseClicked(evt);
-            }
-        });
-        Nota.add(Quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 140, 20));
-
-        jSeparator20.setBackground(new java.awt.Color(235, 235, 235));
-        jSeparator20.setForeground(new java.awt.Color(0, 0, 0));
-        Nota.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 160, 10));
-
-        NumNote.setBackground(new java.awt.Color(243, 240, 235));
-        NumNote.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        NumNote.setForeground(new java.awt.Color(102, 102, 102));
-        NumNote.setText("XXXX");
-        NumNote.setBorder(null);
-        NumNote.setCaretColor(new java.awt.Color(204, 51, 0));
-        NumNote.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        NumNote.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                NumNoteMouseClicked(evt);
-            }
-        });
-        Nota.add(NumNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 100, 20));
-
-        jSeparator21.setBackground(new java.awt.Color(235, 235, 235));
-        jSeparator21.setForeground(new java.awt.Color(0, 0, 0));
-        Nota.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 40, 120, 10));
-
-        model.setBackground(new java.awt.Color(243, 240, 235));
-        model.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        model.setForeground(new java.awt.Color(102, 102, 102));
-        model.setText("Ingrese Modelo ");
-        model.setBorder(null);
-        model.setCaretColor(new java.awt.Color(204, 51, 0));
-        model.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        model.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                modelMouseClicked(evt);
-            }
-        });
-        Nota.add(model, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 140, 20));
-
-        jSeparator7.setBackground(new java.awt.Color(235, 235, 235));
-        jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
-        Nota.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 160, 10));
-
-        Total.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Total.setForeground(new java.awt.Color(0, 0, 0));
-        Total.setText("xxxx");
-        Nota.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 370, 160, -1));
+        Nota.add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 390, 60, 60));
+        Nota.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, -1));
+        Nota.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 450, 150, -1));
 
         jScrollPane1.setViewportView(Nota);
 
@@ -1332,7 +1298,7 @@ public class PC extends javax.swing.JFrame {
             //        }
     }//GEN-LAST:event_CleanActionPerformed
 
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         //        java.awt.EventQueue.invokeLater(new Runnable() {
             //            public void run() {
                 //                new exa().setVisible(true);
@@ -1343,35 +1309,42 @@ public class PC extends javax.swing.JFrame {
     ir.setVisible(true);
     ir.setLocationRelativeTo(null);
     this.dispose();
-    }//GEN-LAST:event_saveActionPerformed
+    }//GEN-LAST:event_jBGuardarActionPerformed
 
-    private void AddNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNoteActionPerformed
+    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
         int dialog = JOptionPane.YES_NO_OPTION;
         int result = JOptionPane.showConfirmDialog(null, "Se guardado con exito :3","Exit",dialog);
         if (result==0){
 
         }
-    }//GEN-LAST:event_AddNoteActionPerformed
+    }//GEN-LAST:event_AddActionPerformed
 
-    private void AddNoteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddNoteMouseReleased
+    private void AddMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_AddNoteMouseReleased
+    }//GEN-LAST:event_AddMouseReleased
 
-    private void AddNoteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddNoteMousePressed
+    private void AddMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMousePressed
 
-    }//GEN-LAST:event_AddNoteMousePressed
+    }//GEN-LAST:event_AddMousePressed
 
-    private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked
-        if (product.getText().equals("Nombre del Producto")) {
-            product.setText("");
+    private void jTFuserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuserMouseClicked
+        // TODO add your handling code here:
+        if (jTFuser.getText().equals("Ingrese Usuario")) {
+            jTFuser.setText("");
         }
-    }//GEN-LAST:event_productMouseClicked
+    }//GEN-LAST:event_jTFuserMouseClicked
 
-    private void amountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_amountMouseClicked
-        if (amount.getText().equals("00.00")) {
-            amount.setText("");
-        }
-    }//GEN-LAST:event_amountMouseClicked
+    private void jTFuser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuser1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFuser1MouseClicked
+
+    private void jTFuser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFuser2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFuser2ActionPerformed
+
+    private void jTFuser2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuser2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFuser2MouseClicked
 
     private void Add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add1ActionPerformed
         // TODO add your handling code here:
@@ -1651,24 +1624,6 @@ public class PC extends javax.swing.JFrame {
                            }
             
     }//GEN-LAST:event_jMenuEliminarActionPerformed
-
-    private void modelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modelMouseClicked
-        if (model.getText().equals("Ingrese Modelo")) {
-            model.setText("");
-        }
-    }//GEN-LAST:event_modelMouseClicked
-
-    private void QuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuantityMouseClicked
-        if (Quantity.getText().equals("Ingrese Cantidad")) {
-            Quantity.setText("");
-        }
-    }//GEN-LAST:event_QuantityMouseClicked
-
-    private void NumNoteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NumNoteMouseClicked
-        if (NumNote.getText().equals("XXXX")) {
-            NumNote.setText("");
-        }
-    }//GEN-LAST:event_NumNoteMouseClicked
     public void llenarclaseproductos(){
         cli= new clientes();
         cli.setModeloPro(name1.getText().replace(" ",""));
@@ -1740,8 +1695,8 @@ public class PC extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Add;
     private javax.swing.JButton Add1;
-    private javax.swing.JButton AddNote;
     private javax.swing.JPanel Bitacora;
     private javax.swing.JMenuItem Cargar;
     private javax.swing.JButton Clean;
@@ -1749,8 +1704,6 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JButton Close;
     private javax.swing.JLabel Date;
     private javax.swing.JLabel Date1;
-    private com.toedter.calendar.JDateChooser Deadline;
-    private javax.swing.JComboBox<String> DeliveryType;
     private javax.swing.JMenuItem Eliminar2;
     private javax.swing.JPanel Entregas;
     private javax.swing.JButton Minimize;
@@ -1760,13 +1713,9 @@ public class PC extends javax.swing.JFrame {
     public javax.swing.JTabbedPane Nav;
     private javax.swing.JTextField Nomprov;
     private javax.swing.JPanel Nota;
-    private javax.swing.JTextField NumNote;
     private javax.swing.JPanel Productos;
     private javax.swing.JPanel Proveedores;
-    private javax.swing.JTextField Quantity;
-    private javax.swing.JTextArea Reference;
     private javax.swing.JButton Shutdown;
-    private javax.swing.JTable TNote;
     private javax.swing.JLabel Total;
     private javax.swing.JTable agenda;
     private javax.swing.JTable agenda1;
@@ -1774,20 +1723,21 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTable agenda4;
     private javax.swing.JTable agenda5;
     public static javax.swing.JTextField am1;
-    private javax.swing.JTextField amount;
     public static javax.swing.JTextField ap1;
     private javax.swing.JTextField buscar;
     private javax.swing.JTextField buscar1;
     private javax.swing.JTextField buscar2;
     private javax.swing.JTextField buscar3;
-    private javax.swing.JRadioButton counted;
-    private javax.swing.JRadioButton credit;
-    private com.toedter.calendar.JDateChooser dateofpurchase;
     private javax.swing.JTextField dirccprove;
     public static javax.swing.JTextField email1;
     private javax.swing.JTextField emailprov;
+    private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBGuardar1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1820,6 +1770,8 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1842,22 +1794,22 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator17;
     private javax.swing.JSeparator jSeparator18;
     private javax.swing.JSeparator jSeparator19;
-    private javax.swing.JSeparator jSeparator20;
-    private javax.swing.JSeparator jSeparator21;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JTextField jTFuser;
+    private javax.swing.JTextField jTFuser1;
+    private javax.swing.JTextField jTFuser2;
     private javax.swing.JTextField jTFuser3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField mercprov;
-    private javax.swing.JTextField model;
     public static javax.swing.JTextField name1;
     public static javax.swing.JTextField nmm1;
     public static javax.swing.JTextField nmo1;
-    private javax.swing.JTextField product;
-    private javax.swing.JButton save;
     private javax.swing.JTextField telprov;
     private javax.swing.JTextField txtFile;
     // End of variables declaration//GEN-END:variables

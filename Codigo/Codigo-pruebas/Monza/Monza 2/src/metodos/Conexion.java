@@ -33,7 +33,6 @@ public class Conexion
 //    }
     
     public Connection Conecta(String host, String instancia, String usuario, String pass, int manejador) throws SQLException
-            //Funcion para configurar la conexion a la BD
     {
         String driver = "";
         String error = "";
@@ -45,36 +44,34 @@ public class Conexion
         
         
         
-        if (manejador == 1 || manejador == 2)//Comprobacion del Manejador si es para oracle o para MySql(BD)
+        if (manejador == 1 || manejador == 2)
         {
-            if (manejador == 1)//Manejador para Oracle
+            if (manejador == 1)
             {
-                driver = "oracle.jdbc.driver.OracleDriver";//driver proporcionado por Oracle
-                error = "No se pudo cargar el driver Oracle";//Mensaje de error al no cargar el Driver 
-                url = "jdbc:oracle:thin:@" + host + ":3306:" + instancia;//Direccion del Servidor o Host de la BD
-            }
-            else if (manejador == 2)//manejador para SQl
+                driver = "oracle.jdbc.driver.OracleDriver";
+                error = "No se pudo cargar el driver Oracle";
+                url = "jdbc:oracle:thin:@" + host + ":3306:" + instancia;
+            } //MYSQL
+            else if (manejador == 2)
             {
-                driver = "com.mysql.cj.jdbc.Driver";//Driver de MySql
-                //Direccion del servidor o host donde se ubica la BD(MySql)
+                driver = "com.mysql.cj.jdbc.Driver";
                 url = "jdbc:mysql://" + host + "/" + instancia + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-                //Mensaje de Error
                 error = "No se pudo cargar el driver Mysql";
             }
             try
             {
-                Class.forName(driver).newInstance();//Carga la Base de datos del Servidor
+                Class.forName(driver).newInstance();
             } catch (Exception e)
             {
-                // Mensaje de Error al Cargar la BD
+                // Ocurrió un error al registrar el driver 
                 System.out.println(error);
 
             }
             try
             {
                 // De esta forma se obtiene la conexi¢n 
-                con = DriverManager.getConnection(url, usuario, pass);//Cenexion a BD usando direccion , usuario y contraseña
-                System.out.println("Conexi¢n establecida.");//Mensaje de Confirmacion
+                con = DriverManager.getConnection(url, usuario, pass);
+                System.out.println("Conexi¢n establecida.");
             } catch (SQLException sqle)
             {
                 // Ocurrió un error con la conexi¢n 
@@ -83,7 +80,7 @@ public class Conexion
             }
         } else
         {
-            System.out.println("ERROR DEBES MANDAR UN 1 PARA ORACLE O UN 2 PARA MYSQL");//Mensaje de Error del Manejador 
+            System.out.println("ERROR DEBES MANDAR UN 1 PARA ORACLE O UN 2 PARA MYSQL");
         }
         return con;
     }
@@ -95,21 +92,20 @@ public class Conexion
      * @param usuario -Usuario de la base de datos
      * @param pass -Password del usuario en la base de datos
      */
-    //Funcion Mejorada
-    public Connection Conecta(/*String host,*/String bd, String usuario, String pass)//Funcion para modificar o registrar Registros(o Datos de la BD)
+    public Connection Conecta(/*String host,*/String bd, String usuario, String pass)
     {
         String url = "jdbc:odbc:" + bd;//"+host+"/"+bd;       
         try
         {
-            Driver d = (Driver) Class.forName("sun.jdbc.odbc.JdbcOdbcDriver").newInstance();//Carga del Driver para uso en Mysql
+            Driver d = (Driver) Class.forName("sun.jdbc.odbc.JdbcOdbcDriver").newInstance();
         } catch (Exception e)
         {
             System.out.println("No se ha podido cargar el Driver JDBC-ODBC");
         }
         try
         {            // De esta forma se obtiene la conexi¢n 
-            con = DriverManager.getConnection(url, usuario, pass);//Cenexion a BD usando direccion , usuario y contraseña
-            System.out.println("Conexi¢n establecida.");//Mensaje de Confirmacion de Conexion
+            con = DriverManager.getConnection(url, usuario, pass);
+            System.out.println("Conexi¢n establecida.");
         } catch (SQLException sqle)
         {
             // Ocurrió un error con la conexi¢n 

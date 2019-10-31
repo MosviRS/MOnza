@@ -11,28 +11,27 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Rasteck7
+ * @author USUARIO
  */
-public class ManipulaDBC//Metodo que permite la manipulacion y el acceso a la  BD(SQL)
+public class ManipulaDBC
 {
 
-    public static Connection conectaDB()//Funcion de tipo conection 
+    public static Connection conectaDB()
     {
-        Conexion x = new Conexion();//objeto de tipo conection, realizara un enlace a la BD correspondiente
+        Conexion x = new Conexion();
         try
         {
-            //Configuracion para realizar conexion al servidor y a la BD
-            return x.Conecta("localhost:3306", "mydb", "root", "", 2);//Host,Nombre de la BD,Usuario,Contraseña, Manejador para MySql 
+            return x.Conecta("localhost:3306", "mydb", "root", "", 2);
         } catch (SQLException ex)
         {
-            return null;//Error de Conexion 
+            return null;
         }
     }
 
-    public static void desconectaDB(Connection con)//Funcion para liberar la conexion a la BD
+    public static void desconectaDB(Connection con)
     {
         Conexion x = new Conexion();
-        x.desconectar(con);//Libera Conexion a BD
+        x.desconectar(con);
     }
 
 }

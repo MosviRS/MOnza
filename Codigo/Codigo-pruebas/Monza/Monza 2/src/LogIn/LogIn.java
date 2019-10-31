@@ -26,7 +26,7 @@ public class LogIn extends javax.swing.JFrame {
      */
      Connection con;
     public LogIn() {
-        initComponents();//Componentes graficos
+        initComponents();
         this.setLocationRelativeTo(null);        
         this.setTitle("Muebleria ¨MONZA¨");
         ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
@@ -252,21 +252,20 @@ public class LogIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserMouseClicked
-        // Evento del mouse, para limpiar caja de texto
+        // TODO add your handling code here:
         if (User.getText().equals("Ingrese Usuario")) {
             User.setText("");
         }
     }//GEN-LAST:event_UserMouseClicked
 
     private void PasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PasswordMouseClicked
-        // Evento del mouse para limpiar caja de texto del password
+        // TODO add your handling code here:
         if (Password.getText().equals("Inserte contraseña")) {
             Password.setText("");
         }
     }//GEN-LAST:event_PasswordMouseClicked
 
     private void ViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewActionPerformed
-        //Boton muestra contraseña
         if (View.isSelected()==true) {
             Password.setEchoChar((char)0);
         }else{
@@ -276,15 +275,15 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_ViewActionPerformed
 
     private void ForgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForgetActionPerformed
-        SqlUsuarios ModSQL= new SqlUsuarios();//Metodos de Usuario
-        Usuario mod= new Usuario();//Entidad Usuario para encapsulamiento  
+        SqlUsuarios ModSQL= new SqlUsuarios();
+        Usuario mod= new Usuario();        
         
-        if(!User.getText().equals("") && !User.getText().equals("Ingrese Usuario")){//Validadciones
-            mod.setUser(User.getText());//Guarda usuario en la Clase Entidad
-            if(ModSQL.Olvide(mod)){//Optiene datos del usuario para realizar validacion de usuario y proporcionar la contraseña                
-                olv2 ir= new olv2(mod);//Abre frame de Olvidar
-                ir.setVisible(true);//Muestra el frame 
-                this.dispose();//Oculta venta principal
+        if(!User.getText().equals("") && !User.getText().equals("Ingrese Usuario")){
+            mod.setUser(User.getText());
+            if(ModSQL.Olvide(mod)){                
+                olv2 ir= new olv2(mod);
+                ir.setVisible(true);
+                this.dispose();
                 JOptionPane.showMessageDialog(null, "Por Motivos de Seguridad se le asignara una NUEVA contraseña", "Warning",JOptionPane.WARNING_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario No Existe");
@@ -335,16 +334,16 @@ public class LogIn extends javax.swing.JFrame {
 
     private void AccesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccesActionPerformed
             
-            SqlUsuarios ModSQL= new SqlUsuarios();//Metodos de Usuario 
-            Usuario mod= new Usuario();//Clase Entidad Usuario
-            String password= new String(Password.getPassword());//recibe Password proporcionado por el Usuario
+            SqlUsuarios ModSQL= new SqlUsuarios();
+            Usuario mod= new Usuario();
+            String password= new String(Password.getPassword());
             
             if(!User.getText().equals("") && !password.equals("") && !User.getText().equals("Ingrese Usuario") && !password.equals("Inserte contraseña")){
-                    String encriptado= Hash.sha1(password);//Encriptacion del password
-                    mod.setUser(User.getText());//Envia el usuario a la Clase Entidad Usuario
-                    mod.setPassword(encriptado);//Envia password encriptado                    
-                    if(ModSQL.login(mod)){//Validacion de Usuario y contraseña
-                        PC ir= new PC(mod);//Permitir acceso a PC
+                    String encriptado= Hash.sha1(password);
+                    mod.setUser(User.getText());
+                    mod.setPassword(encriptado);                    
+                    if(ModSQL.login(mod)){
+                        PC ir= new PC(mod);
                         ir.setVisible(true);
                         this.dispose();
                     }else{
