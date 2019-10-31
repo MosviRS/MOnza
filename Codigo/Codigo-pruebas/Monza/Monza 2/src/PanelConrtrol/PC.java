@@ -44,7 +44,7 @@ public class PC extends javax.swing.JFrame {
     JFileChooser jf;
     SqLImagen sqli=new SqLImagen();
     SqLProvedores sqlprov=new SqLProvedores();
-    int notabbPane;
+    int noTabPane;
     /**
      * Creates new form Registro
      */
@@ -105,9 +105,9 @@ public class PC extends javax.swing.JFrame {
         jLocaleChooser1 = new com.toedter.components.JLocaleChooser();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuEliminar = new javax.swing.JMenuItem();
+        jMenuCargar = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
-        Eliminar2 = new javax.swing.JMenuItem();
-        Cargar = new javax.swing.JMenuItem();
+        Eliminar1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         Nav = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -228,21 +228,21 @@ public class PC extends javax.swing.JFrame {
         });
         jPopupMenu1.add(jMenuEliminar);
 
-        Eliminar2.setText("Eliminar");
-        Eliminar2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuCargar.setText("Cargar");
+        jMenuCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Eliminar2ActionPerformed(evt);
+                jMenuCargarActionPerformed(evt);
             }
         });
-        jPopupMenu2.add(Eliminar2);
+        jPopupMenu1.add(jMenuCargar);
 
-        Cargar.setText("Cargar");
-        Cargar.addActionListener(new java.awt.event.ActionListener() {
+        Eliminar1.setText("Eliminar");
+        Eliminar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CargarActionPerformed(evt);
+                Eliminar1ActionPerformed(evt);
             }
         });
-        jPopupMenu2.add(Cargar);
+        jPopupMenu2.add(Eliminar1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -642,7 +642,7 @@ public class PC extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        agenda1.setComponentPopupMenu(jPopupMenu2);
+        agenda1.setComponentPopupMenu(jPopupMenu1);
         agenda1.setRowHeight(70);
         agenda1.setSelectionBackground(new java.awt.Color(206, 166, 8));
         agenda1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -827,6 +827,7 @@ public class PC extends javax.swing.JFrame {
         Nomprov.setBackground(new java.awt.Color(243, 240, 235));
         Nomprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Nomprov.setForeground(new java.awt.Color(102, 102, 102));
+        Nomprov.setText("Inserta Nombre");
         Nomprov.setBorder(null);
         Nomprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -866,6 +867,7 @@ public class PC extends javax.swing.JFrame {
         dirccprove.setBackground(new java.awt.Color(243, 240, 235));
         dirccprove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dirccprove.setForeground(new java.awt.Color(102, 102, 102));
+        dirccprove.setText("Inserta Dirección");
         dirccprove.setBorder(null);
         dirccprove.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -895,6 +897,7 @@ public class PC extends javax.swing.JFrame {
         emailprov.setBackground(new java.awt.Color(243, 240, 235));
         emailprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         emailprov.setForeground(new java.awt.Color(102, 102, 102));
+        emailprov.setText("Inserta Correo Electronico");
         emailprov.setBorder(null);
         emailprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -924,6 +927,7 @@ public class PC extends javax.swing.JFrame {
         telprov.setBackground(new java.awt.Color(243, 240, 235));
         telprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         telprov.setForeground(new java.awt.Color(102, 102, 102));
+        telprov.setText("Inserta Telefono");
         telprov.setBorder(null);
         telprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -961,6 +965,7 @@ public class PC extends javax.swing.JFrame {
         mercprov.setBackground(new java.awt.Color(243, 240, 235));
         mercprov.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mercprov.setForeground(new java.awt.Color(102, 102, 102));
+        mercprov.setText("Inserta Mercancia");
         mercprov.setBorder(null);
         mercprov.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1004,7 +1009,7 @@ public class PC extends javax.swing.JFrame {
             }
         });
         agenda4.setColumnSelectionAllowed(true);
-        agenda4.setComponentPopupMenu(jPopupMenu1);
+        agenda4.setComponentPopupMenu(jPopupMenu2);
         agenda4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 agenda4MouseClicked(evt);
@@ -1474,7 +1479,7 @@ public class PC extends javax.swing.JFrame {
          
                                     
         
-        String s1=sqli.guardarProductos(con,cli.getModeloPro().replace(" ",""), cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath());
+        String s1=sqli.guardarProductos(con,cli.getModeloPro(), cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath());
        
        // String s1 = q.Insertar(con, "productos"," idmodelo, nombre, precio, existencia, clasificacion, provedores_id ", valores1);
         if (s1 != null)
@@ -1558,7 +1563,7 @@ public class PC extends javax.swing.JFrame {
            if (evt.getSource() instanceof JTabbedPane) {
              
                             JTabbedPane pane = (JTabbedPane) evt.getSource();
-                            notabbPane=pane.getSelectedIndex();
+                            noTabPane=pane.getSelectedIndex();
                            switch(pane.getSelectedIndex()){
                                case 0:
                                    
@@ -1586,23 +1591,12 @@ public class PC extends javax.swing.JFrame {
         
     }//GEN-LAST:event_NavStateChanged
 
-    private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
+    private void Eliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar1ActionPerformed
         // TODO add your handling code here:
-        sqli.cargar(agenda1, con);
-    }//GEN-LAST:event_CargarActionPerformed
-
-    private void Eliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar2ActionPerformed
-        // TODO add your handling code here:
-        sqli.elimnar(agenda1, con);
-    }//GEN-LAST:event_Eliminar2ActionPerformed
-
-    private void jMenuEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEliminarActionPerformed
-        // TODO add your handling code here:
-           
-           
-                           
-                            ;
-                           switch(notabbPane){
+        System.out.println("hola?");
+          
+         
+                           switch( noTabPane){
                                case 0:
                                    
                                break;    
@@ -1614,8 +1608,7 @@ public class PC extends javax.swing.JFrame {
                                
                                break;
                                case 4:
-                               sqlprov.elimnar(agenda4, con);
-                                   
+                               sqlprov.elimnar(agenda4, con);  
                                break;    
                                case 5:
                                
@@ -1623,10 +1616,20 @@ public class PC extends javax.swing.JFrame {
                                
                            }
             
+    }//GEN-LAST:event_Eliminar1ActionPerformed
+
+    private void jMenuEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEliminarActionPerformed
+        // TODO add your handling code here:
+         sqli.elimnar(agenda1, con);
     }//GEN-LAST:event_jMenuEliminarActionPerformed
+
+    private void jMenuCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCargarActionPerformed
+        // TODO add your handling code here:
+         sqli.cargar(agenda1, con);
+    }//GEN-LAST:event_jMenuCargarActionPerformed
     public void llenarclaseproductos(){
         cli= new clientes();
-        cli.setModeloPro(name1.getText().replace(" ",""));
+        cli.setModeloPro(name1.getText());
         cli.setNombrePro(ap1.getText());
         cli.setPrecio(Double.parseDouble(am1.getText()));
         cli.setProvedMarca(email1.getText());
@@ -1698,13 +1701,12 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JButton Add;
     private javax.swing.JButton Add1;
     private javax.swing.JPanel Bitacora;
-    private javax.swing.JMenuItem Cargar;
     private javax.swing.JButton Clean;
     private javax.swing.JPanel Clientes;
     private javax.swing.JButton Close;
     private javax.swing.JLabel Date;
     private javax.swing.JLabel Date1;
-    private javax.swing.JMenuItem Eliminar2;
+    private javax.swing.JMenuItem Eliminar1;
     private javax.swing.JPanel Entregas;
     private javax.swing.JButton Minimize;
     private javax.swing.JButton Minimize1;
@@ -1764,6 +1766,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private com.toedter.components.JLocaleChooser jLocaleChooser1;
+    private javax.swing.JMenuItem jMenuCargar;
     private javax.swing.JMenuItem jMenuEliminar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;

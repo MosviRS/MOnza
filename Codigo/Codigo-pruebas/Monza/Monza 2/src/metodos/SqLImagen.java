@@ -5,7 +5,7 @@
  */
 package metodos;
 
-import static PanelConrtrol.PC.ap1;
+import static PanelConrtrol.PC.atm;
 import static PanelConrtrol.PC.*;
 import clases.IMGtabla;
 import clases.editTable;
@@ -131,9 +131,10 @@ public class SqLImagen {
        public void elimnar(JTable tabla,Connection con){
       Querys q = new Querys();
       try{
-            String s1=q.Delete(con,"productos","idmodelo", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
-            DefaultTableModel atm=(editTable) tabla.getModel();
-                if (s1 != null)
+            String s1=q.Delete(con,"productos","modela", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
+            DefaultTableModel atm = (editTable) tabla.getModel(); 
+           
+                    if (s1 != null)
                {    
                    System.out.println("valio queso");
                } else
@@ -152,6 +153,7 @@ public class SqLImagen {
          
         name1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 0)));
         ap1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 1)));
+        
         am1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 2)));
         email1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 3)));
         nmm1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 4)));

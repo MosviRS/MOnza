@@ -95,21 +95,6 @@ public class Querys
         try
         {
             Statement stmt = con.createStatement();
-            String myquery = "delete from " + tabla + " where " + campo + "=" +"'"+ condicion+"'";
-            System.out.println(myquery);
-            stmt.executeUpdate(myquery);
-            return null;
-        } catch (Exception e)
-        {
-            return "No se pudo eliminar el registro..."+ e.getMessage();
-        }
-
-    }
-    public String  Deleteentero(Connection con, String tabla, String campo, String condicion)
-    {
-        try
-        {
-            Statement stmt = con.createStatement();
             String myquery = "delete from " + tabla + " where " + campo + "=" + condicion;
             System.out.println(myquery);
             stmt.executeUpdate(myquery);

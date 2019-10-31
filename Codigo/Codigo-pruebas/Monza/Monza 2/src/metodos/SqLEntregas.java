@@ -18,8 +18,9 @@ public class SqLEntregas {
      public void elimnar(JTable tabla,Connection con){
       Querys q = new Querys();
       try{
-            String s1=q.Delete(con,"entregas","nota_entregas", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
-            DefaultTableModel atm=(editTable) tabla.getModel();
+            String s1=q.Delete(con,"entregas","modela", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
+              DefaultTableModel atm = (editTable) tabla.getModel(); 
+                               
            
                     if (s1 != null)
                {    
@@ -27,7 +28,7 @@ public class SqLEntregas {
                } else
                {
                     System.out.println("Exito");
-                    atm.removeRow(tabla.getSelectedRow());
+                     atm.removeRow(tabla.getSelectedRow());
                     tabla.setModel(atm);
                     //agregarProductos(cli.getModeloPro(),cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath().replace("\\","/"));
                }
