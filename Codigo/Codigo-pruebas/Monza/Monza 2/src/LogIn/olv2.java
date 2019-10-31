@@ -323,8 +323,8 @@ public class olv2 extends javax.swing.JFrame {
                 String contrasenia = " lrgvudhqamqvjgwh";///se tiene que generar una contraseña de aplicacion en tu cuenta google y esa contraseña generada se pega aqui
                 String destinatario=email.getText();///
                 String asunto = "Recuperacion de Contraseña MONZA";
-                String mensaje="Hola "+mod.getNombreUser()+" Su Usuario: "+mod.getUser()+" nos has solicitado reestablecer su password, para ingresar de nuevo a la plataforma"///
-                + "\n Tu contraseña es: "+decodedString;///
+                String mensaje="Hola "+mod.getNombreUser()+"  nos has solicitado reestablecer tu contraseña, a continuacion tus datos para iniciar sesion. \nRecuerda que por seguridad no podemos proporcionarte la contraseña anterior, unicamente generarte una nueva."///
+                +"\nUsuario: "+mod.getUser() +"\n Contraseña: "+decodedString;///
                 System.out.println("Contraseña enviada: "+decodedString);
                  //Encriptar
                 String encriptado= Hash.sha1(decodedString);
