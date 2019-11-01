@@ -14,6 +14,7 @@ import clases.IMGtabla;
 import clases.editTable;
 import java.awt.FileDialog;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -112,14 +113,13 @@ public class PC extends javax.swing.JFrame {
         Nav = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         Nota = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        DeliveryType = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
         jTFuser2 = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel25 = new javax.swing.JLabel();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        Total = new javax.swing.JLabel();
+        credit = new javax.swing.JRadioButton();
+        counted = new javax.swing.JRadioButton();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel24 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -129,19 +129,23 @@ public class PC extends javax.swing.JFrame {
         NNote = new javax.swing.JLabel();
         Date = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTFuser = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
-        jComboBox1 = new javax.swing.JComboBox<>();
         Add = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TNote = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        Reference = new javax.swing.JTextArea();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jBGuardar = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        dateofpurchase = new com.toedter.calendar.JDateChooser();
+        Deadline = new com.toedter.calendar.JDateChooser();
+        jSeparator20 = new javax.swing.JSeparator();
+        jSeparator21 = new javax.swing.JSeparator();
+        jTFuser = new javax.swing.JTextField();
+        jSeparator7 = new javax.swing.JSeparator();
+        Total = new javax.swing.JLabel();
+        AddNote = new javax.swing.JLabel();
+        Quantity1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Productos = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -278,8 +282,8 @@ public class PC extends javax.swing.JFrame {
         Nota.setBackground(new java.awt.Color(243, 240, 235));
         Nota.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Nota.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 100, -1));
+        DeliveryType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Nota.add(DeliveryType, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 100, -1));
 
         jLabel26.setBackground(new java.awt.Color(235, 235, 235));
         jLabel26.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
@@ -298,11 +302,6 @@ public class PC extends javax.swing.JFrame {
                 jTFuser2MouseClicked(evt);
             }
         });
-        jTFuser2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFuser2ActionPerformed(evt);
-            }
-        });
         Nota.add(jTFuser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 140, 20));
 
         jSeparator6.setBackground(new java.awt.Color(235, 235, 235));
@@ -314,19 +313,15 @@ public class PC extends javax.swing.JFrame {
         jLabel25.setText("Monto Recibido:");
         Nota.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 120, 20));
 
-        jRadioButton2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jRadioButton2.setText("Credito");
-        Nota.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 90, -1));
+        credit.setBackground(new java.awt.Color(243, 240, 235));
+        credit.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        credit.setText("Credito");
+        Nota.add(credit, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 90, -1));
 
-        jRadioButton1.setBackground(new java.awt.Color(243, 240, 235));
-        jRadioButton1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jRadioButton1.setText("Contado");
-        Nota.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 90, -1));
-
-        Total.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Total.setForeground(new java.awt.Color(102, 102, 102));
-        Total.setText("XXXXXX");
-        Nota.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 370, 160, 20));
+        counted.setBackground(new java.awt.Color(243, 240, 235));
+        counted.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        counted.setText("Contado");
+        Nota.add(counted, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 90, -1));
 
         jSeparator5.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
@@ -366,8 +361,8 @@ public class PC extends javax.swing.JFrame {
         Nota.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 160, 20));
 
         NNote.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        NNote.setText("Numero de Nota:XXXXX");
-        Nota.add(NNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, 180, 40));
+        NNote.setText("Numero de Nota:");
+        Nota.add(NNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, 120, 40));
 
         Date.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         Date.setText("Fecha de Compra:");
@@ -377,27 +372,6 @@ public class PC extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel5.setText("Modelo:");
         Nota.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 60, 20));
-
-        jTFuser.setBackground(new java.awt.Color(243, 240, 235));
-        jTFuser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFuser.setForeground(new java.awt.Color(102, 102, 102));
-        jTFuser.setText("Ingrese Modelo ");
-        jTFuser.setBorder(null);
-        jTFuser.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFuser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFuser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFuserMouseClicked(evt);
-            }
-        });
-        Nota.add(jTFuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 140, 20));
-
-        jSeparator3.setBackground(new java.awt.Color(235, 235, 235));
-        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-        Nota.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 160, 10));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Nota.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 100, -1));
 
         Add.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         Add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add2.png"))); // NOI18N
@@ -423,7 +397,7 @@ public class PC extends javax.swing.JFrame {
         });
         Nota.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, -1, 40));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TNote.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -442,13 +416,13 @@ public class PC extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane6.setViewportView(jTable1);
+        jScrollPane6.setViewportView(TNote);
 
-        Nota.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 900, 220));
+        Nota.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 900, 240));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane7.setViewportView(jTextArea1);
+        Reference.setColumns(20);
+        Reference.setRows(5);
+        jScrollPane7.setViewportView(Reference);
 
         Nota.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 340, 60));
 
@@ -476,8 +450,51 @@ public class PC extends javax.swing.JFrame {
             }
         });
         Nota.add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 390, 60, 60));
-        Nota.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, -1));
-        Nota.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 450, 150, -1));
+
+        dateofpurchase.setBackground(new java.awt.Color(243, 240, 235));
+        Nota.add(dateofpurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, -1));
+        Nota.add(Deadline, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 450, 150, -1));
+
+        jSeparator20.setBackground(new java.awt.Color(235, 235, 235));
+        jSeparator20.setForeground(new java.awt.Color(0, 0, 0));
+        Nota.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 160, 10));
+
+        jSeparator21.setBackground(new java.awt.Color(235, 235, 235));
+        jSeparator21.setForeground(new java.awt.Color(0, 0, 0));
+        Nota.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 40, 120, 10));
+
+        jTFuser.setBackground(new java.awt.Color(243, 240, 235));
+        jTFuser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFuser.setForeground(new java.awt.Color(102, 102, 102));
+        jTFuser.setText("Ingrese Modelo ");
+        jTFuser.setBorder(null);
+        jTFuser.setCaretColor(new java.awt.Color(204, 51, 0));
+        jTFuser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTFuser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTFuserMouseClicked(evt);
+            }
+        });
+        Nota.add(jTFuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 140, 20));
+
+        jSeparator7.setBackground(new java.awt.Color(235, 235, 235));
+        jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
+        Nota.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 160, 10));
+
+        Total.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Total.setForeground(new java.awt.Color(0, 0, 0));
+        Total.setText("xxxx");
+        Nota.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 370, 160, -1));
+
+        AddNote.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        AddNote.setForeground(new java.awt.Color(35, 34, 34));
+        AddNote.setText("XXXX");
+        Nota.add(AddNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 100, -1));
+
+        Quantity1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Quantity1.setForeground(new java.awt.Color(102, 102, 102));
+        Quantity1.setText("Ingrese Cantidad");
+        Nota.add(Quantity1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 150, -1));
 
         jScrollPane1.setViewportView(Nota);
 
@@ -650,6 +667,11 @@ public class PC extends javax.swing.JFrame {
                 agenda1MouseClicked(evt);
             }
         });
+        agenda1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                agenda1KeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(agenda1);
 
         jScrollPane8.setViewportView(jScrollPane3);
@@ -755,7 +777,7 @@ public class PC extends javax.swing.JFrame {
         Entregas.setBackground(new java.awt.Color(243, 240, 235));
         Entregas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-search-48_1.png"))); // NOI18N
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/icons8-search-48_1.png"))); // NOI18N
         Entregas.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, 50, 40));
 
         buscar2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -861,7 +883,7 @@ public class PC extends javax.swing.JFrame {
         });
         Proveedores.add(buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 170, -1));
 
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-search-48_1.png"))); // NOI18N
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/icons8-search-48_1.png"))); // NOI18N
         Proveedores.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, 50, 40));
 
         dirccprove.setBackground(new java.awt.Color(243, 240, 235));
@@ -1013,6 +1035,11 @@ public class PC extends javax.swing.JFrame {
         agenda4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 agenda4MouseClicked(evt);
+            }
+        });
+        agenda4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                agenda4KeyReleased(evt);
             }
         });
         jScrollPane12.setViewportView(agenda4);
@@ -1231,6 +1258,20 @@ public class PC extends javax.swing.JFrame {
         //        data3[4]=agenda1.getValueAt(fslt, 4).toString();
         //        data3[5]=agenda1.getValueAt(fslt, 5).toString();
         //        filas=fslt;
+          if(agenda1.getSelectedColumn()==6){
+        jf = new JFileChooser();
+        FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
+        jf.setFileFilter(fil);
+        jf.setCurrentDirectory(new File("\\Downloads"));
+        int el = jf.showOpenDialog(this);
+        if(el == JFileChooser.APPROVE_OPTION){
+            //txtRuta.setText(jf.getSelectedFile().getAbsolutePath());
+           
+          sqli.Modificarxcragadoimagen(agenda1, con,jf.getSelectedFile().getAbsolutePath());
+           
+            //lblFoto.setIcon(new ImageIcon(txtRuta.getText()));
+        }
+       }
     }//GEN-LAST:event_agenda1MouseClicked
 
     private void buscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyReleased
@@ -1625,8 +1666,23 @@ public class PC extends javax.swing.JFrame {
 
     private void jMenuCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCargarActionPerformed
         // TODO add your handling code here:
-         sqli.cargar(agenda1, con);
+        // sqli.cargar(agenda1, con);
     }//GEN-LAST:event_jMenuCargarActionPerformed
+
+    private void agenda1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agenda1KeyReleased
+        // TODO add your handling code here:
+          if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+          sqli.Modificarcargado(agenda1, con);  
+       }
+    }//GEN-LAST:event_agenda1KeyReleased
+
+    private void agenda4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agenda4KeyReleased
+        // TODO add your handling code here:
+         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+          sqlprov.modificar(agenda4,con);  
+       }
+             
+    }//GEN-LAST:event_agenda4KeyReleased
     public void llenarclaseproductos(){
         cli= new clientes();
         cli.setModeloPro(name1.getText());
@@ -1700,12 +1756,15 @@ public class PC extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Add;
     private javax.swing.JButton Add1;
+    private javax.swing.JLabel AddNote;
     private javax.swing.JPanel Bitacora;
     private javax.swing.JButton Clean;
     private javax.swing.JPanel Clientes;
     private javax.swing.JButton Close;
     private javax.swing.JLabel Date;
     private javax.swing.JLabel Date1;
+    private com.toedter.calendar.JDateChooser Deadline;
+    private javax.swing.JComboBox<String> DeliveryType;
     private javax.swing.JMenuItem Eliminar1;
     private javax.swing.JPanel Entregas;
     private javax.swing.JButton Minimize;
@@ -1717,7 +1776,10 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JPanel Nota;
     private javax.swing.JPanel Productos;
     private javax.swing.JPanel Proveedores;
+    private javax.swing.JLabel Quantity1;
+    private javax.swing.JTextArea Reference;
     private javax.swing.JButton Shutdown;
+    private javax.swing.JTable TNote;
     private javax.swing.JLabel Total;
     private javax.swing.JTable agenda;
     private javax.swing.JTable agenda1;
@@ -1730,16 +1792,15 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTextField buscar1;
     private javax.swing.JTextField buscar2;
     private javax.swing.JTextField buscar3;
+    private javax.swing.JRadioButton counted;
+    private javax.swing.JRadioButton credit;
+    private com.toedter.calendar.JDateChooser dateofpurchase;
     private javax.swing.JTextField dirccprove;
     public static javax.swing.JTextField email1;
     private javax.swing.JTextField emailprov;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBGuardar1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1773,8 +1834,6 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1797,18 +1856,18 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator17;
     private javax.swing.JSeparator jSeparator18;
     private javax.swing.JSeparator jSeparator19;
-    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator20;
+    private javax.swing.JSeparator jSeparator21;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTextField jTFuser;
     private javax.swing.JTextField jTFuser1;
     private javax.swing.JTextField jTFuser2;
     private javax.swing.JTextField jTFuser3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField mercprov;
     public static javax.swing.JTextField name1;
     public static javax.swing.JTextField nmm1;

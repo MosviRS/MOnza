@@ -12,6 +12,7 @@ package metodos;
  *
  */
 import clases.editTable;
+import clases.editTabletrue;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -21,15 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class Querys
 {
 
-    /**
-     * Inserta un registro en una tabla de mysql
-     *
-     * @param con se requiere un objeto Connection
-     * @param tabla es el nombre de la tabla
-     * @param columnas son las columnas que se van a modificar
-     * @param values un string con los valores a insertar separados por comas
-     */
-    
+   
     public String consulta(Connection con, String tabla, String columna, String value)
     {
         try
@@ -96,6 +89,22 @@ public class Querys
         {
             Statement stmt = con.createStatement();
             String myquery = "delete from " + tabla + " where " + campo + "=" + condicion;
+            System.out.println(myquery);
+            stmt.executeUpdate(myquery);
+            return null;
+        } catch (Exception e)
+        {
+            return "No se pudo eliminar el registro..."+ e.getMessage();
+        }
+
+    }
+        
+    public String  Deletetext(Connection con, String tabla, String campo, String condicion)
+    {
+        try
+        {
+            Statement stmt = con.createStatement();
+            String myquery = "delete from " + tabla + " where " + campo + "=" + "'"+condicion+"'";
             System.out.println(myquery);
             stmt.executeUpdate(myquery);
             return null;
@@ -204,7 +213,7 @@ public class Querys
     }
      public DefaultTableModel SeleccionTable(Connection con, String campos, String tabla, String condicion,String[] titulo)
     {   
-        DefaultTableModel modelatm=new editTable();
+        DefaultTableModel modelatm=new editTabletrue();
         modelatm.setColumnIdentifiers(titulo);
        
         String cond = "";

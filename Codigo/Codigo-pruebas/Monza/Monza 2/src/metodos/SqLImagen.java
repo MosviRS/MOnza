@@ -9,6 +9,7 @@ import static PanelConrtrol.PC.atm;
 import static PanelConrtrol.PC.*;
 import clases.IMGtabla;
 import clases.editTable;
+import clases.editTabletrue;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -29,7 +30,6 @@ import javax.swing.table.DefaultTableModel;
  * @author LAPROMA1-21
  */
 public class SqLImagen {
-    
      public String guardarProductos(Connection con,String modelo, String nombrePro,double precio,int exietn,String cat,String prov, String ruta){
         String insert = "insert into productos(idmodelo, nombre, precio, existencia, clasificacion, provedor, imagen) values(?,?,?,?,?,?,?)";
         
@@ -54,6 +54,7 @@ public class SqLImagen {
             return "Error al agregar usuario "+ex.getMessage();
         }
     }
+     
       public ResultSet visualizar(Connection con){
    
         ResultSet rs = null;
@@ -65,14 +66,15 @@ public class SqLImagen {
         }
         return rs;
     }
+      
     public void visualizar_tabla(JTable tabla,Connection con){
    
     ResultSet rs = visualizar(con);
     //Image img = null;   
  
-    DefaultTableModel atm=new editTable();
+    DefaultTableModel atm=new editTabletrue();
    
-         String []titulo=new String[] {"Modelo","Nombre","Precio","Marca/Provedor","Cantidad","Categoria","Imagen"};
+         String []titulo=new String[] {"Modelo","Nombre","Precio","Existencia","Categoria","Marca/Provedor","Imagen"};
          tabla.setDefaultRenderer(Object.class,new IMGtabla());
          atm.setColumnIdentifiers(titulo);
          
@@ -131,8 +133,8 @@ public class SqLImagen {
        public void elimnar(JTable tabla,Connection con){
       Querys q = new Querys();
       try{
-            String s1=q.Delete(con,"productos","modela", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
-            DefaultTableModel atm = (editTable) tabla.getModel(); 
+            String s1=q.Deletetext(con,"productos","idmodelo", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),0)));
+            DefaultTableModel atm = (editTabletrue) tabla.getModel(); 
            
                     if (s1 != null)
                {    
@@ -149,15 +151,96 @@ public class SqLImagen {
           
       }
   }
-     public void cargar(JTable tabla,Connection con){
-         
-        name1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 0)));
-        ap1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 1)));
+        public String modificar(Connection con,String modelo, String nombrePro,double precio,int exietn,String cat,String prov,JTable tabla){
+           
+                               
+        String insert = "update productos set idmodelo = ?, nombre = ?, precio = ?, existencia = ?, clasificacion = ?, provedor = ? where idmodelo='"+modelo+"'";
         
-        am1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 2)));
-        email1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 3)));
-        nmm1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 4)));
-        nmo1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 5)));
+        FileInputStream fi = null;
+        PreparedStatement ps = null;
+        try{
+          
+            
+            ps = con.prepareStatement(insert);
+            ps.setString(1, modelo);
+            ps.setString(2, nombrePro);
+            ps.setDouble(3, precio);
+            ps.setInt(4, exietn);
+            ps.setString(5, cat);
+            ps.setString(6, prov);
+          
+            
+            ps.executeUpdate();
+          
+            return null;
+        }catch(Exception ex){
+            return "Error al modificar usuario "+ex.getMessage();
+        }
+    }
+       public String modificarimagen(Connection con,String modelo, String ruta){
+           
+                               
+        String insert = "update productos set imagen = ? where idmodelo='"+modelo+"'";
         
+        FileInputStream fi = null;
+        PreparedStatement ps = null;
+        try{
+            File file = new File(ruta);
+            fi = new FileInputStream(file);
+            
+            ps = con.prepareStatement(insert);
+            
+            ps.setBinaryStream(1, fi);
+            
+            ps.executeUpdate();
+          
+            return null;
+        }catch(Exception ex){
+            return "Error al modificar usuario "+ex.getMessage();
+        }
+    }
+      
+   public void Modificarcargado(JTable tabla,Connection con){
+         DefaultTableModel atm = (editTabletrue) tabla.getModel(); 
+        String mod= String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 0));
+        String nom=String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 1));
+        Double prec=Double.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
+        int cant=Integer.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
+        String cate=String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 4));
+        String marca=String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 5));
+    
+       String s1= modificar(con,mod,nom,prec,cant,cate,marca,tabla);
+        if(s1!=null){
+            System.out.println("valio queso");
+        }else{
+            
+            System.out.println("exito");
+        }
      }
+     
+     public void Modificarxcragadoimagen(JTable tabla,Connection con,String ruta){
+        
+        String mod= String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 0));
+        
+    
+       String s1= modificarimagen(con,mod,ruta);
+        if(s1!=null){
+            System.out.println("valio queso");
+        }else{
+            
+            tabla.setValueAt(new JLabel(reducirtamamo(new ImageIcon(ruta))), tabla.getSelectedRow(), tabla.getSelectedColumn());
+            System.out.println("exito");
+        }
+     }
+//     public void cargar(JTable tabla,Connection con){
+//         
+//        name1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 0)));
+//        ap1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 1)));
+//        
+//        am1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 2)));
+//        email1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 3)));
+//        nmm1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 4)));
+//        nmo1.setText(String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 5)));
+//        
+//     }
 }
