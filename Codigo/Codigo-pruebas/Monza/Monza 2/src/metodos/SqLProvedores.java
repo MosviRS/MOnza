@@ -5,12 +5,15 @@
  */
 package metodos;
 
+import Entidades.Provedores;
+import PanelConrtrol.PC;
 import cjb.ci.Mensaje;
 import clases.IMGtabla;
 import clases.editTable;
 import clases.editTabletrue;
 import com.mysql.cj.Query;
 import java.sql.Connection;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import javax.swing.JTable;
@@ -21,6 +24,25 @@ import javax.swing.table.DefaultTableModel;
  * @author mosvi
  */
 public class SqLProvedores {
+    public void insertarprovedores(Provedores prov,JFrame PC,JTable agenda4,Connection con){
+         Querys q = new Querys();
+          String valores1 =("'"+prov.getNombre() + "',");
+                                    valores1 +=("'"+prov.getDireccion()+ "',");
+                                    valores1 += ("'"+prov.getCorreo() + "',");
+                                    valores1 += ("'"+prov.getTelefono() + "',");
+                                    valores1 += ("'"+prov.getTipoMer()+"'");
+                                   
+                                    
+            
+        String s1 = q.Insertar(con, "provedores"," nombre_empresa, direccion, correo, telefono, mercancia ", valores1);
+        if (s1 != null)
+        {    Mensaje.error(PC, s1);
+            System.out.println("valio queso");
+        } else
+        {    visualizar_tabla(agenda4, con);
+             System.out.println("Exito");
+        }
+    }
    public void visualizar_tabla(JTable tabla,Connection con){
         Querys q = new Querys();
         DefaultTableModel atm=new editTabletrue();

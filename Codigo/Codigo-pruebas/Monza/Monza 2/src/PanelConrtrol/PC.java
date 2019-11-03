@@ -1394,24 +1394,10 @@ public class PC extends javax.swing.JFrame {
 
     private void Add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add1ActionPerformed
         // TODO add your handling code here:
-         q = new Querys();
+        
          llenarclaseprovedores();
-        String valores1 =("'"+prov.getNombre() + "',");
-                                    valores1 +=("'"+prov.getDireccion()+ "',");
-                                    valores1 += ("'"+prov.getCorreo() + "',");
-                                    valores1 += ("'"+prov.getTelefono() + "',");
-                                    valores1 += ("'"+prov.getTipoMer()+"'");
-                                   
-                                    
-            
-        String s1 = q.Insertar(con, "provedores"," nombre_empresa, direccion, correo, telefono, mercancia ", valores1);
-        if (s1 != null)
-        {    Mensaje.error(this, s1);
-            System.out.println("valio queso");
-        } else
-        {    sqlprov.visualizar_tabla(agenda4, con);
-             System.out.println("Exito");
-        }
+         sqlprov.insertarprovedores(prov, this, agenda4, con);
+ 
     }//GEN-LAST:event_Add1ActionPerformed
 
     private void Add1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Add1MouseReleased

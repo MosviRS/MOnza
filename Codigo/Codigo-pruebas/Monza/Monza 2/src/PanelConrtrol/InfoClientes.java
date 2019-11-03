@@ -430,10 +430,13 @@ public class InfoClientes extends javax.swing.JFrame {
             //            }
         //
         //        }//else el campo esta lleno
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
         // TODO add your handling code here:
+     
     }//GEN-LAST:event_jButton1MouseReleased
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed

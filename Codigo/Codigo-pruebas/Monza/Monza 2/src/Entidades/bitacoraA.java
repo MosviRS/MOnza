@@ -3,6 +3,20 @@ package Entidades;
 public class bitacoraA extends notas {
 
     /**
+     * @return the cuentaUsuario
+     */
+    public String getCuentaUsuario() {
+        return cuentaUsuario;
+    }
+
+    /**
+     * @param cuentaUsuario the cuentaUsuario to set
+     */
+    public void setCuentaUsuario(String cuentaUsuario) {
+        this.cuentaUsuario = cuentaUsuario;
+    }
+
+    /**
      * @return the fecha
      */
     public String getFecha() {
@@ -60,6 +74,7 @@ public class bitacoraA extends notas {
     public bitacoraA(){
         
     }
+    private String cuentaUsuario;
     private String fecha;
 
     private String did;
