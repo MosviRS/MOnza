@@ -25,7 +25,7 @@ public class SqLNotas {
         con= ManipulaDBC.conectaDB();//Objeto que permite manipular a la BD
         //Codigo MySql para Seleccionar(o bien Buscar) Registros, guardado en una Variable de tipo String
         //para seleccionar elementos en la Tabla Usuarios de la BD, previamente diseñada
-        String sql = "SELECT idmodelo, nombre FROM productos WHERE idmodelo =?";
+        String sql = "SELECT idmodelo, nombre, existencia FROM productos WHERE idmodelo =?";
         try {
             ps = con.prepareStatement(sql);//Precarga declaraciondes por default de MySql
             ps.setString(1, p.getModeloPro());//Busqueda de Modelo
@@ -34,6 +34,7 @@ public class SqLNotas {
             if (rs.next()) {
                 if (p.getModeloPro().equals(rs.getString(1))) {
                     p.setNombrePro(rs.getString(2));
+                    p.setExistencia(rs.getInt(3));
                 }
             }
 
@@ -85,25 +86,27 @@ public class SqLNotas {
     }
     //Verificacion de Datos
     public boolean Verificar(clientes p){
+        boolean bn=true;
         PreparedStatement ps = null;//Objeto que permite usar declaraciones preparadas por la libreria para un facil acceso a MySql
         ResultSet rs = null;//Muestra Datos almacenados en la BD
         Connection con;//objeto que permite la conexion a la BD(MySql)
         con= ManipulaDBC.conectaDB();//Objeto que permite manipular a la BD
         //Codigo MySql para Seleccionar(o bien Buscar) Registros, guardado en una Variable de tipo String
         //para seleccionar elementos en la Tabla Usuarios de la BD, previamente diseñada
-        String sql = "SELECT idmodelo, nombre FROM productos WHERE idmodelo =?";
+        String sql = "SELECT idmodelo, nombre, existencia FROM productos WHERE idmodelo =?";
         try {
             ps = con.prepareStatement(sql);//Precarga declaraciondes por default de MySql
             ps.setString(1, p.getModeloPro());//Busqueda de Modelo
             rs = ps.executeQuery();
             
             if (rs.next()) {
-                if (p.getModeloPro().equals(rs.getString(1))) {
-                    p.setNombrePro(rs.getString(2));
+                if (p.getModeloPro().equals(rs.getString(1))&&p.getNombrePro().equals(rs.getString(2))&&p.getExistencia()==rs.getInt(3)) {
+                    return bn=true;
+                }else{
+                    return bn=false;
                 }
             }
-
-            return true;
+            return bn;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());//Mensajes de Error
             return false;

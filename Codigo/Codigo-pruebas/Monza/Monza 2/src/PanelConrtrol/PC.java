@@ -151,6 +151,8 @@ public class PC extends javax.swing.JFrame {
         Quantity = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
         Total = new javax.swing.JLabel();
+        storage = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Productos = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -390,8 +392,8 @@ public class PC extends javax.swing.JFrame {
 
         jLabel5.setBackground(new java.awt.Color(235, 235, 235));
         jLabel5.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jLabel5.setText("Modelo:");
-        Nota.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 60, 20));
+        jLabel5.setText("En Almacen:");
+        Nota.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 90, 20));
 
         model.setBackground(new java.awt.Color(243, 240, 235));
         model.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -434,7 +436,7 @@ public class PC extends javax.swing.JFrame {
                 adddProductActionPerformed(evt);
             }
         });
-        Nota.add(adddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, -1, 40));
+        Nota.add(adddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, 40));
 
         TNote.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -538,6 +540,16 @@ public class PC extends javax.swing.JFrame {
         Total.setForeground(new java.awt.Color(0, 0, 0));
         Total.setText("xxxx");
         Nota.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 370, 160, -1));
+
+        storage.setBackground(new java.awt.Color(235, 235, 235));
+        storage.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        storage.setForeground(new java.awt.Color(0, 0, 0));
+        Nota.add(storage, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 40, 20));
+
+        jLabel20.setBackground(new java.awt.Color(235, 235, 235));
+        jLabel20.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel20.setText("Modelo:");
+        Nota.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 60, 20));
 
         jScrollPane1.setViewportView(Nota);
 
@@ -1402,13 +1414,19 @@ public class PC extends javax.swing.JFrame {
 
     private void adddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adddProductActionPerformed
         if (model.getText().equals("")||nameProduct.getText().equals("")||Quantity.getText().equals("")) {
-            
+            p.setModeloPro(model.getText());
+            p.setNombrePro(nameProduct.getText());
+            p.setExistencia(Integer.parseInt(storage.getText()));
+            //Cantidad 
+            if (MN.Verificar(p)) {
+                
+                int dialog = JOptionPane.DEFAULT_OPTION;
+                JOptionPane.showConfirmDialog(null, "Se guardado con exito :3","Exit",dialog);
+            }else{
+                
+            }
         }
-//        int dialog = JOptionPane.DEFAULT_OPTION;
-//        int result = JOptionPane.showConfirmDialog(null, "Se guardado con exito :3","Exit",dialog);
-//        if (result==0){
-//
-//        }
+        
     }//GEN-LAST:event_adddProductActionPerformed
 
     private void adddProductMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddProductMouseReleased
@@ -1751,6 +1769,7 @@ public class PC extends javax.swing.JFrame {
         p.setModeloPro(model.getText());
         p=MN.BusquedaModel(p);
         nameProduct.setText(p.getNombrePro());
+        storage.setText(Integer.toString(p.getExistencia()));
     }//GEN-LAST:event_modelKeyReleased
 
     private void nameProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameProductKeyReleased
@@ -1891,6 +1910,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1950,6 +1970,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTextField nameProduct;
     public static javax.swing.JTextField nmm1;
     public static javax.swing.JTextField nmo1;
+    private javax.swing.JLabel storage;
     private javax.swing.JTextField telprov;
     private javax.swing.JTextField txtFile;
     // End of variables declaration//GEN-END:variables

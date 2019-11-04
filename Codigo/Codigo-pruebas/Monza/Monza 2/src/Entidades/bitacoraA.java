@@ -76,10 +76,7 @@ public class bitacoraA extends notas {
     }
     private String cuentaUsuario;
     private String fecha;
-
     private String did;
-
     private String cantiadad;
-
     private String notaB;
 }
