@@ -28,6 +28,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import metodos.ManipulaDBC;
 import metodos.SqLImagen;
+import metodos.SqLNotas;
 import metodos.SqLProvedores;
 
 /**
@@ -46,6 +47,10 @@ public class PC extends javax.swing.JFrame {
     SqLImagen sqli=new SqLImagen();
     SqLProvedores sqlprov=new SqLProvedores();
     int noTabPane;
+    //Variables para Notas
+    clientes p=new clientes();
+    SqLNotas MN=new SqLNotas();
+    
     /**
      * Creates new form Registro
      */
@@ -115,7 +120,7 @@ public class PC extends javax.swing.JFrame {
         Nota = new javax.swing.JPanel();
         DeliveryType = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
-        jTFuser2 = new javax.swing.JTextField();
+        Amount = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel25 = new javax.swing.JLabel();
         credit = new javax.swing.JRadioButton();
@@ -124,28 +129,28 @@ public class PC extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        jTFuser1 = new javax.swing.JTextField();
+        nameProduct = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         NNote = new javax.swing.JLabel();
         Date = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        Add = new javax.swing.JButton();
+        model = new javax.swing.JTextField();
+        adddProduct = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         TNote = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
         Reference = new javax.swing.JTextArea();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jBGuardar = new javax.swing.JButton();
+        Save = new javax.swing.JButton();
         dateofpurchase = new com.toedter.calendar.JDateChooser();
         Deadline = new com.toedter.calendar.JDateChooser();
         jSeparator20 = new javax.swing.JSeparator();
         jSeparator21 = new javax.swing.JSeparator();
-        jTFuser = new javax.swing.JTextField();
+        NumNote = new javax.swing.JTextField();
+        Quantity = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
         Total = new javax.swing.JLabel();
-        AddNote = new javax.swing.JLabel();
-        Quantity1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Productos = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -282,7 +287,7 @@ public class PC extends javax.swing.JFrame {
         Nota.setBackground(new java.awt.Color(243, 240, 235));
         Nota.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        DeliveryType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        DeliveryType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presencial", "Inmediata", "Por entregar"}));
         Nota.add(DeliveryType, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 100, -1));
 
         jLabel26.setBackground(new java.awt.Color(235, 235, 235));
@@ -290,19 +295,19 @@ public class PC extends javax.swing.JFrame {
         jLabel26.setText("Fecha de Entrega:");
         Nota.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 420, 120, 20));
 
-        jTFuser2.setBackground(new java.awt.Color(243, 240, 235));
-        jTFuser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFuser2.setForeground(new java.awt.Color(102, 102, 102));
-        jTFuser2.setText("00.00");
-        jTFuser2.setBorder(null);
-        jTFuser2.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFuser2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFuser2.addMouseListener(new java.awt.event.MouseAdapter() {
+        Amount.setBackground(new java.awt.Color(243, 240, 235));
+        Amount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Amount.setForeground(new java.awt.Color(102, 102, 102));
+        Amount.setText("00.00");
+        Amount.setBorder(null);
+        Amount.setCaretColor(new java.awt.Color(204, 51, 0));
+        Amount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Amount.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFuser2MouseClicked(evt);
+                AmountMouseClicked(evt);
             }
         });
-        Nota.add(jTFuser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 140, 20));
+        Nota.add(Amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 140, 20));
 
         jSeparator6.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
@@ -316,11 +321,21 @@ public class PC extends javax.swing.JFrame {
         credit.setBackground(new java.awt.Color(243, 240, 235));
         credit.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         credit.setText("Credito");
+        credit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditActionPerformed(evt);
+            }
+        });
         Nota.add(credit, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 90, -1));
 
         counted.setBackground(new java.awt.Color(243, 240, 235));
         counted.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         counted.setText("Contado");
+        counted.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                countedActionPerformed(evt);
+            }
+        });
         Nota.add(counted, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 90, -1));
 
         jSeparator5.setBackground(new java.awt.Color(235, 235, 235));
@@ -341,19 +356,24 @@ public class PC extends javax.swing.JFrame {
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
         Nota.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 190, 10));
 
-        jTFuser1.setBackground(new java.awt.Color(243, 240, 235));
-        jTFuser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFuser1.setForeground(new java.awt.Color(102, 102, 102));
-        jTFuser1.setText("Nombre del Producto");
-        jTFuser1.setBorder(null);
-        jTFuser1.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFuser1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFuser1.addMouseListener(new java.awt.event.MouseAdapter() {
+        nameProduct.setBackground(new java.awt.Color(243, 240, 235));
+        nameProduct.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        nameProduct.setForeground(new java.awt.Color(102, 102, 102));
+        nameProduct.setText("Nombre del Producto");
+        nameProduct.setBorder(null);
+        nameProduct.setCaretColor(new java.awt.Color(204, 51, 0));
+        nameProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        nameProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFuser1MouseClicked(evt);
+                nameProductMouseClicked(evt);
             }
         });
-        Nota.add(jTFuser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 170, 20));
+        nameProduct.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameProductKeyReleased(evt);
+            }
+        });
+        Nota.add(nameProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 170, 20));
 
         jLabel6.setBackground(new java.awt.Color(235, 235, 235));
         jLabel6.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
@@ -373,29 +393,48 @@ public class PC extends javax.swing.JFrame {
         jLabel5.setText("Modelo:");
         Nota.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 60, 20));
 
-        Add.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
-        Add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add2.png"))); // NOI18N
-        Add.setBorder(null);
-        Add.setBorderPainted(false);
-        Add.setContentAreaFilled(false);
-        Add.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Add.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
-        Add.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
-        Add.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
-        Add.addMouseListener(new java.awt.event.MouseAdapter() {
+        model.setBackground(new java.awt.Color(243, 240, 235));
+        model.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        model.setForeground(new java.awt.Color(102, 102, 102));
+        model.setText("Ingrese Modelo");
+        model.setBorder(null);
+        model.setCaretColor(new java.awt.Color(204, 51, 0));
+        model.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        model.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modelMouseClicked(evt);
+            }
+        });
+        model.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                modelKeyReleased(evt);
+            }
+        });
+        Nota.add(model, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 140, 20));
+
+        adddProduct.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
+        adddProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add2.png"))); // NOI18N
+        adddProduct.setBorder(null);
+        adddProduct.setBorderPainted(false);
+        adddProduct.setContentAreaFilled(false);
+        adddProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        adddProduct.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
+        adddProduct.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
+        adddProduct.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
+        adddProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                AddMousePressed(evt);
+                adddProductMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                AddMouseReleased(evt);
+                adddProductMouseReleased(evt);
             }
         });
-        Add.addActionListener(new java.awt.event.ActionListener() {
+        adddProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddActionPerformed(evt);
+                adddProductActionPerformed(evt);
             }
         });
-        Nota.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, -1, 40));
+        Nota.add(adddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, -1, 40));
 
         TNote.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -436,20 +475,20 @@ public class PC extends javax.swing.JFrame {
         jLabel28.setText("Referencia de entrega:");
         Nota.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 390, 160, 20));
 
-        jBGuardar.setBackground(new java.awt.Color(243, 240, 235));
-        jBGuardar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s1.png"))); // NOI18N
-        jBGuardar.setBorder(null);
-        jBGuardar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
-        jBGuardar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
-        jBGuardar.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
-        jBGuardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
-        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+        Save.setBackground(new java.awt.Color(243, 240, 235));
+        Save.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s1.png"))); // NOI18N
+        Save.setBorder(null);
+        Save.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
+        Save.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
+        Save.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
+        Save.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/s2.png"))); // NOI18N
+        Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBGuardarActionPerformed(evt);
+                SaveActionPerformed(evt);
             }
         });
-        Nota.add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 390, 60, 60));
+        Nota.add(Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 390, 60, 60));
 
         dateofpurchase.setBackground(new java.awt.Color(243, 240, 235));
         Nota.add(dateofpurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, -1));
@@ -463,19 +502,33 @@ public class PC extends javax.swing.JFrame {
         jSeparator21.setForeground(new java.awt.Color(0, 0, 0));
         Nota.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 40, 120, 10));
 
-        jTFuser.setBackground(new java.awt.Color(243, 240, 235));
-        jTFuser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFuser.setForeground(new java.awt.Color(102, 102, 102));
-        jTFuser.setText("Ingrese Modelo ");
-        jTFuser.setBorder(null);
-        jTFuser.setCaretColor(new java.awt.Color(204, 51, 0));
-        jTFuser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTFuser.addMouseListener(new java.awt.event.MouseAdapter() {
+        NumNote.setBackground(new java.awt.Color(243, 240, 235));
+        NumNote.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        NumNote.setForeground(new java.awt.Color(102, 102, 102));
+        NumNote.setText("XXXX");
+        NumNote.setBorder(null);
+        NumNote.setCaretColor(new java.awt.Color(204, 51, 0));
+        NumNote.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        NumNote.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFuserMouseClicked(evt);
+                NumNoteMouseClicked(evt);
             }
         });
-        Nota.add(jTFuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 140, 20));
+        Nota.add(NumNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 100, 20));
+
+        Quantity.setBackground(new java.awt.Color(243, 240, 235));
+        Quantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Quantity.setForeground(new java.awt.Color(102, 102, 102));
+        Quantity.setText("Ingrese Cantidad");
+        Quantity.setBorder(null);
+        Quantity.setCaretColor(new java.awt.Color(204, 51, 0));
+        Quantity.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Quantity.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QuantityMouseClicked(evt);
+            }
+        });
+        Nota.add(Quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 140, 20));
 
         jSeparator7.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
@@ -485,16 +538,6 @@ public class PC extends javax.swing.JFrame {
         Total.setForeground(new java.awt.Color(0, 0, 0));
         Total.setText("xxxx");
         Nota.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 370, 160, -1));
-
-        AddNote.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        AddNote.setForeground(new java.awt.Color(35, 34, 34));
-        AddNote.setText("XXXX");
-        Nota.add(AddNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 100, -1));
-
-        Quantity1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Quantity1.setForeground(new java.awt.Color(102, 102, 102));
-        Quantity1.setText("Ingrese Cantidad");
-        Nota.add(Quantity1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 150, -1));
 
         jScrollPane1.setViewportView(Nota);
 
@@ -1344,7 +1387,7 @@ public class PC extends javax.swing.JFrame {
             //        }
     }//GEN-LAST:event_CleanActionPerformed
 
-    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
         //        java.awt.EventQueue.invokeLater(new Runnable() {
             //            public void run() {
                 //                new exa().setVisible(true);
@@ -1355,42 +1398,51 @@ public class PC extends javax.swing.JFrame {
     ir.setVisible(true);
     ir.setLocationRelativeTo(null);
     this.dispose();
-    }//GEN-LAST:event_jBGuardarActionPerformed
+    }//GEN-LAST:event_SaveActionPerformed
 
-    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
-        int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "Se guardado con exito :3","Exit",dialog);
-        if (result==0){
-
+    private void adddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adddProductActionPerformed
+        if (model.getText().equals("")||nameProduct.getText().equals("")||Quantity.getText().equals("")) {
+            
         }
-    }//GEN-LAST:event_AddActionPerformed
+//        int dialog = JOptionPane.DEFAULT_OPTION;
+//        int result = JOptionPane.showConfirmDialog(null, "Se guardado con exito :3","Exit",dialog);
+//        if (result==0){
+//
+//        }
+    }//GEN-LAST:event_adddProductActionPerformed
 
-    private void AddMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMouseReleased
+    private void adddProductMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddProductMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_AddMouseReleased
+    }//GEN-LAST:event_adddProductMouseReleased
 
-    private void AddMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMousePressed
+    private void adddProductMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddProductMousePressed
 
-    }//GEN-LAST:event_AddMousePressed
+    }//GEN-LAST:event_adddProductMousePressed
 
-    private void jTFuserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuserMouseClicked
+    private void modelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modelMouseClicked
         // TODO add your handling code here:
-        if (jTFuser.getText().equals("Ingrese Usuario")) {
-            jTFuser.setText("");
+        if (model.getText().equals("Ingrese Modelo")) {
+            model.setText("");
         }
-    }//GEN-LAST:event_jTFuserMouseClicked
+    }//GEN-LAST:event_modelMouseClicked
 
-    private void jTFuser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuser1MouseClicked
+    private void nameProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameProductMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFuser1MouseClicked
+        if (nameProduct.getText().equals("Nombre del Producto")) {
+            nameProduct.setText("");
+        }
+    }//GEN-LAST:event_nameProductMouseClicked
 
     private void jTFuser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFuser2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFuser2ActionPerformed
 
-    private void jTFuser2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuser2MouseClicked
+    private void AmountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AmountMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFuser2MouseClicked
+        if (Amount.getText().equals("00.00")) {
+            Amount.setText("");
+        }
+    }//GEN-LAST:event_AmountMouseClicked
 
     private void Add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add1ActionPerformed
         // TODO add your handling code here:
@@ -1669,6 +1721,46 @@ public class PC extends javax.swing.JFrame {
        }
              
     }//GEN-LAST:event_agenda4KeyReleased
+
+    private void countedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countedActionPerformed
+        // TODO add your handling code here:
+        credit.setSelected(false);
+    }//GEN-LAST:event_countedActionPerformed
+
+    private void creditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditActionPerformed
+        // TODO add your handling code here:
+        counted.setSelected(false);
+    }//GEN-LAST:event_creditActionPerformed
+
+    private void QuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuantityMouseClicked
+        // TODO add your handling code here:
+        if (Quantity.getText().equals("Ingrese Cantidad")) {
+            Quantity.setText("");
+        }
+    }//GEN-LAST:event_QuantityMouseClicked
+
+    private void NumNoteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NumNoteMouseClicked
+        // TODO add your handling code here:
+        if (NumNote.getText().equals("XXXX")) {
+            NumNote.setText("");
+        }
+    }//GEN-LAST:event_NumNoteMouseClicked
+
+    private void modelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_modelKeyReleased
+        // Busqueda Model:
+        p.setModeloPro(model.getText());
+        p=MN.BusquedaModel(p);
+        nameProduct.setText(p.getNombrePro());
+    }//GEN-LAST:event_modelKeyReleased
+
+    private void nameProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameProductKeyReleased
+        // Busqueda NameProduct:
+//        clientes p=new clientes();
+//        SqLNotas MN=new SqLNotas();
+//        p.setNombrePro(nameProduct.getText());
+//        p=MN.BusquedaNameP(p);
+//        model.setText(p.getModeloPro());
+    }//GEN-LAST:event_nameProductKeyReleased
     public void llenarclaseproductos(){
         cli= new clientes();
         cli.setModeloPro(name1.getText());
@@ -1706,43 +1798,42 @@ public class PC extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Windows".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new PC().setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PC().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Add;
     private javax.swing.JButton Add1;
-    private javax.swing.JLabel AddNote;
+    private javax.swing.JTextField Amount;
     private javax.swing.JPanel Bitacora;
     private javax.swing.JButton Clean;
     private javax.swing.JPanel Clientes;
@@ -1760,13 +1851,16 @@ public class PC extends javax.swing.JFrame {
     public javax.swing.JTabbedPane Nav;
     private javax.swing.JTextField Nomprov;
     private javax.swing.JPanel Nota;
+    private javax.swing.JTextField NumNote;
     private javax.swing.JPanel Productos;
     private javax.swing.JPanel Proveedores;
-    private javax.swing.JLabel Quantity1;
+    private javax.swing.JTextField Quantity;
     private javax.swing.JTextArea Reference;
+    private javax.swing.JButton Save;
     private javax.swing.JButton Shutdown;
     private javax.swing.JTable TNote;
     private javax.swing.JLabel Total;
+    private javax.swing.JButton adddProduct;
     private javax.swing.JTable agenda;
     private javax.swing.JTable agenda1;
     private javax.swing.JTable agenda3;
@@ -1784,7 +1878,6 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTextField dirccprove;
     public static javax.swing.JTextField email1;
     private javax.swing.JTextField emailprov;
-    private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBGuardar1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -1850,12 +1943,11 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextField jTFuser;
-    private javax.swing.JTextField jTFuser1;
-    private javax.swing.JTextField jTFuser2;
     private javax.swing.JTextField jTFuser3;
     private javax.swing.JTextField mercprov;
+    private javax.swing.JTextField model;
     public static javax.swing.JTextField name1;
+    private javax.swing.JTextField nameProduct;
     public static javax.swing.JTextField nmm1;
     public static javax.swing.JTextField nmo1;
     private javax.swing.JTextField telprov;
