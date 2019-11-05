@@ -8,6 +8,7 @@ package PanelConrtrol;
 import Entidades.Provedores;
 import Entidades.Usuario;
 import Entidades.clientes;
+import Entidades.orders;
 import LogIn.*;
 import cjb.ci.Mensaje;
 import clases.IMGtabla;
@@ -20,6 +21,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import metodos.Querys;
 import java.sql.Connection;
+import java.util.StringTokenizer;
+import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
@@ -37,7 +40,6 @@ import metodos.SqLProvedores;
  */
 public class PC extends javax.swing.JFrame {
     Usuario mod;
-    
     Connection con;
     clientes cli;
     Provedores prov;
@@ -49,7 +51,9 @@ public class PC extends javax.swing.JFrame {
     int noTabPane;
     //Variables para Notas
     clientes p=new clientes();
+    orders op=new orders();
     SqLNotas MN=new SqLNotas();
+    private  DefaultTableModel mdl;
     
     /**
      * Creates new form Registro
@@ -62,7 +66,10 @@ public class PC extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
         this.setIconImage(icon.getImage());
         String []titulo=new String[] {"Nombre","Descripcion","PrecioG","precioN","Imagen"};
-         
+        
+        //TablaNotas
+         mdl =  (DefaultTableModel)TNote.getModel();
+         TNote.setModel(mdl);
        
     }
     public PC(Usuario mod){
@@ -133,9 +140,9 @@ public class PC extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         NNote = new javax.swing.JLabel();
         Date = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        priceOne = new javax.swing.JLabel();
         model = new javax.swing.JTextField();
-        adddProduct = new javax.swing.JButton();
+        addProduct = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         TNote = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -153,6 +160,8 @@ public class PC extends javax.swing.JFrame {
         Total = new javax.swing.JLabel();
         storage = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Productos = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -370,11 +379,6 @@ public class PC extends javax.swing.JFrame {
                 nameProductMouseClicked(evt);
             }
         });
-        nameProduct.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                nameProductKeyReleased(evt);
-            }
-        });
         Nota.add(nameProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 170, 20));
 
         jLabel6.setBackground(new java.awt.Color(235, 235, 235));
@@ -390,10 +394,10 @@ public class PC extends javax.swing.JFrame {
         Date.setText("Fecha de Compra:");
         Nota.add(Date, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, 40));
 
-        jLabel5.setBackground(new java.awt.Color(235, 235, 235));
-        jLabel5.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jLabel5.setText("En Almacen:");
-        Nota.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 90, 20));
+        priceOne.setBackground(new java.awt.Color(235, 235, 235));
+        priceOne.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        priceOne.setForeground(new java.awt.Color(0, 0, 0));
+        Nota.add(priceOne, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 90, 70, 20));
 
         model.setBackground(new java.awt.Color(243, 240, 235));
         model.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -414,36 +418,32 @@ public class PC extends javax.swing.JFrame {
         });
         Nota.add(model, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 140, 20));
 
-        adddProduct.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
-        adddProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add2.png"))); // NOI18N
-        adddProduct.setBorder(null);
-        adddProduct.setBorderPainted(false);
-        adddProduct.setContentAreaFilled(false);
-        adddProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        adddProduct.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
-        adddProduct.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
-        adddProduct.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
-        adddProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+        addProduct.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
+        addProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add2.png"))); // NOI18N
+        addProduct.setBorder(null);
+        addProduct.setBorderPainted(false);
+        addProduct.setContentAreaFilled(false);
+        addProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addProduct.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
+        addProduct.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
+        addProduct.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/add1.png"))); // NOI18N
+        addProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                adddProductMousePressed(evt);
+                addProductMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                adddProductMouseReleased(evt);
+                addProductMouseReleased(evt);
             }
         });
-        adddProduct.addActionListener(new java.awt.event.ActionListener() {
+        addProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adddProductActionPerformed(evt);
+                addProductActionPerformed(evt);
             }
         });
-        Nota.add(adddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, 40));
+        Nota.add(addProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, -1, 40));
 
         TNote.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
             },
             new String [] {
                 "(ID)Modelo", "Nombre del Producto", "cantidad", "Monto por unidad", "Monto subtotal"
@@ -521,7 +521,7 @@ public class PC extends javax.swing.JFrame {
         Quantity.setBackground(new java.awt.Color(243, 240, 235));
         Quantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Quantity.setForeground(new java.awt.Color(102, 102, 102));
-        Quantity.setText("Ingrese Cantidad");
+        Quantity.setText("0");
         Quantity.setBorder(null);
         Quantity.setCaretColor(new java.awt.Color(204, 51, 0));
         Quantity.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -544,12 +544,22 @@ public class PC extends javax.swing.JFrame {
         storage.setBackground(new java.awt.Color(235, 235, 235));
         storage.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         storage.setForeground(new java.awt.Color(0, 0, 0));
-        Nota.add(storage, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 40, 20));
+        Nota.add(storage, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 70, 20));
 
         jLabel20.setBackground(new java.awt.Color(235, 235, 235));
         jLabel20.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel20.setText("Modelo:");
         Nota.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 60, 20));
+
+        jLabel19.setBackground(new java.awt.Color(235, 235, 235));
+        jLabel19.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel19.setText("En Almacen:");
+        Nota.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 90, 20));
+
+        jLabel21.setBackground(new java.awt.Color(235, 235, 235));
+        jLabel21.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel21.setText("Precio Unitario:");
+        Nota.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 110, 20));
 
         jScrollPane1.setViewportView(Nota);
 
@@ -1202,7 +1212,7 @@ public class PC extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Microsoft Tai Le", 1, 28)); // NOI18N
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/engranajes.png"))); // NOI18N
         jLabel8.setText("Centro de trabajo");
-        jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 70));
+        jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 370, 70));
 
         Shutdown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/Shutdown1.png"))); // NOI18N
         Shutdown.setBorder(null);
@@ -1412,30 +1422,78 @@ public class PC extends javax.swing.JFrame {
     this.dispose();
     }//GEN-LAST:event_SaveActionPerformed
 
-    private void adddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adddProductActionPerformed
-        if (model.getText().equals("")||nameProduct.getText().equals("")||Quantity.getText().equals("")) {
+    private void addProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductActionPerformed
+        if (!model.getText().equals("")&&
+                !nameProduct.getText().equals("")&&
+                !Quantity.getText().equals("")&&
+                !NumNote.getText().equals("")&&
+                !NumNote.getText().equals("XXXX")) {
             p.setModeloPro(model.getText());
             p.setNombrePro(nameProduct.getText());
             p.setExistencia(Integer.parseInt(storage.getText()));
-            //Cantidad 
-            if (MN.Verificar(p)) {
-                
+            p.setNo_nota(NumNote.getText());
+            p.setPrecio(Double.parseDouble(priceOne.getText()));
+            op.setCant(Integer.parseInt(Quantity.getText()));
+            //Cantidad
+            if (MN.Verificar(p,op)) {
+                NumNote.setEnabled(false);
+//                MN.insertNote(Integer.parseInt(p.getNo_nota()), 0, 0);
+                MN.insertProNote(p.getModeloPro(),Integer.parseInt(p.getNo_nota()),op.getCant());
+                insertTable(p.getModeloPro(),p.getNombrePro(),Integer.toString(op.getCant()),Double.toString(p.getPrecio()));
+                p=MN.ActualizarProd(p, op.getCant());
+                model.setText("");
+                nameProduct.setText("");
+                storage.setText("");
+                priceOne.setText("");
+                Quantity.setText("");
                 int dialog = JOptionPane.DEFAULT_OPTION;
-                JOptionPane.showConfirmDialog(null, "Se guardado con exito :3","Exit",dialog);
+                JOptionPane.showConfirmDialog(null, "Articulo agregado exitosamente! :3","Saved successfully!",dialog);
             }else{
-                
+                int dialog = JOptionPane.DEFAULT_OPTION;
+                JOptionPane.showConfirmDialog(null, "Lo siento algunos datos son incorrectos :c","save error",dialog);
+                if (NumNote.getText().equals("")||
+                        p.getNo_nota().equals("XXXX")) {
+                    JOptionPane.showConfirmDialog(null, "Numero de Nota vacia"
+                            + "\nIngresar Nota antes de agregar articulos","save error",dialog);
+                }
+//                if (MN.verificarNote(p)||
+//                        NumNote.getText().equals("")||
+//                        p.getNo_nota().equals("XXXX")) {
+//                    JOptionPane.showConfirmDialog(null, "Numero de Nota Existente O vacia","save error",dialog);
+//                }
             }
-        }
-        
-    }//GEN-LAST:event_adddProductActionPerformed
-
-    private void adddProductMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddProductMouseReleased
+        }else{
+            int dialog = JOptionPane.DEFAULT_OPTION;
+                JOptionPane.showConfirmDialog(null, "Lo siento algunos datos son incorrectos :c","save error",dialog);
+                if (NumNote.getText().equals("")||
+                        p.getNo_nota().equals("XXXX")) {
+                    JOptionPane.showConfirmDialog(null, "Numero de Nota vacia"
+                            + "\nIngresar Nota antes de agregar articulos","save error",dialog);
+                }
+        } 
+    }//GEN-LAST:event_addProductActionPerformed
+    private void insertTable(String IDM,String Nombre,String Cantidad,String precioU){
+        String SubT;
+        double cant,pu;
+        cant=Double.parseDouble(Cantidad);
+        pu=Double.parseDouble(precioU);
+        SubT=(Double.toString(cant*pu));
+        String cadena=IDM+"--"+Nombre+"--"+Cantidad+"--"+precioU+"--"+SubT+"--";
+        StringTokenizer linea = new StringTokenizer(cadena, "--");///para convertir la cadena 
+                    Vector v = new Vector();///vector donde se guardan los elementos
+                    while (linea.hasMoreTokens()) {///si hay mas datos en la linea
+                        v.addElement(linea.nextToken());
+                    }
+                    mdl.addRow(v);
+                    
+    }
+    private void addProductMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_adddProductMouseReleased
+    }//GEN-LAST:event_addProductMouseReleased
 
-    private void adddProductMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddProductMousePressed
+    private void addProductMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductMousePressed
 
-    }//GEN-LAST:event_adddProductMousePressed
+    }//GEN-LAST:event_addProductMousePressed
 
     private void modelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modelMouseClicked
         // TODO add your handling code here:
@@ -1752,7 +1810,7 @@ public class PC extends javax.swing.JFrame {
 
     private void QuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuantityMouseClicked
         // TODO add your handling code here:
-        if (Quantity.getText().equals("Ingrese Cantidad")) {
+        if (Quantity.getText().equals("0")) {
             Quantity.setText("");
         }
     }//GEN-LAST:event_QuantityMouseClicked
@@ -1770,16 +1828,8 @@ public class PC extends javax.swing.JFrame {
         p=MN.BusquedaModel(p);
         nameProduct.setText(p.getNombrePro());
         storage.setText(Integer.toString(p.getExistencia()));
+        priceOne.setText(Double.toString(p.getPrecio()));
     }//GEN-LAST:event_modelKeyReleased
-
-    private void nameProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameProductKeyReleased
-        // Busqueda NameProduct:
-//        clientes p=new clientes();
-//        SqLNotas MN=new SqLNotas();
-//        p.setNombrePro(nameProduct.getText());
-//        p=MN.BusquedaNameP(p);
-//        model.setText(p.getModeloPro());
-    }//GEN-LAST:event_nameProductKeyReleased
     public void llenarclaseproductos(){
         cli= new clientes();
         cli.setModeloPro(name1.getText());
@@ -1879,7 +1929,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JButton Shutdown;
     private javax.swing.JTable TNote;
     private javax.swing.JLabel Total;
-    private javax.swing.JButton adddProduct;
+    private javax.swing.JButton addProduct;
     private javax.swing.JTable agenda;
     private javax.swing.JTable agenda1;
     private javax.swing.JTable agenda3;
@@ -1909,8 +1959,10 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1920,7 +1972,6 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1970,6 +2021,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTextField nameProduct;
     public static javax.swing.JTextField nmm1;
     public static javax.swing.JTextField nmo1;
+    private javax.swing.JLabel priceOne;
     private javax.swing.JLabel storage;
     private javax.swing.JTextField telprov;
     private javax.swing.JTextField txtFile;
