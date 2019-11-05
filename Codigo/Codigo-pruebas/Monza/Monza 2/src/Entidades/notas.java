@@ -3,6 +3,34 @@ package Entidades;
 public class notas extends info_productos {
 
     /**
+     * @return the monto_recibido
+     */
+    public double getMonto_recibido() {
+        return monto_recibido;
+    }
+
+    /**
+     * @param monto_recibido the monto_recibido to set
+     */
+    public void setMonto_recibido(double monto_recibido) {
+        this.monto_recibido = monto_recibido;
+    }
+
+    /**
+     * @return the fecha_nota
+     */
+    public String getFecha_nota() {
+        return fecha_nota;
+    }
+
+    /**
+     * @param fecha_nota the fecha_nota to set
+     */
+    public void setFecha_nota(String fecha_nota) {
+        this.fecha_nota = fecha_nota;
+    }
+
+    /**
      * @return the total
      */
     public double getTotal() {
@@ -75,10 +103,13 @@ public class notas extends info_productos {
     protected double total;
 
     protected double abono;
+    protected double monto_recibido;
 
     protected int entrega;
 
     protected String no_nota;
 
     protected String poductos;
+    
+    protected String fecha_nota;
 }

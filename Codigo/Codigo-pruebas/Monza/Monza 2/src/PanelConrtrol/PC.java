@@ -7,6 +7,7 @@ package PanelConrtrol;
 
 import Entidades.Provedores;
 import Entidades.Usuario;
+import Entidades.bitacoraA;
 import Entidades.clientes;
 import Entidades.orders;
 import LogIn.*;
@@ -21,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import metodos.Querys;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import javax.swing.JFileChooser;
@@ -50,10 +52,11 @@ public class PC extends javax.swing.JFrame {
     SqLProvedores sqlprov=new SqLProvedores();
     int noTabPane;
     //Variables para Notas
-    clientes p=new clientes();
-    orders op=new orders();
+    public static clientes p=new clientes();
+     public static orders op=new orders();
     SqLNotas MN=new SqLNotas();
     private  DefaultTableModel mdl;
+    bitacoraA bit;
     
     /**
      * Creates new form Registro
@@ -298,7 +301,7 @@ public class PC extends javax.swing.JFrame {
         Nota.setBackground(new java.awt.Color(243, 240, 235));
         Nota.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        DeliveryType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presencial", "Inmediata", "Por entregar"}));
+        DeliveryType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inmediata", "Por entregar"}));
         Nota.add(DeliveryType, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 100, -1));
 
         jLabel26.setBackground(new java.awt.Color(235, 235, 235));
@@ -1416,6 +1419,31 @@ public class PC extends javax.swing.JFrame {
                 //            }
             //        });
     //        this.dispose();
+   bit= new bitacoraA();
+   ArrayList<String> auxrr= new  ArrayList();
+        for (int i = 0; i < TNote.getRowCount(); i++) {
+            auxrr.add((String)TNote.getValueAt(i, 0));
+            auxrr.add((String)TNote.getValueAt(i, 1));
+            auxrr.add((String)TNote.getValueAt(i, 2));
+            auxrr.add((String)TNote.getValueAt(i, 3));
+            auxrr.add((String)TNote.getValueAt(i, 4));
+        }
+        p.setMonto_recibido(Double.parseDouble(Amount.getText()));
+        if(p.getMonto_recibido()==p.getTotal()){//sea contado
+          bit.setCantiadad(Double.toString(p.getMonto_recibido()));
+          bit.setDid("Contado");
+          if(DeliveryType.getSelectedItem().equals("Por entregar")){
+              op.setReferencia(Reference.getText());
+              op.setFech(Deadline.getDateFormatString());
+          }
+        }else if(p.getMonto_recibido()>=0 && p.getMonto_recibido()<p.getTotal() ){
+            bit.setDid("Abono");
+            bit.setCantiadad(Double.toString(p.getMonto_recibido()));
+             if(DeliveryType.getSelectedItem().equals("Por entregar")){
+              op.setReferencia(Reference.getText());
+              op.setFech(Deadline.getDateFormatString());
+          }
+        }
     InfoClientes ir= new InfoClientes();
     ir.setVisible(true);
     ir.setLocationRelativeTo(null);
@@ -1438,9 +1466,11 @@ public class PC extends javax.swing.JFrame {
             if (MN.Verificar(p,op)) {
                 NumNote.setEnabled(false);
 //                MN.insertNote(Integer.parseInt(p.getNo_nota()), 0, 0);
-                MN.insertProNote(p.getModeloPro(),Integer.parseInt(p.getNo_nota()),op.getCant());
-                insertTable(p.getModeloPro(),p.getNombrePro(),Integer.toString(op.getCant()),Double.toString(p.getPrecio()));
-                p=MN.ActualizarProd(p, op.getCant());
+//                MN.insertProNote(p.getModeloPro(),Integer.parseInt(p.getNo_nota()),op.getCant());
+                p.setTotal(p.getTotal()+(op.getCant()*p.getPrecio()));
+                insertTable(p.getModeloPro(),p.getNombrePro(),op.getCant(),p.getPrecio());
+//                p=MN.ActualizarProd(p, op.getCant());
+                Total.setText(p.getTotal()+"");
                 model.setText("");
                 nameProduct.setText("");
                 storage.setText("");
@@ -1472,12 +1502,9 @@ public class PC extends javax.swing.JFrame {
                 }
         } 
     }//GEN-LAST:event_addProductActionPerformed
-    private void insertTable(String IDM,String Nombre,String Cantidad,String precioU){
+    private void insertTable(String IDM,String Nombre,int Cantidad,Double precioU){
         String SubT;
-        double cant,pu;
-        cant=Double.parseDouble(Cantidad);
-        pu=Double.parseDouble(precioU);
-        SubT=(Double.toString(cant*pu));
+        SubT=(Double.toString(Cantidad*precioU));
         String cadena=IDM+"--"+Nombre+"--"+Cantidad+"--"+precioU+"--"+SubT+"--";
         StringTokenizer linea = new StringTokenizer(cadena, "--");///para convertir la cadena 
                     Vector v = new Vector();///vector donde se guardan los elementos

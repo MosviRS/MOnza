@@ -147,7 +147,7 @@
                     <Component class="javax.swing.JComboBox" name="DeliveryType">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Presencial&quot;, &quot;Inmediata&quot;, &quot;Por entregar&quot;})" type="code"/>
+                          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Inmediata&quot;, &quot;Por entregar&quot;})" type="code"/>
                         </Property>
                       </Properties>
                       <AuxValues>
