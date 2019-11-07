@@ -150,9 +150,12 @@ public class ConsultaArt extends javax.swing.JFrame {
         });
         jScrollPane13.setViewportView(TablaPri);
         if (TablaPri.getColumnModel().getColumnCount() > 0) {
-            TablaPri.getColumnModel().getColumn(0).setMinWidth(8);
-            TablaPri.getColumnModel().getColumn(0).setPreferredWidth(8);
-            TablaPri.getColumnModel().getColumn(0).setMaxWidth(8);
+            TablaPri.getColumnModel().getColumn(0).setMinWidth(80);
+            TablaPri.getColumnModel().getColumn(0).setPreferredWidth(80);
+            TablaPri.getColumnModel().getColumn(0).setMaxWidth(80);
+            TablaPri.getColumnModel().getColumn(1).setMinWidth(300);
+            TablaPri.getColumnModel().getColumn(1).setPreferredWidth(300);
+            TablaPri.getColumnModel().getColumn(1).setMaxWidth(300);
             TablaPri.getColumnModel().getColumn(3).setPreferredWidth(8);
         }
 
