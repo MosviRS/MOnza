@@ -6,6 +6,7 @@
 package metodos;
 
 import clases.editTable;
+import clases.editTabletrue;
 import java.sql.Connection;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -15,6 +16,21 @@ import javax.swing.table.DefaultTableModel;
  * @author LAPROMA1-18
  */
 public class SqLEntregas {
+      public void vizualizar_tabla(JTable tabla,Connection con){
+         Querys q = new Querys();
+        DefaultTableModel atm=new editTabletrue();
+        String []titulo=new String[] {"No.Nota","Nombre","Direccion","Reeferencia","fecha de entrega","Telefono"};
+        
+          String qu="SELECT entregas.nota_entregas, clientes.nombre, clientes.direccion, entregas.referencia, entregas.fecha_entrega, clientes.telefono"
+                      +" FROM (clientes INNER JOIN notas ON clientes.idclientes = notas.no_cliente) INNER JOIN entregas ON notas.nota = entregas.nota_entregas";
+         atm= q.Seleccioncond(con,qu, titulo);
+         
+         
+         tabla.setRowHeight(16);
+         tabla.setModel(atm);
+      
+                     
+    }
      public void elimnar(JTable tabla,Connection con){
       Querys q = new Querys();
       try{

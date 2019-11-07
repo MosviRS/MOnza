@@ -251,7 +251,46 @@ public class Querys
         }
         return modelatm;
     }
-
+    public DefaultTableModel Seleccioncond(Connection con,String query,String[] titulo)
+    {   
+        DefaultTableModel modelatm=new editTabletrue();
+        modelatm.setColumnIdentifiers(titulo);
+       
+        String cond = "";
+        
+//        if (!condicion.equals(""))
+//        {
+//            cond = " where " + condicion;
+//        }
+        try
+        {
+            Statement stmt = con.createStatement();
+            String myquery = query;
+            System.out.println(myquery); //impresion de pureba
+            ResultSet rs = stmt.executeQuery(myquery);
+//            System.out.println("rs=" + rs.getNString("idLigas"));
+            while (rs.next())
+            {   Vector<Object> reg = new Vector();
+                for (int i = 1; i < (rs.getMetaData().getColumnCount()) + 1; i++)
+                {  
+                    reg.add(rs.getObject(i));
+                }
+                modelatm.addRow(reg);
+            }
+            //System.out.println("reg= " + reg.toString());
+//            String cadena = reg.toString();
+//            cadena = cadena.substring(1);
+//            cadena = cadena.replace("]", " ");
+//            System.out.println("salida xxx : " + cadena); //impresion de prueba 
+//            reg=SepararCadena(cadena);
+            return modelatm;
+            
+        } catch (Exception e)
+        {
+             System.out.println("Exception, no hay datos");
+        }
+        return modelatm;
+    }
     public ArrayList SepararCadena(String cadena)
     {
         ArrayList datos = new ArrayList();

@@ -16,6 +16,7 @@ import clases.IMGtabla;
 import clases.editTable;
 import java.awt.FileDialog;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import javax.swing.ImageIcon;
@@ -29,9 +30,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import metodos.ManipulaDBC;
+import metodos.SqLEntregas;
 import metodos.SqLImagen;
 import metodos.SqLNotas;
 import metodos.SqLProvedores;
@@ -50,13 +54,15 @@ public class PC extends javax.swing.JFrame {
     JFileChooser jf;
     SqLImagen sqli=new SqLImagen();
     SqLProvedores sqlprov=new SqLProvedores();
+    SqLEntregas sqlentr= new SqLEntregas();
     int noTabPane;
     //Variables para Notas
     public static clientes p=new clientes();
      public static orders op=new orders();
     SqLNotas MN=new SqLNotas();
     private  DefaultTableModel mdl;
-    bitacoraA bit;
+    bitacoraA bit= new bitacoraA();
+    TableRowSorter tbfil;
     
     /**
      * Creates new form Registro
@@ -683,6 +689,9 @@ public class PC extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscar1KeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                buscar1KeyTyped(evt);
+            }
         });
         Productos.add(buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 170, -1));
 
@@ -947,6 +956,9 @@ public class PC extends javax.swing.JFrame {
         buscar3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscar3KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                buscar3KeyTyped(evt);
             }
         });
         Proveedores.add(buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 170, -1));
@@ -1511,6 +1523,7 @@ public class PC extends javax.swing.JFrame {
                     while (linea.hasMoreTokens()) {///si hay mas datos en la linea
                         v.addElement(linea.nextToken());
                     }
+                    System.out.println(v);
                     mdl.addRow(v);
                     
     }
@@ -1758,6 +1771,7 @@ public class PC extends javax.swing.JFrame {
                                    
                                break;    
                                case 3:
+                               sqlentr.vizualizar_tabla(agenda3, con);
                                
                                break;
                                case 4:
@@ -1857,6 +1871,36 @@ public class PC extends javax.swing.JFrame {
         storage.setText(Integer.toString(p.getExistencia()));
         priceOne.setText(Double.toString(p.getPrecio()));
     }//GEN-LAST:event_modelKeyReleased
+
+    private void buscar3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar3KeyTyped
+        // TODO add your handling code here:
+           buscar3.addKeyListener(new KeyAdapter(){
+           
+            @Override
+            public void keyReleased(KeyEvent ke){
+                tbfil.setRowFilter(RowFilter.regexFilter("(?i)"+buscar3.getText(),1));
+            }
+            
+           
+        });
+        tbfil=new TableRowSorter(agenda4.getModel());
+        agenda4.setRowSorter(tbfil);
+    }//GEN-LAST:event_buscar3KeyTyped
+
+    private void buscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyTyped
+        // TODO add your handling code here:
+        buscar1.addKeyListener(new KeyAdapter(){
+           
+            @Override
+            public void keyReleased(KeyEvent ke){
+                tbfil.setRowFilter(RowFilter.regexFilter("(?i)"+buscar1.getText(),1));
+            }
+            
+           
+        });
+        tbfil=new TableRowSorter(agenda1.getModel());
+        agenda1.setRowSorter(tbfil);
+    }//GEN-LAST:event_buscar1KeyTyped
     public void llenarclaseproductos(){
         cli= new clientes();
         cli.setModeloPro(name1.getText());

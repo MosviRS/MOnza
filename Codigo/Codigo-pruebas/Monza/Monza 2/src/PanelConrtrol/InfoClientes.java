@@ -6,7 +6,10 @@
 package PanelConrtrol;
 
 import LogIn.LogIn;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
+import metodos.ManipulaDBC;
+import metodos.SqLNotas;
 
 /**
  *
@@ -18,6 +21,8 @@ public class InfoClientes extends javax.swing.JFrame {
      * Creates new form InfoClientes
      */
     PC claasepc;
+    Connection con;
+    SqLNotas sqlnotas= new SqLNotas();
     public InfoClientes() {
         initComponents();
     }
@@ -54,6 +59,14 @@ public class InfoClientes extends javax.swing.JFrame {
         dir = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(243, 240, 235));
         jPanel1.setPreferredSize(new java.awt.Dimension(577, 383));
@@ -438,6 +451,10 @@ public class InfoClientes extends javax.swing.JFrame {
         claasepc.p.setAm(Am.getText());
         claasepc.p.setTelefono(tel.getText());
         claasepc.p.setDireccion(dir.getText());
+        claasepc.p.setIdcliente(tel.getText());
+        
+        sqlnotas.insertarclioentes(claasepc.p,this);
+        sqlnotas.insertarnotas(claasepc.p, this);
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -458,6 +475,16 @@ public class InfoClientes extends javax.swing.JFrame {
     private void AmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AmActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        con= ManipulaDBC.conectaDB();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        con= ManipulaDBC.conectaDB();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

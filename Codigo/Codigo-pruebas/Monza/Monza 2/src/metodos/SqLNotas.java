@@ -7,10 +7,13 @@ package metodos;
 
 import Entidades.clientes;
 import Entidades.orders;
+import cjb.ci.Mensaje;
+import com.mysql.cj.Query;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -226,5 +229,48 @@ public class SqLNotas {
                 JOptionPane.showMessageDialog(null, e.toString());//Mas Mensajes de Error
             }
         }
+    }
+    public void insertarclioentes(clientes cli,JFrame p){
+        con= ManipulaDBC.conectaDB();
+        String sql;
+        Querys qu= new Querys();
+        String valores1=(cli.getIdcliente() + ",");
+                                    valores1 +=("'"+cli.getNombre()+ "',");
+                                    valores1 += ("'"+cli.getAp() + "',");
+                                    valores1 += ("'"+cli.getAm() + "',");
+                                    valores1 += ("'"+cli.getDireccion()+"',");
+                                    valores1 += (cli.getTelefono());
+                                    System.out.println(valores1);
+                                    
+        sql=qu.Insertar(con,"clientes", " idclientes, nombre, APaterno, Amaterno, direccion, telefono ",valores1);
+          if (sql != null)
+        {     Mensaje.error(p, sql);
+            System.out.println("valio queso");
+        } else
+        {    
+             System.out.println("Exito");
+        }
+        
+        
+    }
+     public void insertarnotas(clientes cli,JFrame p){
+        con= ManipulaDBC.conectaDB();
+        String sql;
+        Querys qu= new Querys();
+        String valores1=("'"+cli.getNo_nota()+ "',");
+                                    valores1 +=(Double.toString(cli.getTotal())+",");
+                                    valores1 += (cli.getIdcliente());
+                                   
+                                    
+        sql=qu.Insertar(con,"notas", " nota, total, no_cliente ",valores1);
+          if (sql != null)
+        {    Mensaje.error(p, sql);
+            System.out.println("valio queso");
+        } else
+        {    
+             System.out.println("Exito");
+        }
+        
+        
     }
 }
