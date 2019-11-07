@@ -17,6 +17,7 @@ public class InfoClientes extends javax.swing.JFrame {
     /**
      * Creates new form InfoClientes
      */
+    PC claasepc;
     public InfoClientes() {
         initComponents();
     }
@@ -34,23 +35,23 @@ public class InfoClientes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        Answer = new javax.swing.JTextField();
+        Name = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
         Minimize = new javax.swing.JButton();
         Close = new javax.swing.JButton();
         back = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        Answer1 = new javax.swing.JTextField();
+        Ap = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        Answer2 = new javax.swing.JTextField();
+        Am = new javax.swing.JTextField();
         jSeparator9 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        Answer4 = new javax.swing.JTextField();
+        tel = new javax.swing.JTextField();
         jSeparator11 = new javax.swing.JSeparator();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        dir = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,21 +94,21 @@ public class InfoClientes extends javax.swing.JFrame {
         jLabel3.setText("Nombre");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 250, 20));
 
-        Answer.setBackground(new java.awt.Color(242, 242, 242));
-        Answer.setForeground(new java.awt.Color(102, 102, 102));
-        Answer.setText("inserte la respuesta correcta");
-        Answer.setBorder(null);
-        Answer.addMouseListener(new java.awt.event.MouseAdapter() {
+        Name.setBackground(new java.awt.Color(242, 242, 242));
+        Name.setForeground(new java.awt.Color(102, 102, 102));
+        Name.setText("Inserte Nombre");
+        Name.setBorder(null);
+        Name.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AnswerMouseClicked(evt);
+                NameMouseClicked(evt);
             }
         });
-        Answer.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                AnswerKeyReleased(evt);
+        Name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NameActionPerformed(evt);
             }
         });
-        jPanel1.add(Answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 250, 30));
+        jPanel1.add(Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 250, 30));
 
         jSeparator7.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
@@ -160,21 +161,21 @@ public class InfoClientes extends javax.swing.JFrame {
         jLabel4.setText("Apellido Paterno");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 250, 20));
 
-        Answer1.setBackground(new java.awt.Color(242, 242, 242));
-        Answer1.setForeground(new java.awt.Color(102, 102, 102));
-        Answer1.setText("inserte la respuesta correcta");
-        Answer1.setBorder(null);
-        Answer1.addMouseListener(new java.awt.event.MouseAdapter() {
+        Ap.setBackground(new java.awt.Color(242, 242, 242));
+        Ap.setForeground(new java.awt.Color(102, 102, 102));
+        Ap.setText("Inserte Apellido Paterno");
+        Ap.setBorder(null);
+        Ap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Answer1MouseClicked(evt);
+                ApMouseClicked(evt);
             }
         });
-        Answer1.addKeyListener(new java.awt.event.KeyAdapter() {
+        Ap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                Answer1KeyReleased(evt);
+                ApKeyReleased(evt);
             }
         });
-        jPanel1.add(Answer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 250, 30));
+        jPanel1.add(Ap, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 250, 30));
 
         jSeparator8.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
@@ -184,21 +185,26 @@ public class InfoClientes extends javax.swing.JFrame {
         jLabel5.setText("Apellido Materno");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 250, 20));
 
-        Answer2.setBackground(new java.awt.Color(242, 242, 242));
-        Answer2.setForeground(new java.awt.Color(102, 102, 102));
-        Answer2.setText("inserte la respuesta correcta");
-        Answer2.setBorder(null);
-        Answer2.addMouseListener(new java.awt.event.MouseAdapter() {
+        Am.setBackground(new java.awt.Color(242, 242, 242));
+        Am.setForeground(new java.awt.Color(102, 102, 102));
+        Am.setText("Inserte Apellido Materno");
+        Am.setBorder(null);
+        Am.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Answer2MouseClicked(evt);
+                AmMouseClicked(evt);
             }
         });
-        Answer2.addKeyListener(new java.awt.event.KeyAdapter() {
+        Am.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AmActionPerformed(evt);
+            }
+        });
+        Am.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                Answer2KeyReleased(evt);
+                AmKeyReleased(evt);
             }
         });
-        jPanel1.add(Answer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 250, 30));
+        jPanel1.add(Am, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 250, 30));
 
         jSeparator9.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
@@ -212,29 +218,29 @@ public class InfoClientes extends javax.swing.JFrame {
         jLabel7.setText("Teléfono");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 250, -1));
 
-        Answer4.setBackground(new java.awt.Color(242, 242, 242));
-        Answer4.setForeground(new java.awt.Color(102, 102, 102));
-        Answer4.setText("inserte la respuesta correcta");
-        Answer4.setBorder(null);
-        Answer4.addMouseListener(new java.awt.event.MouseAdapter() {
+        tel.setBackground(new java.awt.Color(242, 242, 242));
+        tel.setForeground(new java.awt.Color(102, 102, 102));
+        tel.setText("Inserte Telefono");
+        tel.setBorder(null);
+        tel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Answer4MouseClicked(evt);
+                telMouseClicked(evt);
             }
         });
-        Answer4.addKeyListener(new java.awt.event.KeyAdapter() {
+        tel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                Answer4KeyReleased(evt);
+                telKeyReleased(evt);
             }
         });
-        jPanel1.add(Answer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 270, 30));
+        jPanel1.add(tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 270, 30));
 
         jSeparator11.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator11.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 270, 10));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane7.setViewportView(jTextArea1);
+        dir.setColumns(20);
+        dir.setRows(5);
+        jScrollPane7.setViewportView(dir);
 
         jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 290, 80));
 
@@ -252,29 +258,29 @@ public class InfoClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Answer4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Answer4KeyReleased
+    private void telKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_Answer4KeyReleased
+    }//GEN-LAST:event_telKeyReleased
 
-    private void Answer4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Answer4MouseClicked
+    private void telMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_telMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_Answer4MouseClicked
+    }//GEN-LAST:event_telMouseClicked
 
-    private void Answer2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Answer2KeyReleased
+    private void AmKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AmKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_Answer2KeyReleased
+    }//GEN-LAST:event_AmKeyReleased
 
-    private void Answer2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Answer2MouseClicked
+    private void AmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AmMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_Answer2MouseClicked
+    }//GEN-LAST:event_AmMouseClicked
 
-    private void Answer1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Answer1KeyReleased
+    private void ApKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ApKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_Answer1KeyReleased
+    }//GEN-LAST:event_ApKeyReleased
 
-    private void Answer1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Answer1MouseClicked
+    private void ApMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_Answer1MouseClicked
+    }//GEN-LAST:event_ApMouseClicked
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -302,13 +308,9 @@ public class InfoClientes extends javax.swing.JFrame {
         this.setState(LogIn.ICONIFIED);
     }//GEN-LAST:event_MinimizeActionPerformed
 
-    private void AnswerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AnswerKeyReleased
+    private void NameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NameMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_AnswerKeyReleased
-
-    private void AnswerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnswerMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AnswerMouseClicked
+    }//GEN-LAST:event_NameMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //        int bandera=0;
@@ -430,15 +432,32 @@ public class InfoClientes extends javax.swing.JFrame {
             //            }
         //
         //        }//else el campo esta lleno
+        
+        claasepc.p.setNombre(Name.getText());
+        claasepc.p.setAp(Ap.getText());
+        claasepc.p.setAm(Am.getText());
+        claasepc.p.setTelefono(tel.getText());
+        claasepc.p.setDireccion(dir.getText());
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
         // TODO add your handling code here:
+     
     }//GEN-LAST:event_jButton1MouseReleased
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
 
     }//GEN-LAST:event_jButton1MousePressed
+
+    private void NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NameActionPerformed
+
+    private void AmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AmActionPerformed
 
     /**
      * @param args the command line arguments
@@ -476,13 +495,13 @@ public class InfoClientes extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Answer;
-    private javax.swing.JTextField Answer1;
-    private javax.swing.JTextField Answer2;
-    private javax.swing.JTextField Answer4;
+    private javax.swing.JTextField Am;
+    private javax.swing.JTextField Ap;
     private javax.swing.JButton Close;
     private javax.swing.JButton Minimize;
+    private javax.swing.JTextField Name;
     private javax.swing.JButton back;
+    private javax.swing.JTextArea dir;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -496,6 +515,6 @@ public class InfoClientes extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField tel;
     // End of variables declaration//GEN-END:variables
 }
