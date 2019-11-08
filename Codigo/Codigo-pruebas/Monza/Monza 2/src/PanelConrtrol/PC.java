@@ -58,11 +58,13 @@ public class PC extends javax.swing.JFrame {
     int noTabPane;
     //Variables para Notas
     public static clientes p=new clientes();
-     public static orders op=new orders();
+    public static orders op=new orders();
     SqLNotas MN=new SqLNotas();
     private  DefaultTableModel mdl;
-    bitacoraA bit= new bitacoraA();
+    public static bitacoraA bit= new bitacoraA();
     TableRowSorter tbfil;
+    LogIn L=new LogIn();
+    
     
     /**
      * Creates new form Registro
@@ -70,7 +72,7 @@ public class PC extends javax.swing.JFrame {
     public PC() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Registro");
+        this.setTitle("Panel de Control");
         //Nav.setEnabledAt(4, false);
         ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
         this.setIconImage(icon.getImage());
@@ -1441,8 +1443,12 @@ public class PC extends javax.swing.JFrame {
             auxrr.add((String)TNote.getValueAt(i, 4));
         }
         p.setMonto_recibido(Double.parseDouble(Amount.getText()));
+        p.setFaltante(p.getTotal()-p.getMonto_recibido());
+        bit.setFecha_nota(dateofpurchase.getDateFormatString());
+        bit.setCantiadad(Double.toString(p.getMonto_recibido()));
+        bit.setNo_nota(p.getNo_nota());
+        bit.setCuentaUsuario(L.us);
         if(p.getMonto_recibido()==p.getTotal()){//sea contado
-          bit.setCantiadad(Double.toString(p.getMonto_recibido()));
           bit.setDid("Contado");
           if(DeliveryType.getSelectedItem().equals("Por entregar")){
               op.setReferencia(Reference.getText());
@@ -1450,7 +1456,6 @@ public class PC extends javax.swing.JFrame {
           }
         }else if(p.getMonto_recibido()>=0 && p.getMonto_recibido()<p.getTotal() ){
             bit.setDid("Abono");
-            bit.setCantiadad(Double.toString(p.getMonto_recibido()));
              if(DeliveryType.getSelectedItem().equals("Por entregar")){
               op.setReferencia(Reference.getText());
               op.setFech(Deadline.getDateFormatString());
@@ -1477,11 +1482,12 @@ public class PC extends javax.swing.JFrame {
             //Cantidad
             if (MN.Verificar(p,op)) {
                 NumNote.setEnabled(false);
-//                MN.insertNote(Integer.parseInt(p.getNo_nota()), 0, 0);
-//                MN.insertProNote(p.getModeloPro(),Integer.parseInt(p.getNo_nota()),op.getCant());
                 p.setTotal(p.getTotal()+(op.getCant()*p.getPrecio()));
                 insertTable(p.getModeloPro(),p.getNombrePro(),op.getCant(),p.getPrecio());
-//                p=MN.ActualizarProd(p, op.getCant());
+                
+                p.setEx(p.getExistencia()-op.getCant());
+                MN.actualizar(p, this);
+                
                 Total.setText(p.getTotal()+"");
                 model.setText("");
                 nameProduct.setText("");

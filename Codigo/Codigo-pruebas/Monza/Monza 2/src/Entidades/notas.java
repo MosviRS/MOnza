@@ -3,6 +3,34 @@ package Entidades;
 public class notas extends info_productos {
 
     /**
+     * @return the ex
+     */
+    public int getEx() {
+        return ex;
+    }
+
+    /**
+     * @param ex the ex to set
+     */
+    public void setEx(int ex) {
+        this.ex = ex;
+    }
+
+    /**
+     * @return the faltante
+     */
+    public double getFaltante() {
+        return faltante;
+    }
+
+    /**
+     * @param faltante the faltante to set
+     */
+    public void setFaltante(double faltante) {
+        this.faltante = faltante;
+    }
+
+    /**
      * @return the monto_recibido
      */
     public double getMonto_recibido() {
@@ -104,7 +132,9 @@ public class notas extends info_productos {
 
     protected double abono;
     protected double monto_recibido;
+    protected double faltante;
 
+    protected int ex;
     protected int entrega;
 
     protected String no_nota;

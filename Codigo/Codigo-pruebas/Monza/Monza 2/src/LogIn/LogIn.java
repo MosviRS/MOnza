@@ -34,7 +34,7 @@ public class LogIn extends javax.swing.JFrame {
      
         
     }
-
+    public static String us;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -344,6 +344,7 @@ public class LogIn extends javax.swing.JFrame {
                     mod.setUser(User.getText());//Envia el usuario a la Clase Entidad Usuario
                     mod.setPassword(encriptado);//Envia password encriptado                    
                     if(ModSQL.login(mod)){//Validacion de Usuario y contraseña
+                        us=mod.getUser();
                         PC ir= new PC(mod);//Permitir acceso a PC
                         ir.setVisible(true);
                         this.dispose();

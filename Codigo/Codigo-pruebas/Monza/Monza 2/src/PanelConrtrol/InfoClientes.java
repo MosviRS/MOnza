@@ -59,6 +59,7 @@ public class InfoClientes extends javax.swing.JFrame {
         dir = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -108,6 +109,7 @@ public class InfoClientes extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 250, 20));
 
         Name.setBackground(new java.awt.Color(242, 242, 242));
+        Name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Name.setForeground(new java.awt.Color(102, 102, 102));
         Name.setText("Inserte Nombre");
         Name.setBorder(null);
@@ -175,6 +177,7 @@ public class InfoClientes extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 250, 20));
 
         Ap.setBackground(new java.awt.Color(242, 242, 242));
+        Ap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Ap.setForeground(new java.awt.Color(102, 102, 102));
         Ap.setText("Inserte Apellido Paterno");
         Ap.setBorder(null);
@@ -192,13 +195,14 @@ public class InfoClientes extends javax.swing.JFrame {
 
         jSeparator8.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 250, 20));
+        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 250, 10));
 
         jLabel5.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel5.setText("Apellido Materno");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 250, 20));
 
         Am.setBackground(new java.awt.Color(242, 242, 242));
+        Am.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Am.setForeground(new java.awt.Color(102, 102, 102));
         Am.setText("Inserte Apellido Materno");
         Am.setBorder(null);
@@ -232,6 +236,7 @@ public class InfoClientes extends javax.swing.JFrame {
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 250, -1));
 
         tel.setBackground(new java.awt.Color(242, 242, 242));
+        tel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tel.setForeground(new java.awt.Color(102, 102, 102));
         tel.setText("Inserte Telefono");
         tel.setBorder(null);
@@ -252,6 +257,7 @@ public class InfoClientes extends javax.swing.JFrame {
         jPanel1.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 270, 10));
 
         dir.setColumns(20);
+        dir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dir.setRows(5);
         jScrollPane7.setViewportView(dir);
 
@@ -455,7 +461,9 @@ public class InfoClientes extends javax.swing.JFrame {
         
         sqlnotas.insertarclioentes(claasepc.p,this);
         sqlnotas.insertarnotas(claasepc.p, this);
-        
+        sqlnotas.insertabono(claasepc.p, this);        
+        sqlnotas.insertentregas(claasepc.p,claasepc.op, this);
+        sqlnotas.insertbitacora(claasepc.bit, this);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

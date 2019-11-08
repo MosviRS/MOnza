@@ -5,6 +5,7 @@
  */
 package metodos;
 
+import Entidades.bitacoraA;
 import Entidades.clientes;
 import Entidades.orders;
 import cjb.ci.Mensaje;
@@ -15,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Rasteck7
@@ -270,7 +270,68 @@ public class SqLNotas {
         {    
              System.out.println("Exito");
         }
-        
-        
+    }
+    public void actualizar(clientes p, JFrame m){
+        con=ManipulaDBC.conectaDB();
+        String sql;
+        Querys Qy=new Querys();
+        String val=(p.getEx()+"");
+        sql=Qy.Modificar(con, "productos", "existencia", val , "idmodelo="+p.getModeloPro());
+        if (sql != null)
+        {    Mensaje.error(m, sql);
+            System.out.println("valio queso");
+        } else
+        {    
+            System.out.println("Exito");
+        }
+    }
+    public void insertabono(clientes p, JFrame m){
+        con=ManipulaDBC.conectaDB();
+        String sql;
+        Querys Qy=new Querys();
+        String val=("'"+p.getNo_nota()+"',") ;
+        val+=(p.getMonto_recibido()+",");
+        val+=(p.getFaltante());
+        sql=Qy.Insertar(con,"abono"," nota_abono, abonado, faltante ",val);
+        if (sql != null)
+        {    Mensaje.error(m, sql);
+            System.out.println("valio queso");
+        } else
+        {    
+            System.out.println("Exito");
+        }
+    }
+    public void insertentregas(clientes p,orders op, JFrame m){
+        con=ManipulaDBC.conectaDB();
+        String sql;
+        Querys Qy=new Querys();
+        String val=("'"+p.getNo_nota()+"',") ;
+        val+=(op.getFech());
+        sql=Qy.Insertar(con,"entregas"," nota_entregas, fecha_entrega ",val);
+        if (sql != null)
+        {    Mensaje.error(m, sql);
+            System.out.println("valio queso");
+        } else
+        {    
+            System.out.println("Exito");
+        }
+    }
+    public void insertbitacora(bitacoraA b, JFrame m){
+        con=ManipulaDBC.conectaDB();
+        String sql;
+        Querys Qy=new Querys();
+        String val=("'"+b.getFecha_nota()+"',");
+        val+=(b.getCantiadad()+",'");
+        val+=(b.getDid()+"',");
+        val+=("'"+b.getNo_nota()+"','");
+        val+=(b.getCuentaUsuario()+"'");
+        sql=Qy.Insertar(con,"bitacora"," fecha_dia, cantidad, movimiento, nota_bitacora, cuneta_usuario ",val);
+        if (sql != null)
+        {    Mensaje.error(m, sql);
+            System.out.println("valio queso");
+        } else
+        {    
+            System.out.println("Exito");
+        }
     }
 }
