@@ -407,7 +407,6 @@ public class PC extends javax.swing.JFrame {
 
         priceOne.setBackground(new java.awt.Color(235, 235, 235));
         priceOne.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        priceOne.setForeground(new java.awt.Color(0, 0, 0));
         Nota.add(priceOne, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 90, 70, 20));
 
         model.setBackground(new java.awt.Color(243, 240, 235));
@@ -548,13 +547,11 @@ public class PC extends javax.swing.JFrame {
         Nota.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 160, 10));
 
         Total.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Total.setForeground(new java.awt.Color(0, 0, 0));
         Total.setText("xxxx");
         Nota.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 370, 160, -1));
 
         storage.setBackground(new java.awt.Color(235, 235, 235));
         storage.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        storage.setForeground(new java.awt.Color(0, 0, 0));
         Nota.add(storage, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 70, 20));
 
         jLabel20.setBackground(new java.awt.Color(235, 235, 235));
@@ -1199,7 +1196,7 @@ public class PC extends javax.swing.JFrame {
 
         Date1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         Date1.setText("Fecha: XXXXXX");
-        Bitacora.add(Date1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, 150, 40));
+        Bitacora.add(Date1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 170, 40));
 
         Minimize2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         Minimize2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/pdf-40.png"))); // NOI18N
@@ -1448,6 +1445,7 @@ public class PC extends javax.swing.JFrame {
         bit.setCantiadad(Double.toString(p.getMonto_recibido()));
         bit.setNo_nota(p.getNo_nota());
         bit.setCuentaUsuario(L.us);
+        
         if(p.getMonto_recibido()==p.getTotal()){//sea contado
           bit.setDid("Contado");
           if(DeliveryType.getSelectedItem().equals("Por entregar")){
@@ -1473,6 +1471,7 @@ public class PC extends javax.swing.JFrame {
                 !Quantity.getText().equals("")&&
                 !NumNote.getText().equals("")&&
                 !NumNote.getText().equals("XXXX")) {
+            
             p.setModeloPro(model.getText());
             p.setNombrePro(nameProduct.getText());
             p.setExistencia(Integer.parseInt(storage.getText()));
