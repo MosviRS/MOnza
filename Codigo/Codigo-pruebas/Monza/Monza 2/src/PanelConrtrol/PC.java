@@ -60,7 +60,7 @@ public class PC extends javax.swing.JFrame {
     public static clientes p=new clientes();
     public static orders op=new orders();
     SqLNotas MN=new SqLNotas();
-    private  DefaultTableModel mdl;
+    public  DefaultTableModel mdl;
     public static bitacoraA bit= new bitacoraA();
     TableRowSorter tbfil;
     LogIn L=new LogIn();
@@ -80,6 +80,21 @@ public class PC extends javax.swing.JFrame {
         
         //TablaNotas
          mdl =  (DefaultTableModel)TNote.getModel();
+         mdl=new javax.swing.table.DefaultTableModel(
+         new Object [][] {
+         },
+         new String [] {
+         "(ID)Modelo", "Nombre del Producto", "cantidad", "Monto por unidad", "Monto subtotal"
+        }
+        ) {
+        boolean[] canEdit = new boolean [] {
+                true, true, true, true, true
+        };
+
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit [columnIndex];
+        }
+        };
          TNote.setModel(mdl);
        
     }
@@ -148,7 +163,7 @@ public class PC extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         nameProduct = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        status = new javax.swing.JLabel();
         NNote = new javax.swing.JLabel();
         Date = new javax.swing.JLabel();
         priceOne = new javax.swing.JLabel();
@@ -173,6 +188,7 @@ public class PC extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Productos = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -392,10 +408,10 @@ public class PC extends javax.swing.JFrame {
         });
         Nota.add(nameProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 170, 20));
 
-        jLabel6.setBackground(new java.awt.Color(235, 235, 235));
-        jLabel6.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jLabel6.setText("Nombre del Producto:");
-        Nota.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 160, 20));
+        status.setBackground(new java.awt.Color(235, 235, 235));
+        status.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        status.setForeground(new java.awt.Color(0, 0, 0));
+        Nota.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 70, 120, 20));
 
         NNote.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         NNote.setText("Numero de Nota:");
@@ -568,6 +584,11 @@ public class PC extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel21.setText("Precio Unitario:");
         Nota.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 110, 20));
+
+        jLabel22.setBackground(new java.awt.Color(235, 235, 235));
+        jLabel22.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel22.setText("Nombre del Producto:");
+        Nota.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 160, 20));
 
         jScrollPane1.setViewportView(Nota);
 
@@ -1441,7 +1462,7 @@ public class PC extends javax.swing.JFrame {
         }
         p.setMonto_recibido(Double.parseDouble(Amount.getText()));
         p.setFaltante(p.getTotal()-p.getMonto_recibido());
-        bit.setFecha_nota(dateofpurchase.getDateFormatString());
+        bit.setFecha_nota(dateofpurchase.toString());
         bit.setCantiadad(Double.toString(p.getMonto_recibido()));
         bit.setNo_nota(p.getNo_nota());
         bit.setCuentaUsuario(L.us);
@@ -1450,13 +1471,13 @@ public class PC extends javax.swing.JFrame {
           bit.setDid("Contado");
           if(DeliveryType.getSelectedItem().equals("Por entregar")){
               op.setReferencia(Reference.getText());
-              op.setFech(Deadline.getDateFormatString());
+              op.setFech(Deadline.toString());
           }
         }else if(p.getMonto_recibido()>=0 && p.getMonto_recibido()<p.getTotal() ){
             bit.setDid("Abono");
              if(DeliveryType.getSelectedItem().equals("Por entregar")){
               op.setReferencia(Reference.getText());
-              op.setFech(Deadline.getDateFormatString());
+              op.setFech(Deadline.toString());
           }
         }
     InfoClientes ir= new InfoClientes();
@@ -1466,6 +1487,7 @@ public class PC extends javax.swing.JFrame {
     }//GEN-LAST:event_SaveActionPerformed
 
     private void addProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductActionPerformed
+
         if (!model.getText().equals("")&&
                 !nameProduct.getText().equals("")&&
                 !Quantity.getText().equals("")&&
@@ -1481,20 +1503,20 @@ public class PC extends javax.swing.JFrame {
             //Cantidad
             if (MN.Verificar(p,op)) {
                 NumNote.setEnabled(false);
+                p.setEx(p.getExistencia()-op.getCant());
                 p.setTotal(p.getTotal()+(op.getCant()*p.getPrecio()));
                 insertTable(p.getModeloPro(),p.getNombrePro(),op.getCant(),p.getPrecio());
-                
-                p.setEx(p.getExistencia()-op.getCant());
-                MN.actualizar(p, this);
-                
                 Total.setText(p.getTotal()+"");
+                MN.actualizar(p, this);
+                status.setText("Agregado con exito..");
                 model.setText("");
                 nameProduct.setText("");
                 storage.setText("");
                 priceOne.setText("");
                 Quantity.setText("");
-                int dialog = JOptionPane.DEFAULT_OPTION;
-                JOptionPane.showConfirmDialog(null, "Articulo agregado exitosamente! :3","Saved successfully!",dialog);
+                
+//                int dialog = JOptionPane.DEFAULT_OPTION;
+//                JOptionPane.showConfirmDialog(null, "Articulo agregado exitosamente! :3","Saved successfully!",dialog);
             }else{
                 int dialog = JOptionPane.DEFAULT_OPTION;
                 JOptionPane.showConfirmDialog(null, "Lo siento algunos datos son incorrectos :c","save error",dialog);
@@ -1875,6 +1897,7 @@ public class PC extends javax.swing.JFrame {
         nameProduct.setText(p.getNombrePro());
         storage.setText(Integer.toString(p.getExistencia()));
         priceOne.setText(Double.toString(p.getPrecio()));
+        status.setText("");
     }//GEN-LAST:event_modelKeyReleased
 
     private void buscar3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar3KeyTyped
@@ -2039,6 +2062,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -2048,7 +2072,6 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -2098,6 +2121,7 @@ public class PC extends javax.swing.JFrame {
     public static javax.swing.JTextField nmm1;
     public static javax.swing.JTextField nmo1;
     private javax.swing.JLabel priceOne;
+    private javax.swing.JLabel status;
     private javax.swing.JLabel storage;
     private javax.swing.JTextField telprov;
     private javax.swing.JTextField txtFile;

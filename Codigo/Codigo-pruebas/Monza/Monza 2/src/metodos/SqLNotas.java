@@ -78,10 +78,10 @@ public class SqLNotas {
         con= ManipulaDBC.conectaDB();//Objeto que permite manipular a la BD
         //Codigo MySql para Seleccionar(o bien Buscar) Registros, guardado en una Variable de tipo String
         //para seleccionar elementos en la Tabla Usuarios de la BD, previamente diseñada
-        String sql = "SELECT nota FROM notas WHERE nota =?";
+        String sql = "SELECT abono FROM nota_abono WHERE nota_abono =?";
         try {
             ps = con.prepareStatement(sql);//Precarga declaraciondes por default de MySql
-            ps.setString(1, p.getNo_nota());//Busqueda de Modelo
+            ps.setString(1, p.getNo_nota());
             rs = ps.executeQuery();
             
             if (rs.next()) {
@@ -117,8 +117,6 @@ public class SqLNotas {
                         p.getExistencia()==rs.getInt(3)&&
                         op.getCant()<=rs.getInt(3)&&
                         op.getCant()>0) {
-//                        op.getCant()>0&&
-//                        !p.getNo_nota().equals("XXXX")&&
 //                        !verificarNote(p)) {
                     return true;
                 }
@@ -259,11 +257,10 @@ public class SqLNotas {
         Querys qu= new Querys();
         String valores1=("'"+cli.getNo_nota()+ "',");
                                     valores1 +=(Double.toString(cli.getTotal())+",");
-                                    valores1 += (cli.getIdcliente()+",");
-                                    valores1 += ("'"+cli.getFecha_nota()+"'");
+                                    valores1 += (cli.getIdcliente());
                                    
                                     
-        sql=qu.Insertar(con,"notas", " nota, total, no_cliente, fecha_entrega ",valores1);
+        sql=qu.Insertar(con,"notas", " nota, total, no_cliente",valores1);
           if (sql != null)
         {    Mensaje.error(p, sql);
             System.out.println("valio queso");
@@ -336,4 +333,5 @@ public class SqLNotas {
             System.out.println("Exito");
         }
     }
+    
 }
