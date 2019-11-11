@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
@@ -303,8 +304,8 @@ public class SqLNotas {
         con=ManipulaDBC.conectaDB();
         String sql;
         Querys Qy=new Querys();
-        String val=("'"+p.getNo_nota()+"',") ;
-        val+=(op.getFech());
+        String val=("'"+p.getNo_nota()+"','") ;
+        val+=(op.getFech()+"'");
         sql=Qy.Insertar(con,"entregas"," nota_entregas, fecha_entrega ",val);
         if (sql != null)
         {    Mensaje.error(m, sql);
@@ -333,5 +334,35 @@ public class SqLNotas {
             System.out.println("Exito");
         }
     }
-    
+    public void prodNote(ArrayList tb, String idN, JFrame m){
+        int ml=0;
+        for (int i = 0; i < tb.size(); i++) {
+            if (i==ml) {
+                i+=2;
+                insertProductN((String) tb.get(ml),idN,Integer.parseInt((String) tb.get(i)),m);
+                ml+=5;
+            }
+//            auxrr.add((String)TNote.getValueAt(i, 0));
+//            auxrr.add((String)TNote.getValueAt(i, 1));
+//            auxrr.add((String)TNote.getValueAt(i, 2));
+//            auxrr.add((String)TNote.getValueAt(i, 3));
+//            auxrr.add((String)TNote.getValueAt(i, 4));
+        }
+    }
+    public void insertProductN(String mdl,String idn, int cant, JFrame m){
+        con=ManipulaDBC.conectaDB();
+        String sql;
+        Querys Qy=new Querys();
+        String val=("'"+mdl+"','");
+        val+=(idn+"',");
+        val+=(cant);
+        sql=Qy.Insertar(con,"productos_notas"," idproductos, idnotas, cantidad ",val);
+        if (sql != null)
+        {    Mensaje.error(m, sql);
+            System.out.println("valio queso");
+        } else
+        {    
+            System.out.println("Exito");
+        }
+    }
 }

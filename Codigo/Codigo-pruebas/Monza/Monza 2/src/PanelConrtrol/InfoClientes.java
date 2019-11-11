@@ -25,6 +25,8 @@ public class InfoClientes extends javax.swing.JFrame {
     SqLNotas sqlnotas= new SqLNotas();
     public InfoClientes() {
         initComponents();
+        this.setLocationRelativeTo(null);
+    
     }
 
     /**
@@ -461,10 +463,18 @@ public class InfoClientes extends javax.swing.JFrame {
         
         sqlnotas.insertarclioentes(claasepc.p,this);
         sqlnotas.insertarnotas(claasepc.p, this);
-        sqlnotas.insertabono(claasepc.p, this);        
+        sqlnotas.insertabono(claasepc.p, this);
         sqlnotas.insertentregas(claasepc.p,claasepc.op, this);
         sqlnotas.insertbitacora(claasepc.bit, this);
-        
+        sqlnotas.prodNote(claasepc.auxrr, claasepc.p.getNo_nota(), this);
+        int dialog = JOptionPane.DEFAULT_OPTION;
+                JOptionPane.showConfirmDialog(null, "Nota registrada con exito! :3","Saved successfully!",dialog);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PC().setVisible(true);
+            }
+        });
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased

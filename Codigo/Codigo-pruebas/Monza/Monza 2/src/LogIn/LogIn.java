@@ -345,8 +345,13 @@ public class LogIn extends javax.swing.JFrame {
                     mod.setPassword(encriptado);//Envia password encriptado                    
                     if(ModSQL.login(mod)){//Validacion de Usuario y contraseña
                         us=mod.getUser();
-                        PC ir= new PC(mod);//Permitir acceso a PC
-                        ir.setVisible(true);
+                            java.awt.EventQueue.invokeLater(new Runnable() {
+                            public void run() {
+                                  new PC().setVisible(true);
+                            }
+                          });
+//                        PC ir= new PC(mod);//Permitir acceso a PC
+//                        ir.setVisible(true);
                         this.dispose();
                     }else{
                         JOptionPane.showMessageDialog(null, "Datos Incorrectos");

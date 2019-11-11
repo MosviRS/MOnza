@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import metodos.Querys;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import javax.swing.JFileChooser;
@@ -64,6 +65,7 @@ public class PC extends javax.swing.JFrame {
     public static bitacoraA bit= new bitacoraA();
     TableRowSorter tbfil;
     LogIn L=new LogIn();
+    public static ArrayList<String> auxrr= new  ArrayList();
     
     
     /**
@@ -411,7 +413,7 @@ public class PC extends javax.swing.JFrame {
         status.setBackground(new java.awt.Color(235, 235, 235));
         status.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         status.setForeground(new java.awt.Color(0, 0, 0));
-        Nota.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 70, 120, 20));
+        Nota.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 230, 20));
 
         NNote.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         NNote.setText("Numero de Nota:");
@@ -520,6 +522,8 @@ public class PC extends javax.swing.JFrame {
 
         dateofpurchase.setBackground(new java.awt.Color(243, 240, 235));
         Nota.add(dateofpurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, -1));
+
+        Deadline.setMaxSelectableDate(new java.util.Date(253370790084000L));
         Nota.add(Deadline, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 450, 150, -1));
 
         jSeparator20.setBackground(new java.awt.Color(235, 235, 235));
@@ -528,7 +532,7 @@ public class PC extends javax.swing.JFrame {
 
         jSeparator21.setBackground(new java.awt.Color(235, 235, 235));
         jSeparator21.setForeground(new java.awt.Color(0, 0, 0));
-        Nota.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 40, 120, 10));
+        Nota.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 40, 110, 10));
 
         NumNote.setBackground(new java.awt.Color(243, 240, 235));
         NumNote.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1451,8 +1455,10 @@ public class PC extends javax.swing.JFrame {
                 //            }
             //        });
     //        this.dispose();
-   bit= new bitacoraA();
-   ArrayList<String> auxrr= new  ArrayList();
+    
+    Date dtN=dateofpurchase.getDate();
+    Date dtE=Deadline.getDate();
+    bit= new bitacoraA();
         for (int i = 0; i < TNote.getRowCount(); i++) {
             auxrr.add((String)TNote.getValueAt(i, 0));
             auxrr.add((String)TNote.getValueAt(i, 1));
@@ -1460,9 +1466,12 @@ public class PC extends javax.swing.JFrame {
             auxrr.add((String)TNote.getValueAt(i, 3));
             auxrr.add((String)TNote.getValueAt(i, 4));
         }
+        System.out.println(auxrr);
         p.setMonto_recibido(Double.parseDouble(Amount.getText()));
         p.setFaltante(p.getTotal()-p.getMonto_recibido());
-        bit.setFecha_nota(dateofpurchase.toString());
+        bit.setFecha_nota(dtN.toString().replace(" ", "/"));
+//        bit.setFecha_nota(dateofpurchase.toString());
+
         bit.setCantiadad(Double.toString(p.getMonto_recibido()));
         bit.setNo_nota(p.getNo_nota());
         bit.setCuentaUsuario(L.us);
@@ -1471,19 +1480,35 @@ public class PC extends javax.swing.JFrame {
           bit.setDid("Contado");
           if(DeliveryType.getSelectedItem().equals("Por entregar")){
               op.setReferencia(Reference.getText());
-              op.setFech(Deadline.toString());
+              op.setFech(dtE.toString().replace(" ", "/"));
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                        new InfoClientes().setVisible(true);
+                    }
+                });
+                this.dispose();
+          }else{
+              
           }
         }else if(p.getMonto_recibido()>=0 && p.getMonto_recibido()<p.getTotal() ){
             bit.setDid("Abono");
              if(DeliveryType.getSelectedItem().equals("Por entregar")){
               op.setReferencia(Reference.getText());
-              op.setFech(Deadline.toString());
+              op.setFech(dtE.toString().replace(" ", "/"));
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                        new InfoClientes().setVisible(true);
+                    }
+                });
+                this.dispose();
+          }else{
+                 
           }
         }
-    InfoClientes ir= new InfoClientes();
-    ir.setVisible(true);
-    ir.setLocationRelativeTo(null);
-    this.dispose();
+//    InfoClientes ir= new InfoClientes();
+//    ir.setVisible(true);
+//    ir.setLocationRelativeTo(null);
+    
     }//GEN-LAST:event_SaveActionPerformed
 
     private void addProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductActionPerformed
