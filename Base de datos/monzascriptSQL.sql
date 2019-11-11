@@ -35,8 +35,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
 ENGINE = InnoDB;
 
 
-
-
 -- -----------------------------------------------------
 -- Table `mydb`.`clientes`
 -- -----------------------------------------------------
@@ -46,46 +44,42 @@ CREATE TABLE IF NOT EXISTS `mydb`.`clientes` (
   `APaterno` VARCHAR(45) NOT NULL,
   `Amaterno` VARCHAR(45) NOT NULL,
   `direccion` VARCHAR(55) NOT NULL,
-  `telefono` INT NOT NULL,
+  `telefono` VARCHAR(70) NOT NULL,
   PRIMARY KEY (`idclientes`))
 ENGINE = InnoDB;
-
-
-
--- -----------------------------------------------------
--- Table `mydb`.`abono`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`abono` (
-  ` nota_abono` INT NOT NULL,
-  `abonado` DECIMAL(20) NULL,
-  `numeracion` INT NOT NULL,
-  PRIMARY KEY (` nota_abono`))
-ENGINE = InnoDB;
-
-
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`notas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`notas` (
+  `nota` VARCHAR(45) NOT NULL,
   `total` DECIMAL(20) NOT NULL,
-  `cuenta_cliente` INT NOT NULL,
-  `nota` INT NOT NULL,
+  `no_cliente` INT NOT NULL,
+  `fecha_nota` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`nota`),
-  CONSTRAINT `cuenta_cliente`
-    FOREIGN KEY (`cuenta_cliente`)
+  CONSTRAINT `no_cliente`
+    FOREIGN KEY (`no_cliente`)
     REFERENCES `mydb`.`clientes` (`idclientes`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `nota`
-    FOREIGN KEY (`nota`)
-    REFERENCES `mydb`.`abono` (` nota_abono`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `mydb`.`abono`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`abono` (
+  ` nota_abono` VARCHAR(45) NOT NULL,
+  `abonado` decimal(20,0) NOT NULL,
+  `faltante` decimal(20,0) NOT NULL,
+  PRIMARY KEY (` nota_abono`),
+  CONSTRAINT `nota_abono`
+    FOREIGN KEY (` nota_abono`)
+    REFERENCES `mydb`.`notas` (`nota`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -94,19 +88,19 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`Bitacora` (
   `fecha_dia` DATETIME(6) NOT NULL,
   `cantidad` DECIMAL(20) NOT NULL,
-  `movimiento` VARCHAR(2) NOT NULL,
-  `nota_bitacora` INT NOT NULL,
+  `movimiento` VARCHAR(20) NOT NULL,
+  `nota_bitacora` VARCHAR(45) NOT NULL,
   `cuneta_usuario` VARCHAR(45) NOT NULL,
   CONSTRAINT `cuneta_usuario`
     FOREIGN KEY (`cuneta_usuario`)
     REFERENCES `mydb`.`usuario` (`idcuenta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `nota_bitacora`
     FOREIGN KEY (`nota_bitacora`)
     REFERENCES `mydb`.`notas` (`nota`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -146,15 +140,15 @@ ENGINE = InnoDB;
 -- Table `mydb`.`entregas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`entregas` (
-  `nota_entregas` INT NOT NULL,
-  `fecha_entrega` DATETIME(6) NOT NULL,
-  `estado` CHAR(1) NOT NULL,
+  `nota_entregas` VARCHAR(45) NOT NULL,
+  `fecha_entrega` VARCHAR(200) NOT NULL,
+  `referencia` LONGTEXT NOT NULL,
   PRIMARY KEY (`nota_entregas`),
   CONSTRAINT `nota_entregas`
     FOREIGN KEY (`nota_entregas`)
     REFERENCES `mydb`.`notas` (`nota`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -165,18 +159,18 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`productos_notas` (
   `idproductos` VARCHAR(50) NOT NULL,
-  `idnotas` INT NOT NULL,
+  `idnotas` VARCHAR(45) NOT NULL,
   `cantidad` INT NULL,
   CONSTRAINT `idnotas`
     FOREIGN KEY (`idnotas`)
     REFERENCES `mydb`.`notas` (`nota`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `idproductos`
     FOREIGN KEY (`idproductos`)
     REFERENCES `mydb`.`productos` (`idmodelo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
