@@ -6,6 +6,7 @@
 package PanelConrtrol;
 
 import LogIn.LogIn;
+import static PanelConrtrol.PC.email1;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import metodos.ManipulaDBC;
@@ -125,6 +126,14 @@ public class InfoClientes extends javax.swing.JFrame {
                 NameActionPerformed(evt);
             }
         });
+        Name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NameKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                NameKeyReleased(evt);
+            }
+        });
         jPanel1.add(Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 250, 30));
 
         jSeparator7.setBackground(new java.awt.Color(235, 235, 235));
@@ -186,6 +195,11 @@ public class InfoClientes extends javax.swing.JFrame {
         Ap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ApMouseClicked(evt);
+            }
+        });
+        Ap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApActionPerformed(evt);
             }
         });
         Ap.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -285,22 +299,33 @@ public class InfoClientes extends javax.swing.JFrame {
 
     private void telMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_telMouseClicked
         // TODO add your handling code here:
+        if (tel.getText().equals("Inserte Telefono")) {
+            tel.setText("");
+        }
     }//GEN-LAST:event_telMouseClicked
 
     private void AmKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AmKeyReleased
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_AmKeyReleased
 
     private void AmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AmMouseClicked
         // TODO add your handling code here:
+        if (Am.getText().equals("Inserte Apellido Materno")) {
+            Am.setText("");
+        }
     }//GEN-LAST:event_AmMouseClicked
 
     private void ApKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ApKeyReleased
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_ApKeyReleased
 
     private void ApMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApMouseClicked
         // TODO add your handling code here:
+       if (Ap.getText().equals("Inserte Apellido Paterno")) {
+            Ap.setText("");
+        }
     }//GEN-LAST:event_ApMouseClicked
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -331,6 +356,9 @@ public class InfoClientes extends javax.swing.JFrame {
 
     private void NameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NameMouseClicked
         // TODO add your handling code here:
+         if (Name.getText().equals("Inserte Nombre")) {
+            Name.setText("");
+        }
     }//GEN-LAST:event_NameMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -489,10 +517,18 @@ public class InfoClientes extends javax.swing.JFrame {
 
     private void NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameActionPerformed
         // TODO add your handling code here:
+        if (Ap.getText().equals("Inserte Apellido Paterno")) {
+            Ap.setText("");
+        }
+        Ap.requestFocus ();
     }//GEN-LAST:event_NameActionPerformed
 
     private void AmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmActionPerformed
         // TODO add your handling code here:
+        if (tel.getText().equals("Inserte Telefono")) {
+            tel.setText("");
+        }
+        tel.requestFocus ();
     }//GEN-LAST:event_AmActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -504,6 +540,23 @@ public class InfoClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         con= ManipulaDBC.conectaDB();
     }//GEN-LAST:event_formWindowClosed
+
+    private void ApActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApActionPerformed
+        // TODO add your handling code here:
+        if (Am.getText().equals("Inserte Apellido Materno")) {
+            Am.setText("");
+        }
+        Am.requestFocus ();
+    }//GEN-LAST:event_ApActionPerformed
+
+    private void NameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NameKeyReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_NameKeyReleased
+
+    private void NameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NameKeyPressed
 
     /**
      * @param args the command line arguments
