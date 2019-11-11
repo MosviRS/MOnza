@@ -1469,7 +1469,7 @@ public class PC extends javax.swing.JFrame {
         System.out.println(auxrr);
         p.setMonto_recibido(Double.parseDouble(Amount.getText()));
         p.setFaltante(p.getTotal()-p.getMonto_recibido());
-        bit.setFecha_nota(dtN.toString().replace(" ", "/"));
+        p.setFecha_nota(dtN.toString().replace(" ", "/"));
 //        bit.setFecha_nota(dateofpurchase.toString());
 
         bit.setCantiadad(Double.toString(p.getMonto_recibido()));

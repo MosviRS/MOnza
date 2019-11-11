@@ -238,7 +238,7 @@ public class SqLNotas {
                                     valores1 += ("'"+cli.getAp() + "',");
                                     valores1 += ("'"+cli.getAm() + "',");
                                     valores1 += ("'"+cli.getDireccion()+"',");
-                                    valores1 += (cli.getTelefono());
+                                    valores1 += ("'"+cli.getTelefono()+"'");
                                     System.out.println(valores1);
                                     
         sql=qu.Insertar(con,"clientes", " idclientes, nombre, APaterno, Amaterno, direccion, telefono ",valores1);
