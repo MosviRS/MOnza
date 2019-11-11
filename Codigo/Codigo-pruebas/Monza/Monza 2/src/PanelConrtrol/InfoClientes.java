@@ -469,6 +469,7 @@ public class InfoClientes extends javax.swing.JFrame {
         sqlnotas.prodNote(claasepc.auxrr, claasepc.p.getNo_nota(), this);
         int dialog = JOptionPane.DEFAULT_OPTION;
                 JOptionPane.showConfirmDialog(null, "Nota registrada con exito! :3","Saved successfully!",dialog);
+                
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PC().setVisible(true);

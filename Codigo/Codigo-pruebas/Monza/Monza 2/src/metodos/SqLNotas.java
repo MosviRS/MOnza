@@ -258,10 +258,10 @@ public class SqLNotas {
         Querys qu= new Querys();
         String valores1=("'"+cli.getNo_nota()+ "',");
                                     valores1 +=(Double.toString(cli.getTotal())+",");
-                                    valores1 += (cli.getIdcliente());
-                                   
+                                    valores1 += (cli.getIdcliente()+",");
+                                    valores1 += ("'"+cli.getFecha_nota()+"'");
                                     
-        sql=qu.Insertar(con,"notas", " nota, total, no_cliente",valores1);
+        sql=qu.Insertar(con,"notas", " nota, total, no_cliente, fecha_nota",valores1);
           if (sql != null)
         {    Mensaje.error(p, sql);
             System.out.println("valio queso");
@@ -304,9 +304,11 @@ public class SqLNotas {
         con=ManipulaDBC.conectaDB();
         String sql;
         Querys Qy=new Querys();
-        String val=("'"+p.getNo_nota()+"','") ;
-        val+=(op.getFech()+"'");
-        sql=Qy.Insertar(con,"entregas"," nota_entregas, fecha_entrega ",val);
+        String val=("'"+p.getNo_nota()+"',") ;
+        val+=("'"+op.getFech()+"',");
+        val+=("'"+op.getReferencia()+"'");
+   
+        sql=Qy.Insertar(con,"entregas"," nota_entregas, fecha_entrega, referencia",val);
         if (sql != null)
         {    Mensaje.error(m, sql);
             System.out.println("valio queso");
