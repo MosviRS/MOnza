@@ -40,6 +40,8 @@ import metodos.SqLEntregas;
 import metodos.SqLImagen;
 import metodos.SqLNotas;
 import metodos.SqLProvedores;
+import metodos.SqLclientes;
+import metodos.SqlBitacora;
 
 /**
  *
@@ -56,6 +58,8 @@ public class PC extends javax.swing.JFrame {
     SqLImagen sqli=new SqLImagen();
     SqLProvedores sqlprov=new SqLProvedores();
     SqLEntregas sqlentr= new SqLEntregas();
+    SqLclientes sqlcli= new SqLclientes();
+    SqlBitacora sqlbita= new SqlBitacora();
     int noTabPane;
     //Variables para Notas
     public static clientes p=new clientes();
@@ -1820,17 +1824,17 @@ public class PC extends javax.swing.JFrame {
                                sqli.visualizar_tabla(agenda1, con);
                                break;
                                case 2:
-                                   
+                               sqlcli.vizualizar_tabla(agenda, con);
                                break;    
                                case 3:
                                sqlentr.vizualizar_tabla(agenda3, con);
-                               
                                break;
                                case 4:
                                sqlprov.visualizar_tabla(agenda4, con);
                                    
                                break;    
                                case 5:
+                               sqlbita.vizualizar_tabla(agenda5, con);
                                
                                break;
                                

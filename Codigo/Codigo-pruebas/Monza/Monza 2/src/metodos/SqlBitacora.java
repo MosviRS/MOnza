@@ -38,17 +38,21 @@ public class SqlBitacora {
         }
         
     }
-     public void visualizar_tabla(JTable tabla,Connection con){
-        Querys q = new Querys();
+     public void vizualizar_tabla(JTable tabla,Connection con){
+         Querys q = new Querys();
         DefaultTableModel atm=new editTabletrue();
-        String []titulo=new String[] {"Clave_Administrador","Accion","Cantidad recibida","Correo","No. Nota"};
-         
-         atm= q.SeleccionTable(con,"cuneta_usuario, movimiento, cantidad, nota_bitacora, fecha_dia","bitacora","cuneta_usuario = ?", titulo);
+        String []titulo=new String[] {"Clave Administrador","Accion","Cantidad Recibida","No. Nota","Nombre"};
+        
+          String qu="SELECT bitacora.cuneta_usuario, bitacora.movimiento, bitacora.cantidad, bitacora.nota_bitacora, clientes.nombre "+
+          "FROM usuario INNER JOIN ((clientes INNER JOIN notas ON clientes.idclientes = notas.no_cliente) INNER JOIN bitacora ON notas.nota = bitacora.nota_bitacora) ON usuario.idcuenta = bitacora.cuneta_usuario";
+
+         atm= q.Seleccioncond(con,qu, titulo);
          
          
          tabla.setRowHeight(16);
          tabla.setModel(atm);
-   
+      
+                     
     }
     
     
