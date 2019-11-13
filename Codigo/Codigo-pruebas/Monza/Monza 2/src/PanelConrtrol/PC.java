@@ -865,6 +865,7 @@ public class PC extends javax.swing.JFrame {
             }
         });
         agenda.setColumnSelectionAllowed(true);
+        agenda.setComponentPopupMenu(jPopupMenu2);
         agenda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 agendaMouseClicked(evt);
@@ -917,6 +918,7 @@ public class PC extends javax.swing.JFrame {
             }
         });
         agenda3.setColumnSelectionAllowed(true);
+        agenda3.setComponentPopupMenu(jPopupMenu2);
         agenda3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 agenda3MouseClicked(evt);
@@ -1213,6 +1215,7 @@ public class PC extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        agenda5.setComponentPopupMenu(jPopupMenu2);
         agenda5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 agenda5MouseClicked(evt);
@@ -1854,10 +1857,10 @@ public class PC extends javax.swing.JFrame {
                                break;    
                                
                                case 2:
-                                   
+                               sqlcli.elimnar(agenda, con);
                                break;    
                                case 3:
-                               
+                               sqlentr.elimnar(agenda3, con);
                                break;
                                case 4:
                                sqlprov.elimnar(agenda4, con);  
