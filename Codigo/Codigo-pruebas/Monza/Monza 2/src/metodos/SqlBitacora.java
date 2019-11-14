@@ -38,6 +38,32 @@ public class SqlBitacora {
         }
         
     }
+      public void elimnar(JTable tabla,Connection con){
+      Querys q = new Querys();
+       
+      try{
+           
+            String s1=q.Delete(con,"bitacora","nota_bitacora", String.valueOf(tabla.getValueAt(tabla.getSelectedRow(),3)));
+            DefaultTableModel atm = (editTabletrue) tabla.getModel(); 
+                               
+           
+                    if (s1 != null)
+               {    
+                   System.out.println("valio queso");
+               } else
+               {
+                    System.out.println("Exito");
+                    System.out.println(tabla.getSelectedRow());
+                    atm.removeRow(tabla.getSelectedRow());
+                    tabla.setModel(atm);
+                    //agregarProductos(cli.getModeloPro(),cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath().replace("\\","/"));
+               }
+                    
+      }catch(Exception e){
+          
+      }
+      
+  }
      public void vizualizar_tabla(JTable tabla,Connection con){
          Querys q = new Querys();
         DefaultTableModel atm=new editTabletrue();

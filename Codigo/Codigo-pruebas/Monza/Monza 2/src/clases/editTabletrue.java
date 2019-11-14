@@ -14,7 +14,11 @@ import javax.swing.table.DefaultTableModel;
 public class editTabletrue extends DefaultTableModel {
                 @Override
         public boolean isCellEditable(int row,int column) {
-             return true;
+             if(column==(0)){
+               return false;
+           }else{
+               return true;
+           }
         }
     }
 

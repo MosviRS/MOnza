@@ -871,6 +871,11 @@ public class PC extends javax.swing.JFrame {
                 agendaMouseClicked(evt);
             }
         });
+        agenda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                agendaKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(agenda);
         agenda.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
@@ -895,18 +900,18 @@ public class PC extends javax.swing.JFrame {
 
         agenda3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "No. de Nota", "Nombre", "Dirección", "Referencia", "Fecha de Entrega", "Hora de Entrega", "Telefono"
+                "No. de Nota", "Nombre", "Dirección", "Referencia", "Fecha de Entrega", "Telefono"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -922,6 +927,11 @@ public class PC extends javax.swing.JFrame {
         agenda3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 agenda3MouseClicked(evt);
+            }
+        });
+        agenda3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                agenda3KeyReleased(evt);
             }
         });
         jScrollPane11.setViewportView(agenda3);
@@ -1866,7 +1876,7 @@ public class PC extends javax.swing.JFrame {
                                sqlprov.elimnar(agenda4, con);  
                                break;    
                                case 5:
-                               
+                               sqlbita.elimnar(agenda5, con);
                                break;
                                
                            }
@@ -1961,6 +1971,19 @@ public class PC extends javax.swing.JFrame {
         tbfil=new TableRowSorter(agenda1.getModel());
         agenda1.setRowSorter(tbfil);
     }//GEN-LAST:event_buscar1KeyTyped
+
+    private void agendaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agendaKeyReleased
+        // TODO add your handling code here:
+       
+             
+    }//GEN-LAST:event_agendaKeyReleased
+
+    private void agenda3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agenda3KeyReleased
+        // TODO add your handling code here:
+           if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+             sqlentr.modificar(agenda3,con);  
+       }
+    }//GEN-LAST:event_agenda3KeyReleased
     public void llenarclaseproductos(){
         cli= new clientes();
         cli.setModeloPro(name1.getText());
