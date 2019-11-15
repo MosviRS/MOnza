@@ -322,7 +322,7 @@ public class SqLNotas {
         con=ManipulaDBC.conectaDB();
         String sql;
         Querys Qy=new Querys();
-        String val=("'"+b.getFecha_nota()+"',");
+        String val=("'"+b.getFecha()+"',");
         val+=(b.getCantiadad()+",'");
         val+=(b.getDid()+"',");
         val+=("'"+b.getNo_nota()+"','");

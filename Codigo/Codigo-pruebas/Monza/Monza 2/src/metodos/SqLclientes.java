@@ -5,12 +5,16 @@
  */
 package metodos;
 
+import LogIn.LogIn;
+import static PanelConrtrol.PC.bit;
+import static PanelConrtrol.PC.p;
 import clases.editTable;
 import clases.editTabletrue;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +26,9 @@ import javax.swing.table.DefaultTableModel;
 public class SqLclientes {
       String nocliente;
       double cantidad,saldo,totalcompra;
+       SqlBitacora sqlbita= new SqlBitacora();
+      SqLNotas sqlnotas= new SqLNotas();
+       LogIn L=new LogIn();
       public void vizualizar_tabla(JTable tabla,Connection con){
          Querys q = new Querys();
         DefaultTableModel atm=new editTabletrue();
@@ -162,7 +169,7 @@ public class SqLclientes {
         }
         
      }
-     public void operacion(JTable tabla,Connection con,Double op){
+     public void operacion(JTable tabla,Connection con,Double op,JFrame pc){
                         String valores,columna,s1;
                          Querys p= new Querys();
                          DefaultTableModel atm = (editTabletrue) tabla.getModel();
@@ -181,8 +188,11 @@ public class SqLclientes {
                                             System.out.println("valio queso");
                                               JOptionPane.showMessageDialog(null,"Upss! ha ocurrido un error al modificar el campo"+s1,"Error", JOptionPane.ERROR_MESSAGE);
                                         } else
-                                        {
-                                                    
+                                        {           bit.setDid("Abono");
+                                                   bit.setCantiadad(String.valueOf(op));
+                                                   bit.setNo_nota(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
+                                                   bit.setCuentaUsuario(L.us);
+                                                   sqlnotas.insertbitacora(bit,pc);  
                                                  
                                              //agregarProductos(cli.getModeloPro(),cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath().replace("\\","/"));
                                         } 
@@ -218,6 +228,7 @@ public class SqLclientes {
                                     }
                            
                        }
+                   
                        tabla.setModel(atm);
                        vizualizar_tabla(tabla,con);
                           

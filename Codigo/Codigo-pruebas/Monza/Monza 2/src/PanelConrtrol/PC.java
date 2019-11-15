@@ -813,6 +813,9 @@ public class PC extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscarKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                buscarKeyTyped(evt);
+            }
         });
         Clientes.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 170, -1));
 
@@ -1475,6 +1478,7 @@ public class PC extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarKeyReleased
 
     private void CleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanActionPerformed
+        SqLNotas sqlnotas= new SqLNotas();
         // TODO add your handling code here:
         //        String cad;
         //        fslt=agenda.getSelectedRow();
@@ -1491,14 +1495,19 @@ public class PC extends javax.swing.JFrame {
             //        }else{
             //            JOptionPane.showMessageDialog(null, "Debes seleccionar para poder Eliminar!");
             //        }
-             try{
+//        Date dtN=dateofpurchase.getDate();
+//        bit.setFecha(dtN.toString().replace(" ", "/"));
+      
+            try{
             //Guardamos en un entero la fila seleccionada.
             int filaseleccionada =agenda.getSelectedRow();
+            
             if (filaseleccionada == -1){
                 JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila.");
                 
             } else {
-                sqlcli.operacion(agenda,con,Double.parseDouble(jTFuser3.getText()));
+                sqlcli.operacion(agenda,con,Double.parseDouble(jTFuser3.getText()),this);
+               
                         jTFuser3.setEditable(false);
                         jTFuser3.setText("Inserte Cantidad");
             }
@@ -1506,7 +1515,7 @@ public class PC extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error: "+ex+"\nInténtelo nuevamente", " .::Error En la Operacion::." ,JOptionPane.ERROR_MESSAGE);
         }   
          
-            
+ 
             
     }//GEN-LAST:event_CleanActionPerformed
 
@@ -1521,6 +1530,7 @@ public class PC extends javax.swing.JFrame {
     Date dtN=dateofpurchase.getDate();
     Date dtE=Deadline.getDate();
     bit= new bitacoraA();
+    auxrr= new  ArrayList();
         for (int i = 0; i < TNote.getRowCount(); i++) {
             auxrr.add((String)TNote.getValueAt(i, 0));
             auxrr.add((String)TNote.getValueAt(i, 1));
@@ -1533,40 +1543,29 @@ public class PC extends javax.swing.JFrame {
         p.setFaltante(p.getTotal()-p.getMonto_recibido());
         p.setFecha_nota(dtN.toString().replace(" ", "/"));
 //        bit.setFecha_nota(dateofpurchase.toString());
-
+        bit.setFecha(dtN.toString().replace(" ", "/"));
         bit.setCantiadad(Double.toString(p.getMonto_recibido()));
         bit.setNo_nota(p.getNo_nota());
         bit.setCuentaUsuario(L.us);
         
-        if(p.getMonto_recibido()==p.getTotal()){//sea contado
-          bit.setDid("Contado");
-          if(DeliveryType.getSelectedItem().equals("Por entregar")){
+        //sea contado
+         if(PC.credit.isSelected()){
+              bit.setDid("Abono");
+         }else{
+             bit.setDid("Contado");
+         }
+         if(PC.DeliveryType.getSelectedItem().equals("Por entregar")){
               op.setReferencia(Reference.getText());
               op.setFech(dtE.toString().replace(" ", "/"));
+         }
                 java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                         new InfoClientes().setVisible(true);
                     }
                 });
                 this.dispose();
-          }else{
-              
-          }
-        }else if(p.getMonto_recibido()>=0 && p.getMonto_recibido()<p.getTotal() ){
-            bit.setDid("Abono");
-             if(DeliveryType.getSelectedItem().equals("Por entregar")){
-              op.setReferencia(Reference.getText());
-              op.setFech(dtE.toString().replace(" ", "/"));
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                        new InfoClientes().setVisible(true);
-                    }
-                });
-                this.dispose();
-          }else{
-                 
-          }
-        }
+         
+    
 //    InfoClientes ir= new InfoClientes();
 //    ir.setVisible(true);
 //    ir.setLocationRelativeTo(null);
@@ -2031,6 +2030,22 @@ public class PC extends javax.swing.JFrame {
              sqlentr.modificar(agenda3,con);  
        }
     }//GEN-LAST:event_agenda3KeyReleased
+
+    private void buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyTyped
+        // TODO add your handling code here:
+        
+           buscar.addKeyListener(new KeyAdapter(){
+           
+            @Override
+            public void keyReleased(KeyEvent ke){
+                tbfil.setRowFilter(RowFilter.regexFilter("(?i)"+buscar.getText(),0));
+            }
+            
+           
+        });
+        tbfil=new TableRowSorter(agenda.getModel());
+        agenda.setRowSorter(tbfil);
+    }//GEN-LAST:event_buscarKeyTyped
     public void llenarclaseproductos(){
         cli= new clientes();
         cli.setModeloPro(name1.getText());
@@ -2111,7 +2126,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JLabel Date;
     private javax.swing.JLabel Date1;
     private com.toedter.calendar.JDateChooser Deadline;
-    private javax.swing.JComboBox<String> DeliveryType;
+    public static javax.swing.JComboBox<String> DeliveryType;
     private javax.swing.JMenuItem Eliminar1;
     private javax.swing.JPanel Entregas;
     private javax.swing.JButton Minimize;
@@ -2142,8 +2157,8 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTextField buscar1;
     private javax.swing.JTextField buscar2;
     private javax.swing.JTextField buscar3;
-    private javax.swing.JRadioButton counted;
-    private javax.swing.JRadioButton credit;
+    public static javax.swing.JRadioButton counted;
+    public static javax.swing.JRadioButton credit;
     private com.toedter.calendar.JDateChooser dateofpurchase;
     private javax.swing.JTextField dirccprove;
     public static javax.swing.JTextField email1;
