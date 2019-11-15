@@ -1518,9 +1518,14 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
-                            <Property name="columnSelectionAllowed" type="boolean" value="true"/>
+                            <Property name="columnSelectionAllowed" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="false" type="code"/>
+                            </Property>
                             <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                               <ComponentRef name="jPopupMenu2"/>
+                            </Property>
+                            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                              <Color id="Cursor Por defecto"/>
                             </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>

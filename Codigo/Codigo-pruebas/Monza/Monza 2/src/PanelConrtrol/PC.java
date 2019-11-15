@@ -15,6 +15,7 @@ import cjb.ci.Mensaje;
 import clases.IMGtabla;
 import clases.editTable;
 import java.awt.FileDialog;
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -102,6 +103,7 @@ public class PC extends javax.swing.JFrame {
         }
         };
          TNote.setModel(mdl);
+         jTFuser3.setEditable(false);
        
     }
     public PC(Usuario mod){
@@ -864,8 +866,9 @@ public class PC extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        agenda.setColumnSelectionAllowed(true);
+        agenda.setColumnSelectionAllowed(false);
         agenda.setComponentPopupMenu(jPopupMenu2);
+        agenda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         agenda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 agendaMouseClicked(evt);
@@ -1430,10 +1433,35 @@ public class PC extends javax.swing.JFrame {
 
     private void agendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agendaMouseClicked
         // TODO add your handling code here:
+         try{
+            //Guardamos en un entero la fila seleccionada.
+            int filaseleccionada =agenda.getSelectedRow();
+            if (filaseleccionada == -1){
+                JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila.");
+                
+            } else {
+                 jTFuser3.setEditable(true);
+               
+//                textfield_bastidor.setText(bastidor);
+//                textfield_color.setText(color);
+//                textfield_marca.setText(email);
+//                textfield_modelo.setText(matricula);
+//                textfield_matricula.setText(marca);
+            }
+        }catch (HeadlessException ex){
+            JOptionPane.showMessageDialog(null, "Error: "+ex+"\nInténtelo nuevamente", " .::Error En la Operacion::." ,JOptionPane.ERROR_MESSAGE);
+        }   
+         
     }//GEN-LAST:event_agendaMouseClicked
 
     private void jTFuser3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuser3MouseClicked
         // TODO add your handling code here:
+                if(agenda.getSelectedRow()>-1){
+                    jTFuser3.setText("");
+                } 
+               
+           
+        
     }//GEN-LAST:event_jTFuser3MouseClicked
 
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
@@ -1463,6 +1491,23 @@ public class PC extends javax.swing.JFrame {
             //        }else{
             //            JOptionPane.showMessageDialog(null, "Debes seleccionar para poder Eliminar!");
             //        }
+             try{
+            //Guardamos en un entero la fila seleccionada.
+            int filaseleccionada =agenda.getSelectedRow();
+            if (filaseleccionada == -1){
+                JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila.");
+                
+            } else {
+                sqlcli.operacion(agenda,con,Double.parseDouble(jTFuser3.getText()));
+                        jTFuser3.setEditable(false);
+                        jTFuser3.setText("Inserte Cantidad");
+            }
+        }catch (HeadlessException ex){
+            JOptionPane.showMessageDialog(null, "Error: "+ex+"\nInténtelo nuevamente", " .::Error En la Operacion::." ,JOptionPane.ERROR_MESSAGE);
+        }   
+         
+            
+            
     }//GEN-LAST:event_CleanActionPerformed
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
@@ -1974,7 +2019,9 @@ public class PC extends javax.swing.JFrame {
 
     private void agendaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agendaKeyReleased
         // TODO add your handling code here:
-       
+          if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+       sqlcli.modificar(agenda, con);
+          }
              
     }//GEN-LAST:event_agendaKeyReleased
 
