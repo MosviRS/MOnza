@@ -199,8 +199,8 @@ public class SqLclientes {
                                         
                        //comprueb si ya ha abonado todo y lo elimina automaticamente                 
                                         
-                        System.out.println(Integer.parseInt(to)+" "+totalabono);
-                       if(totalabono>=Integer.parseInt(to)){
+                        System.out.println(Double.parseDouble(to)+" "+totalabono);
+                       if(totalabono>=Double.parseDouble(to)){
                                  System.out.println("ssss");
                                      Querys q = new Querys();
 

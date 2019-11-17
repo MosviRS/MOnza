@@ -1,2 +1,3 @@
 .-En la tabla provedores el campo "idprovedores" hacerlo autoincrementable (phpadmin)
-.-En la tabla productos en el campo "imagen" cambiar el tipo de dato a mediumblob (phpadmin)
+.-En la tabla abono borrar el espacio que tiene al principio el campo "nota_abono"
+.-En la tabla bitacora el campo "numerable" hacerlo autoincrementable (phpadmin)

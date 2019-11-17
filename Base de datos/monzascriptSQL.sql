@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`clientes` (
   `APaterno` VARCHAR(45) NOT NULL,
   `Amaterno` VARCHAR(45) NOT NULL,
   `direccion` VARCHAR(55) NOT NULL,
-  `telefono` VARCHAR(70) NOT NULL,
+  `telefono` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`idclientes`))
 ENGINE = InnoDB;
 
@@ -54,7 +54,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`notas` (
   `nota` VARCHAR(45) NOT NULL,
-  `total` DECIMAL(20) NOT NULL,
+  `total` double NOT NULL,
   `no_cliente` INT NOT NULL,
   `fecha_nota` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`nota`),
@@ -71,8 +71,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`abono` (
   ` nota_abono` VARCHAR(45) NOT NULL,
-  `abonado` decimal(20,0) NOT NULL,
-  `faltante` decimal(20,0) NOT NULL,
+  `abonado` double NOT NULL,
+  `faltante` double NOT NULL,
   PRIMARY KEY (` nota_abono`),
   CONSTRAINT `nota_abono`
     FOREIGN KEY (` nota_abono`)
@@ -86,19 +86,16 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Bitacora`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Bitacora` (
-  `fecha_dia` DATETIME(6) NOT NULL,
-  `cantidad` DECIMAL(20) NOT NULL,
+  `fecha_dia` VARCHAR(200) NOT NULL,
+  `cantidad` double NOT NULL,
   `movimiento` VARCHAR(20) NOT NULL,
   `nota_bitacora` VARCHAR(45) NOT NULL,
   `cuneta_usuario` VARCHAR(45) NOT NULL,
+  `numeracion` INT NOT NULL,
+   PRIMARY KEY (`numeracion`),
   CONSTRAINT `cuneta_usuario`
     FOREIGN KEY (`cuneta_usuario`)
     REFERENCES `mydb`.`usuario` (`idcuenta`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `nota_bitacora`
-    FOREIGN KEY (`nota_bitacora`)
-    REFERENCES `mydb`.`notas` (`nota`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -113,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`provedores` (
   `nombre_empresa` VARCHAR(45) NOT NULL,
   `direccion` VARCHAR(45) NOT NULL,
   `correo` VARCHAR(45) NULL,
-  `telefono` INT NOT NULL,
+  `telefono` VARCHAR(200) NOT NULL,
   `mercancia` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idprovedores`))
 ENGINE = InnoDB;
