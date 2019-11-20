@@ -488,10 +488,9 @@ public class InfoClientes extends javax.swing.JFrame {
         claasepc.p.setTelefono(tel.getText());
         claasepc.p.setDireccion(dir.getText());
         claasepc.p.setIdcliente(tel.getText());
-       
-                
-      
+        
         sqlnotas.insertarclioentes(claasepc.p,this);
+        
         sqlnotas.insertarnotas(claasepc.p, this);
         if(PC.credit.isSelected()){
              sqlnotas.insertabono(claasepc.p, this);

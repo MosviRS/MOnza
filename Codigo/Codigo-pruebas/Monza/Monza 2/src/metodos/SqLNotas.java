@@ -275,7 +275,7 @@ public class SqLNotas {
         String sql;
         Querys Qy=new Querys();
         String val=(p.getEx()+"");
-        sql=Qy.Modificar(con, "productos", "existencia", val , "idmodelo="+p.getModeloPro());
+        sql=Qy.Modificar(con, "productos", "existencia", val , "idmodelo='"+p.getModeloPro()+"'");
         if (sql != null)
         {    Mensaje.error(m, sql);
             System.out.println("valio queso");
