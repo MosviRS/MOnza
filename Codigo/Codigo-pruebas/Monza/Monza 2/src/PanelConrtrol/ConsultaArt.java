@@ -14,6 +14,8 @@ import java.awt.Cursor;
 //import java.lang.System.Logger;
 //import java.lang.System.Logger.Level;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Base64.Decoder;
 import java.util.Properties;
@@ -25,8 +27,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import metodos.ManipulaDBC;
 import metodos.PasswordGenerator;
 import metodos.SqlUsuarios;
+import metodos.Sqlproductos_notas;
 
 /**
  *
@@ -34,16 +38,22 @@ import metodos.SqlUsuarios;
  */
 public class ConsultaArt extends javax.swing.JFrame {
         Usuario mod;
+        Sqlproductos_notas sqlproc= new Sqlproductos_notas();
+        Connection con;
+        String value;
+         ArrayList<Object> arr= new ArrayList();
     /**
      * Creates new form olv2
      */
-    public ConsultaArt() {
+    public ConsultaArt(String valor) {
         initComponents();
-        
+        this.value=valor;
         this.setLocationRelativeTo(null);
         this.setTitle("Recuperacion");
         ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
         this.setIconImage(icon.getImage());
+        
+       
         
     }
   
@@ -62,12 +72,20 @@ public class ConsultaArt extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         Minimize = new javax.swing.JButton();
         Close = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        jLnotapro = new javax.swing.JLabel();
         jScrollPane13 = new javax.swing.JScrollPane();
         TablaPri = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(243, 240, 235));
@@ -115,9 +133,9 @@ public class ConsultaArt extends javax.swing.JFrame {
         });
         jPanel1.add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, -1, 40));
 
-        jLabel5.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jLabel5.setText("No. Nota: xxxxx");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 470, 20));
+        jLnotapro.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLnotapro.setText("No. Nota: xxxxx");
+        jPanel1.add(jLnotapro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 470, 20));
 
         TablaPri.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -186,7 +204,29 @@ public class ConsultaArt extends javax.swing.JFrame {
     private void TablaPriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaPriMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_TablaPriMouseClicked
-   
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        
+         ManipulaDBC.desconectaDB(con);
+         
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        
+        con = ManipulaDBC.conectaDB();
+        
+         arr=sqlproc.vizualizar_tabla(TablaPri, con,value);
+         if(arr!=null){
+              llenar();
+         }
+      
+    }//GEN-LAST:event_formWindowOpened
+   public void llenar(){
+       jLnotapro.setText("No. Nota: "+arr.get(0).toString());
+       jLabel2.setText("Nombre del Cliente: "+arr.get(1).toString()+" "+arr.get(2).toString()+" "+arr.get(3).toString());
+   }
     /**
      * @param args the command line arguments
      */
@@ -228,7 +268,7 @@ public class ConsultaArt extends javax.swing.JFrame {
     private javax.swing.JTable TablaPri;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLnotapro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane13;
     // End of variables declaration//GEN-END:variables

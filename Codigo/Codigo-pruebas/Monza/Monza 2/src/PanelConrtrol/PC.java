@@ -31,6 +31,7 @@ import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -155,6 +156,7 @@ public class PC extends javax.swing.JFrame {
         jMenuCargar = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         Eliminar1 = new javax.swing.JMenuItem();
+        jArticulos = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         Nav = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -298,6 +300,14 @@ public class PC extends javax.swing.JFrame {
             }
         });
         jPopupMenu2.add(Eliminar1);
+
+        jArticulos.setText("Articulos de la nota");
+        jArticulos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jArticulosActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(jArticulos);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -2046,6 +2056,31 @@ public class PC extends javax.swing.JFrame {
         tbfil=new TableRowSorter(agenda.getModel());
         agenda.setRowSorter(tbfil);
     }//GEN-LAST:event_buscarKeyTyped
+
+    private void jArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jArticulosActionPerformed
+        // TODO add your handling code here:
+          
+                           switch( noTabPane){
+                               case 0:
+                                   
+                               break;    
+                               
+                               case 2:
+                                validaproductos(agenda);
+                               break;    
+                               case 3:
+                                validaproductos(agenda3);
+                               break;
+                               case 4:
+                               
+                               break;    
+                               case 5:
+                              
+                               break;
+                               
+                           }
+        
+    }//GEN-LAST:event_jArticulosActionPerformed
     public void llenarclaseproductos(){
         cli= new clientes();
         cli.setModeloPro(name1.getText());
@@ -2066,6 +2101,25 @@ public class PC extends javax.swing.JFrame {
      public void mensaje(String texto){
         JOptionPane.showMessageDialog(null, texto);
     }
+     
+     public  void validaproductos(JTable tbl){
+            
+         try{
+            //Guardamos en un entero la fila seleccionada.
+            int filaseleccionada =tbl.getSelectedRow();
+            
+            if (filaseleccionada == -1){
+                JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila.");
+                
+            } else {
+              ConsultaArt art= new ConsultaArt(tbl.getValueAt(tbl.getSelectedRow(),0).toString());
+              art.setVisible(true);
+            
+            }
+        }catch (HeadlessException ex){
+            JOptionPane.showMessageDialog(null, "Error: "+ex+"\nInténtelo nuevamente", " .::Error En la Operacion::." ,JOptionPane.ERROR_MESSAGE);
+        }   
+     }
 //     public void agregarProductos(String mod,String nom,Double preci, int exis,String cate,String provM,String im){
 //      atm.addRow(new Object[]{
 //          mod,nom,preci,exis,cate,provM,new JLabel(reducirtamamo(im))
@@ -2163,6 +2217,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTextField dirccprove;
     public static javax.swing.JTextField email1;
     private javax.swing.JTextField emailprov;
+    private javax.swing.JMenuItem jArticulos;
     private javax.swing.JButton jBGuardar1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
