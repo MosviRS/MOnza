@@ -362,132 +362,13 @@ public class InfoClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_NameMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //        int bandera=0;
-        //        String recup=CorreoRecuperar.getText();
-        //        String name="",ape="",pass="";
-        //
-        //        if ((recup.equals("Inserta un correo electronico"))||(recup.equals(""))) {
-            //            javax.swing.JOptionPane.showMessageDialog(this, "Debe introducir un correo de recuperacion\n ","Aviso!",javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            //        }else{
-            //            LogIn login = new LogIn();
-            //            setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            //            File file;
-            //            FileReader leer;
-            //            BufferedReader memoria;
-            //            String cadena,nombre="",apellido="",user="",password="",correo="",pregunta="",respuesta="";
-            //            file= new File("registro.txt");
-            //            try {
-                //                leer = new FileReader(file);
-                //                memoria = new BufferedReader(leer);
-                //                cadena="";
-                //                while (cadena!=null) {
-                    //                    try {
-                        //                        cadena=memoria.readLine();
-                        //                        nombre=cadena;
-                        //                        cadena=memoria.readLine();
-                        //                        apellido=cadena;
-                        //                        cadena=memoria.readLine();
-                        //                        user=cadena;
-                        //                        cadena=memoria.readLine();
-                        //                        password=cadena;
-                        //                        cadena=memoria.readLine();
-                        //                        correo=cadena;
-                        //                        cadena=memoria.readLine();
-                        //                        pregunta=cadena;
-                        //                        cadena=memoria.readLine();
-                        //                        respuesta=cadena;
-                        //
-                        //                        if (cadena!=null) {
-                            //
-                            //                            if (recup.equals(correo) ) {//validar que el correo exista en el registro
-                                //                                bandera=1;
-                                //                                //                                JOptionPane.showInputDialog(null,"bandera ready");
-                                //                                name=nombre; ape=apellido; pass=password;
-                                //                                break;
-                                //                            }//fin if el corrreo exista en el registro
-                            //                            else{
-                                //                                bandera=0;
-                                //                                //                                            JOptionPane.showInputDialog(null,"bandera se resetea");
-                                //                            }
-                            //
-                            //                        }//if salto de registro
-                        //
-                        //                    }//try lectura
-                    //                    catch (IOException ex) {
-                        //                        Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
-                        //                    }
-                    //
-                    //                }//fin whle
-                //                try {
-                    //                    memoria.close();
-                    //                    leer.close();
-                    //                } catch (IOException ex) {
-                    //                    Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
-                    //                }
-                //
-                //            }//try principal
-            //            catch (FileNotFoundException ex) {
-                //                Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
-                //            }
-            //
-            //            if (bandera==1) {
-                //                Properties propiedad = new Properties();
-                //                propiedad.setProperty("mail.smtp.host","smtp.gmail.com");
-                //                propiedad.setProperty("mail.smtp.starttls.enable","true");
-                //                propiedad.setProperty("mail.smtp.port","587");
-                //                propiedad.setProperty("mail.smtp.auth","true");
-                //
-                //                Session sesion = Session.getDefaultInstance(propiedad);
-                //
-                //                String correoEnvia = "mexajol@gmail.com";
-                //                String contrasenia = "mexajolpoo";
-                //                String destinatario=CorreoRecuperar.getText();
-                //                String asunto = "Recuperacion de Contraseña MexAjol";
-                //                String mensaje="Hola "+name+" "+ape+" nos has solicitado reestablecer tu password, para ingresar de nuevo a la plataforma"
-                //                + "\n Tu contraseña es: "+pass;
-                //
-                //                MimeMessage mail = new MimeMessage(sesion);
-                //                try {
-                    //                    mail.setFrom(new InternetAddress(correoEnvia));
-                    //                    mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
-                    //                    mail.setSubject(asunto);
-                    //                    mail.setText(mensaje);
-                    //
-                    //                    Transport transporte = sesion.getTransport("smtp");
-                    //                    transporte.connect(correoEnvia, contrasenia);
-                    //                    transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
-                    //                    transporte.close();
-                    //
-                    //                    JOptionPane.showMessageDialog(null, "Correo Enviado\n Verifica tu bandeja de entrada");
-                    //
-                    //                } catch (AddressException ex) {
-                    //                    Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
-                    //                } catch (MessagingException ex) {
-                    //                    Logger.getLogger(Olvide.class.getName()).log(Level.SEVERE, null, ex);
-                    //                }
-                //                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                //
-                //                java.awt.EventQueue.invokeLater(new Runnable() {
-                    //                    public void run() {
-                        //                        new LogIn().setVisible(true);
-                        //                    }
-                    //                });
-            //                this.dispose();
-            //
-            //            }else{
-            //                JOptionPane.showMessageDialog(null, "Correo incorrecto o no esta registrado");
-            //                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            //                CorreoRecuperar.setText("");
-            //            }
-        //
-        //        }//else el campo esta lleno
         
         claasepc.p.setNombre(Name.getText());
         claasepc.p.setAp(Ap.getText());
         claasepc.p.setAm(Am.getText());
         claasepc.p.setTelefono(tel.getText());
         claasepc.p.setDireccion(dir.getText());
-        claasepc.p.setIdcliente(tel.getText());
+        claasepc.p.setIdcliente(claasepc.p.getNo_nota());
         
         sqlnotas.insertarclioentes(claasepc.p,this);
         

@@ -36,6 +36,7 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import metodos.ManipulaDBC;
 import metodos.SqLEntregas;
@@ -50,30 +51,31 @@ import metodos.SqlBitacora;
  * @author Rasteck7
  */
 public class PC extends javax.swing.JFrame {
+
     Usuario mod;
     Connection con;
     clientes cli;
     Provedores prov;
     Querys q = new Querys();
-    public static DefaultTableModel atm=new editTable();
+    public static DefaultTableModel atm = new editTable();
     JFileChooser jf;
-    SqLImagen sqli=new SqLImagen();
-    SqLProvedores sqlprov=new SqLProvedores();
-    SqLEntregas sqlentr= new SqLEntregas();
-    SqLclientes sqlcli= new SqLclientes();
-    SqlBitacora sqlbita= new SqlBitacora();
+    SqLImagen sqli = new SqLImagen();
+    SqLProvedores sqlprov = new SqLProvedores();
+    SqLEntregas sqlentr = new SqLEntregas();
+    SqLclientes sqlcli = new SqLclientes();
+    SqlBitacora sqlbita = new SqlBitacora();
     int noTabPane;
     //Variables para Notas
-    public static clientes p=new clientes();
-    public static orders op=new orders();
-    SqLNotas MN=new SqLNotas();
-    public  DefaultTableModel mdl;
-    public static bitacoraA bit= new bitacoraA();
+    public static clientes p = new clientes();
+    public static orders op = new orders();
+    SqLNotas MN = new SqLNotas();
+    public DefaultTableModel mdl;
+    public static bitacoraA bit = new bitacoraA();
     TableRowSorter tbfil;
-    LogIn L=new LogIn();
-    public static ArrayList<String> auxrr= new  ArrayList();
-    
-    
+    LogIn L = new LogIn();
+    public static ArrayList<String> auxrr = new ArrayList();
+    TableRowSorter<TableModel> tr, tr1, tr2, tr3;
+
     /**
      * Creates new form Registro
      */
@@ -84,47 +86,53 @@ public class PC extends javax.swing.JFrame {
         //Nav.setEnabledAt(4, false);
         ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
         this.setIconImage(icon.getImage());
-        String []titulo=new String[] {"Nombre","Descripcion","PrecioG","precioN","Imagen"};
-        
-        //TablaNotas
-         mdl =  (DefaultTableModel)TNote.getModel();
-         mdl=new javax.swing.table.DefaultTableModel(
-         new Object [][] {
-         },
-         new String [] {
-         "(ID)Modelo", "Nombre del Producto", "cantidad", "Monto por unidad", "Monto subtotal"
-        }
-        ) {
-        boolean[] canEdit = new boolean [] {
-                true, true, true, true, true
-        };
+        String[] titulo = new String[]{"Nombre", "Descripcion", "PrecioG", "precioN", "Imagen"};
 
-        public boolean isCellEditable(int rowIndex, int columnIndex) {
-            return canEdit [columnIndex];
-        }
+        //TablaNotas
+        mdl = (DefaultTableModel) TNote.getModel();
+        mdl = new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "(ID)Modelo", "Nombre del Producto", "cantidad", "Monto por unidad", "Monto subtotal"
+                }
+        ) {
+            boolean[] canEdit = new boolean[]{
+                true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
         };
-         TNote.setModel(mdl);
-         jTFuser3.setEditable(false);
-       
+        TNote.setModel(mdl);
+        jTFuser3.setEditable(false);
+
+//         Tabla Provedores
+        DefaultTableModel mdlP = (DefaultTableModel) agenda4.getModel();
+        agenda4.getModel();
+        tr = new TableRowSorter<>(mdlP);
+        agenda4.setRowSorter(tr3);
+
     }
-    public PC(Usuario mod){
+
+    public PC(Usuario mod) {
         initComponents();
-        this.mod= mod;
+        this.mod = mod;
         this.setLocationRelativeTo(null);
         this.setTitle("Registro");
         //Nav.setEnabledAt(4, false);
         ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
         this.setIconImage(icon.getImage());
-        if(mod.getTipo()==1){
-            
+        if (mod.getTipo() == 1) {
+
             Nav.setEnabledAt(0, true);
             Nav.setEnabledAt(1, true);
             Nav.setEnabledAt(2, true);
             Nav.setEnabledAt(3, true);
             Nav.setEnabledAt(4, true);
             Nav.setEnabledAt(5, true);
-            
-        }else if(mod.getTipo()==2){
+
+        } else if (mod.getTipo() == 2) {
             Nav.setEnabledAt(0, true);
             Nav.setEnabledAt(1, true);
             Nav.setEnabledAt(2, true);
@@ -132,13 +140,28 @@ public class PC extends javax.swing.JFrame {
             Nav.setEnabledAt(4, true);
             Nav.setEnabledAt(5, false);
         }
-        
-         String []titulo=new String[] {"Modelo","Nombre","Precio","Marca/Provedor","Cantidad","Categoria","Imagen"};
-         agenda1.setDefaultRenderer(Object.class,new IMGtabla());
-         atm.setColumnIdentifiers(titulo);
-         agenda1.setRowHeight(70);
-         agenda1.setModel(atm);
-       
+
+        String[] titulo = new String[]{"Modelo", "Nombre", "Precio", "Marca/Provedor", "Cantidad", "Categoria", "Imagen"};
+        agenda1.setDefaultRenderer(Object.class, new IMGtabla());
+        atm.setColumnIdentifiers(titulo);
+        agenda1.setRowHeight(70);
+        agenda1.setModel(atm);
+        //         Tabla Productos
+        DefaultTableModel mdlPR = (DefaultTableModel) agenda1.getModel();
+        agenda1.getModel();
+        tr = new TableRowSorter<>(mdlPR);
+        agenda1.setRowSorter(tr);
+//         Tabla Clientes
+        DefaultTableModel mdlCl = (DefaultTableModel) agenda.getModel();
+        agenda.getModel();
+        tr1 = new TableRowSorter<>(mdlCl);
+        agenda.setRowSorter(tr1);
+//         Tabla Entregas
+        DefaultTableModel mdlE = (DefaultTableModel) agenda3.getModel();
+        agenda3.getModel();
+        tr2 = new TableRowSorter<>(mdlE);
+        agenda3.setRowSorter(tr2);
+
     }
 
     /**
@@ -1342,21 +1365,21 @@ public class PC extends javax.swing.JFrame {
 
     private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
         int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "Desea Salir?","Exit",dialog);
-        if (result==0){
+        int result = JOptionPane.showConfirmDialog(null, "Desea Salir?", "Exit", dialog);
+        if (result == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_CloseActionPerformed
 
     private void ShutdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShutdownActionPerformed
         int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "Cerrando Sesión\nEstas seguro de salir ?","Exit",dialog);
-        if (result==0){
+        int result = JOptionPane.showConfirmDialog(null, "Cerrando Sesión\nEstas seguro de salir ?", "Exit", dialog);
+        if (result == 0) {
             java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LogIn().setVisible(true);
-            }
-        });
+                public void run() {
+                    new LogIn().setVisible(true);
+                }
+            });
         }
         this.dispose();
     }//GEN-LAST:event_ShutdownActionPerformed
@@ -1367,16 +1390,16 @@ public class PC extends javax.swing.JFrame {
         //        buscar1.setText("");
         //        String filtro=buscar.getText();
         //        if(!filtro.equals("")){
-            //            tr.setRowFilter(RowFilter.regexFilter(filtro));
-            //        }else{
-            //            tr.setRowFilter(null);
-            //        }
+        //            tr.setRowFilter(RowFilter.regexFilter(filtro));
+        //        }else{
+        //            tr.setRowFilter(null);
+        //        }
         //        String filtro2=buscar1.getText();
         //        if(!filtro2.equals("")){
-            //            tr2.setRowFilter(RowFilter.regexFilter(filtro));
-            //        }else{
-            //            tr2.setRowFilter(null);
-            //        }
+        //            tr2.setRowFilter(RowFilter.regexFilter(filtro));
+        //        }else{
+        //            tr2.setRowFilter(null);
+        //        }
     }//GEN-LAST:event_NavMousePressed
 
     private void agenda1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agenda1MouseClicked
@@ -1395,41 +1418,41 @@ public class PC extends javax.swing.JFrame {
         //        data3[4]=agenda1.getValueAt(fslt, 4).toString();
         //        data3[5]=agenda1.getValueAt(fslt, 5).toString();
         //        filas=fslt;
-          if(agenda1.getSelectedColumn()==6){
-        jf = new JFileChooser();
-        FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
-        jf.setFileFilter(fil);
-        jf.setCurrentDirectory(new File("\\Downloads"));
-        int el = jf.showOpenDialog(this);
-        if(el == JFileChooser.APPROVE_OPTION){
-            //txtRuta.setText(jf.getSelectedFile().getAbsolutePath());
-           
-          sqli.Modificarxcragadoimagen(agenda1, con,jf.getSelectedFile().getAbsolutePath());
-           
-            //lblFoto.setIcon(new ImageIcon(txtRuta.getText()));
+        if (agenda1.getSelectedColumn() == 6) {
+            jf = new JFileChooser();
+            FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
+            jf.setFileFilter(fil);
+            jf.setCurrentDirectory(new File("\\Downloads"));
+            int el = jf.showOpenDialog(this);
+            if (el == JFileChooser.APPROVE_OPTION) {
+                //txtRuta.setText(jf.getSelectedFile().getAbsolutePath());
+
+                sqli.Modificarxcragadoimagen(agenda1, con, jf.getSelectedFile().getAbsolutePath());
+
+                //lblFoto.setIcon(new ImageIcon(txtRuta.getText()));
+            }
         }
-       }
     }//GEN-LAST:event_agenda1MouseClicked
 
     private void buscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyReleased
-        //        // TODO add your handling code here:
-        //        String filtro=buscar1.getText();
-        //        if(!filtro.equals("")){
-            //            tr2.setRowFilter(RowFilter.regexFilter(filtro));
-            //        }else{
-            //            tr2.setRowFilter(null);
-            //        }
+        // TODO add your handling code here:
+        String filtro = buscar1.getText();
+        if (!filtro.equals("")) {
+            tr.setRowFilter(RowFilter.regexFilter(filtro));
+        } else {
+            tr.setRowFilter(null);
+        }
     }//GEN-LAST:event_buscar1KeyReleased
 
     private void name1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name1ActionPerformed
         // TODO add your handling code here:
-        ap1.requestFocus ();
-        
+        ap1.requestFocus();
+
     }//GEN-LAST:event_name1ActionPerformed
 
     private void ap1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ap1ActionPerformed
         // TODO add your handling code here:
-        am1.requestFocus ();
+        am1.requestFocus();
     }//GEN-LAST:event_ap1ActionPerformed
 
     private void Minimize1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Minimize1ActionPerformed
@@ -1442,53 +1465,58 @@ public class PC extends javax.swing.JFrame {
 
     private void buscar2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar2KeyReleased
         // TODO add your handling code here:
+        String filtro = buscar2.getText();
+        if (!filtro.equals("")) {
+            tr2.setRowFilter(RowFilter.regexFilter(filtro));
+        } else {
+            tr2.setRowFilter(null);
+        }
     }//GEN-LAST:event_buscar2KeyReleased
 
     private void agendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agendaMouseClicked
         // TODO add your handling code here:
-         try{
+        try {
             //Guardamos en un entero la fila seleccionada.
-            int filaseleccionada =agenda.getSelectedRow();
-            if (filaseleccionada == -1){
+            int filaseleccionada = agenda.getSelectedRow();
+            if (filaseleccionada == -1) {
                 JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila.");
-                
+
             } else {
-                 jTFuser3.setEditable(true);
-               
+                jTFuser3.setEditable(true);
+
 //                textfield_bastidor.setText(bastidor);
 //                textfield_color.setText(color);
 //                textfield_marca.setText(email);
 //                textfield_modelo.setText(matricula);
 //                textfield_matricula.setText(marca);
             }
-        }catch (HeadlessException ex){
-            JOptionPane.showMessageDialog(null, "Error: "+ex+"\nInténtelo nuevamente", " .::Error En la Operacion::." ,JOptionPane.ERROR_MESSAGE);
-        }   
-         
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente", " .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_agendaMouseClicked
 
     private void jTFuser3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFuser3MouseClicked
         // TODO add your handling code here:
-                if(agenda.getSelectedRow()>-1){
-                    jTFuser3.setText("");
-                } 
-               
-           
-        
+        if (agenda.getSelectedRow() > -1) {
+            jTFuser3.setText("");
+        }
+
+
     }//GEN-LAST:event_jTFuser3MouseClicked
 
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
         //        // TODO add your handling code here:
-        //        String filtro=buscar.getText();
-        //        if(!filtro.equals("")){
-            //            tr.setRowFilter(RowFilter.regexFilter(filtro));
-            //        }else{
-            //            tr.setRowFilter(null);
-            //        }
+        String filtro = buscar.getText();
+        if (!filtro.equals("")) {
+            tr1.setRowFilter(RowFilter.regexFilter(filtro));
+        } else {
+            tr1.setRowFilter(null);
+        }
     }//GEN-LAST:event_buscarKeyReleased
 
     private void CleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanActionPerformed
-        SqLNotas sqlnotas= new SqLNotas();
+        SqLNotas sqlnotas = new SqLNotas();
         // TODO add your handling code here:
         //        String cad;
         //        fslt=agenda.getSelectedRow();
@@ -1500,96 +1528,95 @@ public class PC extends javax.swing.JFrame {
         //        data[5]=agenda1.getValueAt(fslt, 5).toString();
         //        cad=data[0]+"--"+data[1]+"--"+data[2]+"--"+data[3]+"--"+data[4]+"--"+data[5];
         //        if (agenda.getSelectedRow()!=-1) {
-            //            removeLineFromFile(cad);
-            //            modelo.removeRow(agenda.getSelectedRow());
-            //        }else{
-            //            JOptionPane.showMessageDialog(null, "Debes seleccionar para poder Eliminar!");
-            //        }
+        //            removeLineFromFile(cad);
+        //            modelo.removeRow(agenda.getSelectedRow());
+        //        }else{
+        //            JOptionPane.showMessageDialog(null, "Debes seleccionar para poder Eliminar!");
+        //        }
 //        Date dtN=dateofpurchase.getDate();
 //        bit.setFecha(dtN.toString().replace(" ", "/"));
-      
-            try{
+
+        try {
             //Guardamos en un entero la fila seleccionada.
-            int filaseleccionada =agenda.getSelectedRow();
-            
-            if (filaseleccionada == -1){
+            int filaseleccionada = agenda.getSelectedRow();
+
+            if (filaseleccionada == -1) {
                 JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila.");
-                
+
             } else {
-                sqlcli.operacion(agenda,con,Double.parseDouble(jTFuser3.getText()),this);
-               
-                        jTFuser3.setEditable(false);
-                        jTFuser3.setText("Inserte Cantidad");
+                sqlcli.operacion(agenda, con, Double.parseDouble(jTFuser3.getText()), this);
+
+                jTFuser3.setEditable(false);
+                jTFuser3.setText("Inserte Cantidad");
             }
-        }catch (HeadlessException ex){
-            JOptionPane.showMessageDialog(null, "Error: "+ex+"\nInténtelo nuevamente", " .::Error En la Operacion::." ,JOptionPane.ERROR_MESSAGE);
-        }   
-         
- 
-            
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente", " .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_CleanActionPerformed
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
         //        java.awt.EventQueue.invokeLater(new Runnable() {
-            //            public void run() {
-                //                new exa().setVisible(true);
-                //            }
-            //        });
-    //        this.dispose();
-    
-    Date dtN=dateofpurchase.getDate();
-    Date dtE=Deadline.getDate();
-    bit= new bitacoraA();
-    auxrr= new  ArrayList();
+        //            public void run() {
+        //                new exa().setVisible(true);
+        //            }
+        //        });
+        //        this.dispose();
+
+        Date dtN = dateofpurchase.getDate();
+        Date dtE = Deadline.getDate();
+        bit = new bitacoraA();
+        auxrr = new ArrayList();
         for (int i = 0; i < TNote.getRowCount(); i++) {
-            auxrr.add((String)TNote.getValueAt(i, 0));
-            auxrr.add((String)TNote.getValueAt(i, 1));
-            auxrr.add((String)TNote.getValueAt(i, 2));
-            auxrr.add((String)TNote.getValueAt(i, 3));
-            auxrr.add((String)TNote.getValueAt(i, 4));
+            auxrr.add((String) TNote.getValueAt(i, 0));
+            auxrr.add((String) TNote.getValueAt(i, 1));
+            auxrr.add((String) TNote.getValueAt(i, 2));
+            auxrr.add((String) TNote.getValueAt(i, 3));
+            auxrr.add((String) TNote.getValueAt(i, 4));
         }
         System.out.println(auxrr);
         p.setMonto_recibido(Double.parseDouble(Amount.getText()));
-        p.setFaltante(p.getTotal()-p.getMonto_recibido());
+        p.setFaltante(p.getTotal() - p.getMonto_recibido());
         p.setFecha_nota(dtN.toString().replace(" ", "/"));
 //        bit.setFecha_nota(dateofpurchase.toString());
         bit.setFecha(dtN.toString().replace(" ", "/"));
         bit.setCantiadad(Double.toString(p.getMonto_recibido()));
         bit.setNo_nota(p.getNo_nota());
         bit.setCuentaUsuario(L.us);
-        
+
         //sea contado
-         if(PC.credit.isSelected()){
-              bit.setDid("Abono");
-         }else{
-             bit.setDid("Contado");
-         }
-         if(PC.DeliveryType.getSelectedItem().equals("Por entregar")){
-              op.setReferencia(Reference.getText());
-              op.setFech(dtE.toString().replace(" ", "/"));
-         }
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                        new InfoClientes().setVisible(true);
-                    }
-                });
-                this.dispose();
-         
-    
+        if (PC.credit.isSelected()) {
+            bit.setDid("Abono");
+        } else {
+            bit.setDid("Contado");
+        }
+        if (PC.DeliveryType.getSelectedItem().equals("Por entregar")) {
+            op.setReferencia(Reference.getText());
+            op.setFech(dtE.toString().replace(" ", "/"));
+        }
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InfoClientes().setVisible(true);
+            }
+        });
+        this.dispose();
+
 //    InfoClientes ir= new InfoClientes();
 //    ir.setVisible(true);
 //    ir.setLocationRelativeTo(null);
-    
+
     }//GEN-LAST:event_SaveActionPerformed
 
     private void addProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductActionPerformed
+        Date dtN = dateofpurchase.getDate();
+        if (!model.getText().equals("")
+                && !nameProduct.getText().equals("")
+                && !Quantity.getText().equals("")
+                && !NumNote.getText().equals("")
+                && !dtN.toString().equals("")
+                && !NumNote.getText().equals("XXXX")) {
 
-        if (!model.getText().equals("")&&
-                !nameProduct.getText().equals("")&&
-                !Quantity.getText().equals("")&&
-                !NumNote.getText().equals("")&&
-                !NumNote.getText().equals("XXXX")) {
-            
             p.setModeloPro(model.getText());
             p.setNombrePro(nameProduct.getText());
             p.setExistencia(Integer.parseInt(storage.getText()));
@@ -1597,12 +1624,12 @@ public class PC extends javax.swing.JFrame {
             p.setPrecio(Double.parseDouble(priceOne.getText()));
             op.setCant(Integer.parseInt(Quantity.getText()));
             //Cantidad
-            if (MN.Verificar(p,op)) {
+            if (MN.Verificar(p, op)) {
                 NumNote.setEnabled(false);
-                p.setEx(p.getExistencia()-op.getCant());
-                p.setTotal(p.getTotal()+(op.getCant()*p.getPrecio()));
-                insertTable(p.getModeloPro(),p.getNombrePro(),op.getCant(),p.getPrecio());
-                Total.setText(p.getTotal()+"");
+                p.setEx(p.getExistencia() - op.getCant());
+                p.setTotal(p.getTotal() + (op.getCant() * p.getPrecio()));
+                insertTable(p.getModeloPro(), p.getNombrePro(), op.getCant(), p.getPrecio());
+                Total.setText(p.getTotal() + "");
                 MN.actualizar(p, this);
                 status.setText("Agregado con exito..");
                 model.setText("");
@@ -1610,16 +1637,16 @@ public class PC extends javax.swing.JFrame {
                 storage.setText("");
                 priceOne.setText("");
                 Quantity.setText("");
-                
+
 //                int dialog = JOptionPane.DEFAULT_OPTION;
 //                JOptionPane.showConfirmDialog(null, "Articulo agregado exitosamente! :3","Saved successfully!",dialog);
-            }else{
+            } else {
                 int dialog = JOptionPane.DEFAULT_OPTION;
-                JOptionPane.showConfirmDialog(null, "Lo siento algunos datos son incorrectos :c","save error",dialog);
-                if (NumNote.getText().equals("")||
-                        p.getNo_nota().equals("XXXX")) {
+                JOptionPane.showConfirmDialog(null, "Lo siento algunos datos son incorrectos :c", "save error", dialog);
+                if (NumNote.getText().equals("")
+                        || p.getNo_nota().equals("XXXX")) {
                     JOptionPane.showConfirmDialog(null, "Numero de Nota vacia"
-                            + "\nIngresar Nota antes de agregar articulos","save error",dialog);
+                            + "\nIngresar Nota antes de agregar articulos", "save error", dialog);
                 }
 //                if (MN.verificarNote(p)||
 //                        NumNote.getText().equals("")||
@@ -1627,28 +1654,28 @@ public class PC extends javax.swing.JFrame {
 //                    JOptionPane.showConfirmDialog(null, "Numero de Nota Existente O vacia","save error",dialog);
 //                }
             }
-        }else{
+        } else {
             int dialog = JOptionPane.DEFAULT_OPTION;
-                JOptionPane.showConfirmDialog(null, "Lo siento algunos datos son incorrectos :c","save error",dialog);
-                if (NumNote.getText().equals("")||
-                        p.getNo_nota().equals("XXXX")) {
-                    JOptionPane.showConfirmDialog(null, "Numero de Nota vacia"
-                            + "\nIngresar Nota antes de agregar articulos","save error",dialog);
-                }
-        } 
+            JOptionPane.showConfirmDialog(null, "Lo siento algunos datos son incorrectos :c", "save error", dialog);
+            if (NumNote.getText().equals("")
+                    || p.getNo_nota().equals("XXXX")) {
+                JOptionPane.showConfirmDialog(null, "Numero de Nota vacia"
+                        + "\nIngresar Nota antes de agregar articulos", "save error", dialog);
+            }
+        }
     }//GEN-LAST:event_addProductActionPerformed
-    private void insertTable(String IDM,String Nombre,int Cantidad,Double precioU){
+    private void insertTable(String IDM, String Nombre, int Cantidad, Double precioU) {
         String SubT;
-        SubT=(Double.toString(Cantidad*precioU));
-        String cadena=IDM+"--"+Nombre+"--"+Cantidad+"--"+precioU+"--"+SubT+"--";
+        SubT = (Double.toString(Cantidad * precioU));
+        String cadena = IDM + "--" + Nombre + "--" + Cantidad + "--" + precioU + "--" + SubT + "--";
         StringTokenizer linea = new StringTokenizer(cadena, "--");///para convertir la cadena 
-                    Vector v = new Vector();///vector donde se guardan los elementos
-                    while (linea.hasMoreTokens()) {///si hay mas datos en la linea
-                        v.addElement(linea.nextToken());
-                    }
-                    System.out.println(v);
-                    mdl.addRow(v);
-                    
+        Vector v = new Vector();///vector donde se guardan los elementos
+        while (linea.hasMoreTokens()) {///si hay mas datos en la linea
+            v.addElement(linea.nextToken());
+        }
+        System.out.println(v);
+        mdl.addRow(v);
+
     }
     private void addProductMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductMouseReleased
         // TODO add your handling code here:
@@ -1685,10 +1712,10 @@ public class PC extends javax.swing.JFrame {
 
     private void Add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add1ActionPerformed
         // TODO add your handling code here:
-        
-         llenarclaseprovedores();
-         sqlprov.insertarprovedores(prov, this, agenda4, con);
- 
+
+        llenarclaseprovedores();
+        sqlprov.insertarprovedores(prov, this, agenda4, con);
+
     }//GEN-LAST:event_Add1ActionPerformed
 
     private void Add1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Add1MouseReleased
@@ -1757,6 +1784,12 @@ public class PC extends javax.swing.JFrame {
 
     private void buscar3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar3KeyReleased
         // TODO add your handling code here:
+        String filtro = buscar3.getText();
+        if (!filtro.equals("")) {
+            tr3.setRowFilter(RowFilter.regexFilter(filtro));
+        } else {
+            tr3.setRowFilter(null);
+        }
     }//GEN-LAST:event_buscar3KeyReleased
 
     private void NomprovKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NomprovKeyReleased
@@ -1782,46 +1815,40 @@ public class PC extends javax.swing.JFrame {
 
     private void jBGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardar1ActionPerformed
         // TODO add your handling code here:
-        try{
-            if(name1.getText().equals("") || ap1.getText().equals("") || am1.getText().equals("") || email1.getText().equals("") || nmm1.getText().equals("")
-                    || nmo1.getText().equals("")) mensaje("Upss! Faltan campos por llenar");
-            else{
-                
-            
-           
-                
-            
-         sqli=new SqLImagen();
-           
-         llenarclaseproductos();
-         
-                                    
-        
-        String s1=sqli.guardarProductos(con,cli.getModeloPro(), cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath());
-       
-       // String s1 = q.Insertar(con, "productos"," idmodelo, nombre, precio, existencia, clasificacion, provedores_id ", valores1);
-        if (s1 != null)
-        {    Mensaje.error(this, s1);
-            System.out.println("valio queso");
-        } else
-        {
-             System.out.println("Exito");
-             sqli.visualizar_tabla(agenda1, con);
-             //agregarProductos(cli.getModeloPro(),cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath().replace("\\","/"));
-        }
-            }     
-        
-        }catch(Exception e){
-            if(txtFile.getText().equals("")){
-                JOptionPane.showMessageDialog(this,"Falta Seleccionar una imagen ","Selecciona Imagen",JOptionPane.INFORMATION_MESSAGE);
+        try {
+            if (name1.getText().equals("") || ap1.getText().equals("") || am1.getText().equals("") || email1.getText().equals("") || nmm1.getText().equals("")
+                    || nmo1.getText().equals("")) {
+                mensaje("Upss! Faltan campos por llenar");
+            } else {
+
+                sqli = new SqLImagen();
+
+                llenarclaseproductos();
+
+                String s1 = sqli.guardarProductos(con, cli.getModeloPro(), cli.getNombrePro(), cli.getPrecio(), cli.getExistencia(), cli.getCategoria(), cli.getProvedMarca(), jf.getSelectedFile().getAbsolutePath());
+
+                // String s1 = q.Insertar(con, "productos"," idmodelo, nombre, precio, existencia, clasificacion, provedores_id ", valores1);
+                if (s1 != null) {
+                    Mensaje.error(this, s1);
+                    System.out.println("valio queso");
+                } else {
+                    System.out.println("Exito");
+                    sqli.visualizar_tabla(agenda1, con);
+                    //agregarProductos(cli.getModeloPro(),cli.getNombrePro(),cli.getPrecio(),cli.getExistencia(),cli.getCategoria(),cli.getProvedMarca(),jf.getSelectedFile().getAbsolutePath().replace("\\","/"));
+                }
+            }
+
+        } catch (Exception e) {
+            if (txtFile.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Falta Seleccionar una imagen ", "Selecciona Imagen", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-         
+
     }//GEN-LAST:event_jBGuardar1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-         con = ManipulaDBC.conectaDB();
+        con = ManipulaDBC.conectaDB();
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -1831,28 +1858,28 @@ public class PC extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         jf = new JFileChooser();
-        FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
+        jf = new JFileChooser();
+        FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
         jf.setFileFilter(fil);
         jf.setCurrentDirectory(new File("\\Downloads"));
         int el = jf.showOpenDialog(this);
-        if(el == JFileChooser.APPROVE_OPTION){
+        if (el == JFileChooser.APPROVE_OPTION) {
             //txtRuta.setText(jf.getSelectedFile().getAbsolutePath());
             txtFile.setText(jf.getSelectedFile().getName());
-           
+
             //lblFoto.setIcon(new ImageIcon(txtRuta.getText()));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void am1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_am1KeyTyped
         // TODO add your handling code here:
-        char c=evt.getKeyChar();
-        if(Character.isLetter(c) ) {
-		getToolkit().beep();
- 
-		evt.consume();
- 
-	}  
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+
+        }
     }//GEN-LAST:event_am1KeyTyped
 
     private void NomprovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomprovActionPerformed
@@ -1862,84 +1889,83 @@ public class PC extends javax.swing.JFrame {
 
     private void am1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_am1ActionPerformed
         // TODO add your handling code here:
-        email1.requestFocus ();
+        email1.requestFocus();
     }//GEN-LAST:event_am1ActionPerformed
 
     private void email1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email1ActionPerformed
         // TODO add your handling code here:
-        nmm1.requestFocus ();
+        nmm1.requestFocus();
     }//GEN-LAST:event_email1ActionPerformed
 
     private void nmm1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nmm1ActionPerformed
         // TODO add your handling code here:
-        nmo1.requestFocus ();
+        nmo1.requestFocus();
     }//GEN-LAST:event_nmm1ActionPerformed
 
     private void NavStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_NavStateChanged
         // TODO add your handling code here:
-         System.out.println();
-           if (evt.getSource() instanceof JTabbedPane) {
-             
-                            JTabbedPane pane = (JTabbedPane) evt.getSource();
-                            noTabPane=pane.getSelectedIndex();
-                           switch(pane.getSelectedIndex()){
-                               case 0:
-                                   
-                               break;    
-                               case 1:
-                                   
-                               sqli.visualizar_tabla(agenda1, con);
-                               break;
-                               case 2:
-                               sqlcli.vizualizar_tabla(agenda, con);
-                               break;    
-                               case 3:
-                               sqlentr.vizualizar_tabla(agenda3, con);
-                               break;
-                               case 4:
-                               sqlprov.visualizar_tabla(agenda4, con);
-                                   
-                               break;    
-                               case 5:
-                               sqlbita.vizualizar_tabla(agenda5, con);
-                               
-                               break;
-                               
-                           }
+        System.out.println();
+        if (evt.getSource() instanceof JTabbedPane) {
+
+            JTabbedPane pane = (JTabbedPane) evt.getSource();
+            noTabPane = pane.getSelectedIndex();
+            switch (pane.getSelectedIndex()) {
+                case 0:
+
+                    break;
+                case 1:
+
+                    sqli.visualizar_tabla(agenda1, con);
+                    break;
+                case 2:
+                    sqlcli.vizualizar_tabla(agenda, con);
+                    break;
+                case 3:
+                    sqlentr.vizualizar_tabla(agenda3, con);
+                    break;
+                case 4:
+                    sqlprov.visualizar_tabla(agenda4, con);
+
+                    break;
+                case 5:
+                    sqlbita.vizualizar_tabla(agenda5, con);
+
+                    break;
+
             }
-        
+        }
+
     }//GEN-LAST:event_NavStateChanged
 
     private void Eliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar1ActionPerformed
         // TODO add your handling code here:
         System.out.println("hola?");
-          
-         
-                           switch( noTabPane){
-                               case 0:
-                                   
-                               break;    
-                               
-                               case 2:
-                               sqlcli.elimnar(agenda, con);
-                               break;    
-                               case 3:
-                               sqlentr.elimnar(agenda3, con);
-                               break;
-                               case 4:
-                               sqlprov.elimnar(agenda4, con);  
-                               break;    
-                               case 5:
-                               sqlbita.elimnar(agenda5, con);
-                               break;
-                               
-                           }
-            
+
+        switch (noTabPane) {
+            case 0:
+
+                break;
+
+            case 2:
+                sqlcli.elimnar(agenda, con);
+                break;
+            case 3:
+                sqlentr.elimnar(agenda3, con);
+                break;
+            case 4:
+                sqlprov.elimnar(agenda4, con);
+                break;
+            case 5:
+                sqlbita.elimnar(agenda5, con);
+                break;
+
+        }
+
     }//GEN-LAST:event_Eliminar1ActionPerformed
 
     private void jMenuEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEliminarActionPerformed
         // TODO add your handling code here:
-         sqli.elimnar(agenda1, con);
+        sqli.elimnar(agenda1, con);
     }//GEN-LAST:event_jMenuEliminarActionPerformed
 
     private void jMenuCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCargarActionPerformed
@@ -1949,17 +1975,17 @@ public class PC extends javax.swing.JFrame {
 
     private void agenda1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agenda1KeyReleased
         // TODO add your handling code here:
-          if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-          sqli.Modificarcargado(agenda1, con);  
-       }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            sqli.Modificarcargado(agenda1, con);
+        }
     }//GEN-LAST:event_agenda1KeyReleased
 
     private void agenda4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agenda4KeyReleased
         // TODO add your handling code here:
-         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-          sqlprov.modificar(agenda4,con);  
-       }
-             
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            sqlprov.modificar(agenda4, con);
+        }
+
     }//GEN-LAST:event_agenda4KeyReleased
 
     private void countedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countedActionPerformed
@@ -1988,16 +2014,26 @@ public class PC extends javax.swing.JFrame {
 
     private void modelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_modelKeyReleased
         // Busqueda Model:
-        p.setModeloPro(model.getText());
-        p=MN.BusquedaModel(p);
-        nameProduct.setText(p.getNombrePro());
-        storage.setText(Integer.toString(p.getExistencia()));
-        priceOne.setText(Double.toString(p.getPrecio()));
-        status.setText("");
+        if (!model.equals(null)) {
+            p.setModeloPro(model.getText());
+            p = MN.BusquedaM(p,this);
+            System.out.println(p.getNombrePro()+","+p.getExistencia()+","+p.getPrecio());
+            nameProduct.setText(p.getNombrePro());
+            storage.setText(Integer.toString(p.getExistencia()));
+            priceOne.setText(Double.toString(p.getPrecio()));
+            status.setText("");
+        }else{
+            System.out.println(p.getNombrePro()+","+p.getExistencia()+","+p.getPrecio());
+            nameProduct.setText("");
+            storage.setText("");
+            priceOne.setText("");
+            status.setText("");
+        }
+
     }//GEN-LAST:event_modelKeyReleased
 
     private void buscar3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar3KeyTyped
-        // TODO add your handling code here:
+//        // TODO add your handling code here:
            buscar3.addKeyListener(new KeyAdapter(){
            
             @Override
@@ -2028,22 +2064,22 @@ public class PC extends javax.swing.JFrame {
 
     private void agendaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agendaKeyReleased
         // TODO add your handling code here:
-          if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-       sqlcli.modificar(agenda, con);
-          }
-             
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            sqlcli.modificar(agenda, con);
+        }
+
     }//GEN-LAST:event_agendaKeyReleased
 
     private void agenda3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agenda3KeyReleased
         // TODO add your handling code here:
-           if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-             sqlentr.modificar(agenda3,con);  
-       }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            sqlentr.modificar(agenda3, con);
+        }
     }//GEN-LAST:event_agenda3KeyReleased
 
     private void buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyTyped
         // TODO add your handling code here:
-        
+
            buscar.addKeyListener(new KeyAdapter(){
            
             @Override
@@ -2059,30 +2095,30 @@ public class PC extends javax.swing.JFrame {
 
     private void jArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jArticulosActionPerformed
         // TODO add your handling code here:
-          
-                           switch( noTabPane){
-                               case 0:
-                                   
-                               break;    
-                               
-                               case 2:
-                                validaproductos(agenda);
-                               break;    
-                               case 3:
-                                validaproductos(agenda3);
-                               break;
-                               case 4:
-                               
-                               break;    
-                               case 5:
-                              
-                               break;
-                               
-                           }
-        
+
+        switch (noTabPane) {
+            case 0:
+
+                break;
+
+            case 2:
+                validaproductos(agenda);
+                break;
+            case 3:
+                validaproductos(agenda3);
+                break;
+            case 4:
+
+                break;
+            case 5:
+
+                break;
+
+        }
+
     }//GEN-LAST:event_jArticulosActionPerformed
-    public void llenarclaseproductos(){
-        cli= new clientes();
+    public void llenarclaseproductos() {
+        cli = new clientes();
         cli.setModeloPro(name1.getText());
         cli.setNombrePro(ap1.getText());
         cli.setPrecio(Double.parseDouble(am1.getText()));
@@ -2090,36 +2126,38 @@ public class PC extends javax.swing.JFrame {
         cli.setExistencia(Integer.parseInt(nmm1.getText()));
         cli.setCategoria(nmo1.getText());
     }
-    public void llenarclaseprovedores(){
-        prov=new Provedores();
+
+    public void llenarclaseprovedores() {
+        prov = new Provedores();
         prov.setNombre(Nomprov.getText());
         prov.setCorreo(emailprov.getText());
         prov.setTipoMer(mercprov.getText());
         prov.setDireccion(dirccprove.getText());
         prov.setTelefono(telprov.getText());
     }
-     public void mensaje(String texto){
+
+    public void mensaje(String texto) {
         JOptionPane.showMessageDialog(null, texto);
     }
-     
-     public  void validaproductos(JTable tbl){
-            
-         try{
+
+    public void validaproductos(JTable tbl) {
+
+        try {
             //Guardamos en un entero la fila seleccionada.
-            int filaseleccionada =tbl.getSelectedRow();
-            
-            if (filaseleccionada == -1){
+            int filaseleccionada = tbl.getSelectedRow();
+
+            if (filaseleccionada == -1) {
                 JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila.");
-                
+
             } else {
-              ConsultaArt art= new ConsultaArt(tbl.getValueAt(tbl.getSelectedRow(),0).toString());
-              art.setVisible(true);
-            
+                ConsultaArt art = new ConsultaArt(tbl.getValueAt(tbl.getSelectedRow(), 0).toString());
+                art.setVisible(true);
+
             }
-        }catch (HeadlessException ex){
-            JOptionPane.showMessageDialog(null, "Error: "+ex+"\nInténtelo nuevamente", " .::Error En la Operacion::." ,JOptionPane.ERROR_MESSAGE);
-        }   
-     }
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente", " .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 //     public void agregarProductos(String mod,String nom,Double preci, int exis,String cate,String provM,String im){
 //      atm.addRow(new Object[]{
 //          mod,nom,preci,exis,cate,provM,new JLabel(reducirtamamo(im))
@@ -2134,6 +2172,7 @@ public class PC extends javax.swing.JFrame {
 //      return imgfinal;
 //   }
 //   
+
     /**
      * @param args the command line arguments
      */
