@@ -26,14 +26,19 @@ import metodos.Querys;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -45,6 +50,13 @@ import metodos.SqLNotas;
 import metodos.SqLProvedores;
 import metodos.SqLclientes;
 import metodos.SqlBitacora;
+import metodos.Conexion;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -1482,7 +1494,31 @@ public class PC extends javax.swing.JFrame {
     }//GEN-LAST:event_ap1ActionPerformed
 
     private void Minimize1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Minimize1ActionPerformed
-
+        try{
+        Conexion con= new Conexion();
+        Connection conn;
+        conn= ManipulaDBC.conectaDB();;
+        
+                    JasperReport reporte = null;
+            String path = "src\\reportes\\reportEntregasHz.jasper";
+            
+            Map parametro = new HashMap();
+            //parametro.put("id_estado", 36);
+            
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, conn); //Sustituir null por parametro
+            
+            JasperViewer view = new JasperViewer(jprint, false);
+            
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            
+            view.setVisible(true);
+            
+        } catch (JRException ex) {
+            Logger.getLogger(PC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_Minimize1ActionPerformed
 
     private void agenda3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agenda3MouseClicked
@@ -1836,7 +1872,30 @@ public class PC extends javax.swing.JFrame {
     }//GEN-LAST:event_agenda5MouseClicked
 
     private void Minimize2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Minimize2ActionPerformed
-        // TODO add your handling code here:
+        try{
+        Conexion con= new Conexion();
+        Connection conn;
+        conn= ManipulaDBC.conectaDB();;
+        
+                    JasperReport reporte = null;
+            String path = "src\\reportes\\reportbitacora.jasper";
+            
+            Map parametro = new HashMap();
+            //parametro.put("id_estado", 36);
+            
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, conn); //Sustituir null por parametro
+            
+            JasperViewer view = new JasperViewer(jprint, false);
+            
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            
+            view.setVisible(true);
+            
+        } catch (JRException ex) {
+            Logger.getLogger(PC.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Minimize2ActionPerformed
 
     private void jBGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardar1ActionPerformed
