@@ -39,7 +39,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`clientes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`clientes` (
-  `idclientes` INT NOT NULL,
+  `idclientes` BIGINT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `APaterno` VARCHAR(45) NOT NULL,
   `Amaterno` VARCHAR(45) NOT NULL,
@@ -55,7 +55,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`notas` (
   `nota` VARCHAR(45) NOT NULL,
   `total` double NOT NULL,
-  `no_cliente` INT NOT NULL,
+  `no_cliente` BIGINT NOT NULL,
   `fecha_nota` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`nota`),
   CONSTRAINT `no_cliente`

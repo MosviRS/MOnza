@@ -1803,6 +1803,9 @@ public class PC extends javax.swing.JFrame {
 
     private void mercprovMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mercprovMouseClicked
         // TODO add your handling code here:
+         if (mercprov.getText().equals("Inserta Mercancia")) {
+            mercprov.setText("");
+        }
     }//GEN-LAST:event_mercprovMouseClicked
 
     private void telprovKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telprovKeyReleased
@@ -1816,6 +1819,9 @@ public class PC extends javax.swing.JFrame {
 
     private void telprovMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_telprovMouseClicked
         // TODO add your handling code here:
+         if (telprov.getText().equals("Inserta Telefono")) {
+            telprov.setText("");
+        }
     }//GEN-LAST:event_telprovMouseClicked
 
     private void emailprovKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailprovKeyReleased
@@ -1829,6 +1835,10 @@ public class PC extends javax.swing.JFrame {
 
     private void emailprovMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailprovMouseClicked
         // TODO add your handling code here:
+         if (emailprov.getText().equals("Inserta Correo Electronico")) {
+            emailprov.setText("");
+        }
+        
     }//GEN-LAST:event_emailprovMouseClicked
 
     private void dirccproveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dirccproveKeyReleased
@@ -1842,6 +1852,9 @@ public class PC extends javax.swing.JFrame {
 
     private void dirccproveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dirccproveMouseClicked
         // TODO add your handling code here:
+         if (dirccprove.getText().equals("Inserta Dirección")) {
+            dirccprove.setText("");
+        }
     }//GEN-LAST:event_dirccproveMouseClicked
 
     private void buscar3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar3KeyReleased
@@ -1862,7 +1875,7 @@ public class PC extends javax.swing.JFrame {
 
     private void NomprovMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NomprovMouseClicked
         // TODO add your handling code here:
-        if (Nomprov.getText().equals("Inserta un correo electronico")) {
+        if (Nomprov.getText().equals("Inserta Nombre")) {
             Nomprov.setText("");
         }
     }//GEN-LAST:event_NomprovMouseClicked

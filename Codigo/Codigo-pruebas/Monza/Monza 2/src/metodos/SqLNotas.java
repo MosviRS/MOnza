@@ -386,7 +386,7 @@ public class SqLNotas {
         ArrayList dt = new ArrayList();
         con = ManipulaDBC.conectaDB();
         Querys Qy = new Querys();
-        String cond = "idmodelo=" + p.getModeloPro();
+        String cond = "idmodelo='" + p.getModeloPro()+"'";
         dt = Qy.Seleccion(con, " idmodelo, nombre, existencia, precio ", "productos", cond);
         if (dt.get(0).equals("Sindatos")) {
             p.setNombrePro("");
@@ -403,6 +403,7 @@ public class SqLNotas {
 //        System.out.println(cad.replace(" ", ""));
             if (dt.get(0).equals(p.getModeloPro())) {
                 p.setNombrePro(cad[0]);
+              
                 p.setExistencia(Integer.parseInt(cad[1]));
                 p.setPrecio(Double.parseDouble(cad[2]));
             }

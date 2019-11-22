@@ -7,6 +7,7 @@ package PanelConrtrol;
 import LogIn.*;
 import Entidades.Usuario;
 import clases.Hash;
+import clases.editTabletrue;
 //import com.mysql.cj.Session;
 //import com.mysql.cj.protocol.Message;
 //import com.sun.jdi.connect.Transport;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Base64.Decoder;
 import java.util.Properties;
+import java.util.Vector;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.*;
@@ -27,6 +29,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import metodos.ManipulaDBC;
 import metodos.PasswordGenerator;
 import metodos.SqlUsuarios;
@@ -42,6 +46,7 @@ public class ConsultaArt extends javax.swing.JFrame {
         Connection con;
         String value;
          ArrayList<Object> arr= new ArrayList();
+           DefaultTableModel atm;
     /**
      * Creates new form olv2
      */
@@ -146,16 +151,9 @@ public class ConsultaArt extends javax.swing.JFrame {
                 "Cantidad", "Articulos", "Modelo", "Precio"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, true, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -189,15 +187,15 @@ public class ConsultaArt extends javax.swing.JFrame {
     }//GEN-LAST:event_MinimizeActionPerformed
 
     private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
-        int dialog = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "Desea regresar al inicio?","Exit",dialog);
-        if (result==0){
-            java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LogIn().setVisible(true);
-            }
-        });
-        }
+//        int dialog = JOptionPane.YES_NO_OPTION;
+//        int result = JOptionPane.showConfirmDialog(null, "Desea regresar al inicio?","Exit",dialog);
+//        if (result==0){
+//            java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new LogIn().setVisible(true);
+//            }
+//        });
+//        }
         this.dispose();
     }//GEN-LAST:event_CloseActionPerformed
 
@@ -219,14 +217,31 @@ public class ConsultaArt extends javax.swing.JFrame {
         
          arr=sqlproc.vizualizar_tabla(TablaPri, con,value);
          if(arr!=null){
-              llenar();
+              llenar(TablaPri);
          }
       
     }//GEN-LAST:event_formWindowOpened
-   public void llenar(){
+   public void llenar(JTable TablaPri){
+        atm=new editTabletrue();
+           String []titulo=new String[] {"Cantidad","Articulo","Modelo","Precio"};
+           atm.setColumnIdentifiers(titulo);
        jLnotapro.setText("No. Nota: "+arr.get(0).toString());
        jLabel2.setText("Nombre del Cliente: "+arr.get(1).toString()+" "+arr.get(2).toString()+" "+arr.get(3).toString());
+         for (int i =4; i < arr.size(); i=i+8) {
+              atm.addRow(new Object[]{
+               arr.get(i),arr.get(i+1),arr.get(i+2),arr.get(i+3)
+           });
+             
+           }
+             
+         TablaPri.setRowHeight(16);
+         TablaPri.setModel(atm);
    }
+//        public  DefaultTableModel agregarProductos(String mod,String nom,Double preci, int exis,String cate,String provM,String im){
+//      atm.addRow(new Object[]{
+//          
+//      });
+//   }
     /**
      * @param args the command line arguments
      */
