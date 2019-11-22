@@ -5,6 +5,7 @@
  */
 package PanelConrtrol;
 
+import Entidades.Usuario;
 import LogIn.LogIn;
 import static PanelConrtrol.PC.email1;
 import java.sql.Connection;
@@ -24,6 +25,7 @@ public class InfoClientes extends javax.swing.JFrame {
     PC claasepc;
     Connection con;
     SqLNotas sqlnotas= new SqLNotas();
+    Usuario mod=new Usuario();
     public InfoClientes() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -331,7 +333,7 @@ public class InfoClientes extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PanelConrtrol.PC().setVisible(true);
+                new PanelConrtrol.PC(mod).setVisible(true);
             }
         });
         this.dispose();
@@ -386,7 +388,8 @@ public class InfoClientes extends javax.swing.JFrame {
                 JOptionPane.showConfirmDialog(null, "Nota registrada con exito! :3","Saved successfully!",dialog);
                   java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PC().setVisible(true);
+                claasepc.p.setTotal(0);
+                new PC(mod).setVisible(true);
             }
         });
          

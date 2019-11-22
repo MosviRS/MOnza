@@ -52,7 +52,7 @@ import metodos.SqlBitacora;
  */
 public class PC extends javax.swing.JFrame {
 
-    Usuario mod;
+    public static Usuario mod;
     Connection con;
     clientes cli;
     Provedores prov;
@@ -75,6 +75,8 @@ public class PC extends javax.swing.JFrame {
     LogIn L = new LogIn();
     public static ArrayList<String> auxrr = new ArrayList();
     TableRowSorter<TableModel> tr, tr1, tr2, tr3;
+    Date dt = new Date();
+    Mensaje mj = new Mensaje();
 
     /**
      * Creates new form Registro
@@ -86,6 +88,57 @@ public class PC extends javax.swing.JFrame {
         //Nav.setEnabledAt(4, false);
         ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
         this.setIconImage(icon.getImage());
+    }
+
+    public PC(Usuario mod) {
+        initComponents();
+        this.mod = mod;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Panel de Control");
+        //Nav.setEnabledAt(4, false);
+        ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
+        this.setIconImage(icon.getImage());
+        US.setText("User:" + L.us);
+        System.out.println(mod.getTipo());
+        if (mod.getTipo() == 1) {
+
+            Nav.setEnabledAt(0, true);
+            Nav.setEnabledAt(1, true);
+            Nav.setEnabledAt(2, true);
+            Nav.setEnabledAt(3, true);
+            Nav.setEnabledAt(4, true);
+            Nav.setEnabledAt(5, true);
+
+        } else if (mod.getTipo() == 2) {
+            Nav.setEnabledAt(0, true);
+            Nav.setEnabledAt(1, true);
+            Nav.setEnabledAt(2, true);
+            Nav.setEnabledAt(3, true);
+            Nav.setEnabledAt(4, true);
+            Nav.setEnabledAt(5, false);
+        }
+
+        String[] titulo1 = new String[]{"Modelo", "Nombre", "Precio", "Marca/Provedor", "Cantidad", "Categoria", "Imagen"};
+        agenda1.setDefaultRenderer(Object.class, new IMGtabla());
+        atm.setColumnIdentifiers(titulo1);
+        agenda1.setRowHeight(70);
+        agenda1.setModel(atm);
+        //         Tabla Productos
+//        DefaultTableModel mdlPR = (DefaultTableModel) agenda1.getModel();
+//        agenda1.getModel();
+//        tr = new TableRowSorter<>(mdlPR);
+//        agenda1.setRowSorter(tr);
+////         Tabla Clientes
+//        DefaultTableModel mdlCl = (DefaultTableModel) agenda.getModel();
+//        agenda.getModel();
+//        tr1 = new TableRowSorter<>(mdlCl);
+//        agenda.setRowSorter(tr1);
+////         Tabla Entregas
+//        DefaultTableModel mdlE = (DefaultTableModel) agenda3.getModel();
+//        agenda3.getModel();
+//        tr2 = new TableRowSorter<>(mdlE);
+//        agenda3.setRowSorter(tr2);
+
         String[] titulo = new String[]{"Nombre", "Descripcion", "PrecioG", "precioN", "Imagen"};
 
         //TablaNotas
@@ -112,55 +165,10 @@ public class PC extends javax.swing.JFrame {
         agenda4.getModel();
         tr = new TableRowSorter<>(mdlP);
         agenda4.setRowSorter(tr3);
-
-    }
-
-    public PC(Usuario mod) {
-        initComponents();
-        this.mod = mod;
-        this.setLocationRelativeTo(null);
-        this.setTitle("Registro");
-        //Nav.setEnabledAt(4, false);
-        ImageIcon icon = new ImageIcon("src/IMGM/LogoMonza.png");
-        this.setIconImage(icon.getImage());
-        if (mod.getTipo() == 1) {
-
-            Nav.setEnabledAt(0, true);
-            Nav.setEnabledAt(1, true);
-            Nav.setEnabledAt(2, true);
-            Nav.setEnabledAt(3, true);
-            Nav.setEnabledAt(4, true);
-            Nav.setEnabledAt(5, true);
-
-        } else if (mod.getTipo() == 2) {
-            Nav.setEnabledAt(0, true);
-            Nav.setEnabledAt(1, true);
-            Nav.setEnabledAt(2, true);
-            Nav.setEnabledAt(3, true);
-            Nav.setEnabledAt(4, true);
-            Nav.setEnabledAt(5, false);
-        }
-
-        String[] titulo = new String[]{"Modelo", "Nombre", "Precio", "Marca/Provedor", "Cantidad", "Categoria", "Imagen"};
-        agenda1.setDefaultRenderer(Object.class, new IMGtabla());
-        atm.setColumnIdentifiers(titulo);
-        agenda1.setRowHeight(70);
-        agenda1.setModel(atm);
-        //         Tabla Productos
-        DefaultTableModel mdlPR = (DefaultTableModel) agenda1.getModel();
-        agenda1.getModel();
-        tr = new TableRowSorter<>(mdlPR);
-        agenda1.setRowSorter(tr);
-//         Tabla Clientes
-        DefaultTableModel mdlCl = (DefaultTableModel) agenda.getModel();
-        agenda.getModel();
-        tr1 = new TableRowSorter<>(mdlCl);
-        agenda.setRowSorter(tr1);
-//         Tabla Entregas
-        DefaultTableModel mdlE = (DefaultTableModel) agenda3.getModel();
-        agenda3.getModel();
-        tr2 = new TableRowSorter<>(mdlE);
-        agenda3.setRowSorter(tr2);
+        dateofpurchase.setDate(dt);
+        dateB.setDate(dt);
+        dateB.setEnabled(false);
+//        Date1.setText("Fecha : " + dateofpurchase.getDate().getDay()+"/"+dateofpurchase.getDate().getMonth()+"/"+dateofpurchase.getDate().getYear());
 
     }
 
@@ -294,11 +302,13 @@ public class PC extends javax.swing.JFrame {
         agenda5 = new javax.swing.JTable();
         Date1 = new javax.swing.JLabel();
         Minimize2 = new javax.swing.JButton();
+        dateB = new com.toedter.calendar.JDateChooser();
         jPanel10 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         Shutdown = new javax.swing.JButton();
         Minimize = new javax.swing.JButton();
         Close = new javax.swing.JButton();
+        US = new javax.swing.JLabel();
 
         jMenuEliminar.setText("Eliminar");
         jMenuEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -583,6 +593,11 @@ public class PC extends javax.swing.JFrame {
         NumNote.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 NumNoteMouseClicked(evt);
+            }
+        });
+        NumNote.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                NumNoteKeyReleased(evt);
             }
         });
         Nota.add(NumNote, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 100, 20));
@@ -934,6 +949,9 @@ public class PC extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscar2KeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                buscar2KeyTyped(evt);
+            }
         });
         Entregas.add(buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 170, -1));
 
@@ -1276,8 +1294,8 @@ public class PC extends javax.swing.JFrame {
         Bitacora.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 960, 430));
 
         Date1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        Date1.setText("Fecha: XXXXXX");
-        Bitacora.add(Date1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 170, 40));
+        Date1.setText("Fecha: ");
+        Bitacora.add(Date1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 50, 30));
 
         Minimize2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         Minimize2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/pdf-40.png"))); // NOI18N
@@ -1295,6 +1313,9 @@ public class PC extends javax.swing.JFrame {
             }
         });
         Bitacora.add(Minimize2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, 40));
+
+        dateB.setBackground(new java.awt.Color(243, 240, 235));
+        Bitacora.add(dateB, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, 150, -1));
 
         Nav.addTab("Bitacora", Bitacora);
 
@@ -1353,6 +1374,11 @@ public class PC extends javax.swing.JFrame {
             }
         });
         jPanel10.add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 10, -1, 40));
+
+        US.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        US.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGM/UserPC.png"))); // NOI18N
+        US.setText("User:");
+        jPanel10.add(US, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 280, -1));
 
         getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 630));
 
@@ -1436,12 +1462,12 @@ public class PC extends javax.swing.JFrame {
 
     private void buscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyReleased
         // TODO add your handling code here:
-        String filtro = buscar1.getText();
-        if (!filtro.equals("")) {
-            tr.setRowFilter(RowFilter.regexFilter(filtro));
-        } else {
-            tr.setRowFilter(null);
-        }
+//        String filtro = buscar1.getText();
+//        if (!filtro.equals("")) {
+//            tr.setRowFilter(RowFilter.regexFilter(filtro));
+//        } else {
+//            tr.setRowFilter(null);
+//        }
     }//GEN-LAST:event_buscar1KeyReleased
 
     private void name1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name1ActionPerformed
@@ -1465,12 +1491,12 @@ public class PC extends javax.swing.JFrame {
 
     private void buscar2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar2KeyReleased
         // TODO add your handling code here:
-        String filtro = buscar2.getText();
-        if (!filtro.equals("")) {
-            tr2.setRowFilter(RowFilter.regexFilter(filtro));
-        } else {
-            tr2.setRowFilter(null);
-        }
+//        String filtro = buscar2.getText();
+//        if (!filtro.equals("")) {
+//            tr2.setRowFilter(RowFilter.regexFilter(filtro));
+//        } else {
+//            tr2.setRowFilter(null);
+//        }
     }//GEN-LAST:event_buscar2KeyReleased
 
     private void agendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agendaMouseClicked
@@ -1507,12 +1533,12 @@ public class PC extends javax.swing.JFrame {
 
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
         //        // TODO add your handling code here:
-        String filtro = buscar.getText();
-        if (!filtro.equals("")) {
-            tr1.setRowFilter(RowFilter.regexFilter(filtro));
-        } else {
-            tr1.setRowFilter(null);
-        }
+//        String filtro = buscar.getText();
+//        if (!filtro.equals("")) {
+//            tr1.setRowFilter(RowFilter.regexFilter(filtro));
+//        } else {
+//            tr1.setRowFilter(null);
+//        }
     }//GEN-LAST:event_buscarKeyReleased
 
     private void CleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanActionPerformed
@@ -1784,12 +1810,12 @@ public class PC extends javax.swing.JFrame {
 
     private void buscar3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar3KeyReleased
         // TODO add your handling code here:
-        String filtro = buscar3.getText();
-        if (!filtro.equals("")) {
-            tr3.setRowFilter(RowFilter.regexFilter(filtro));
-        } else {
-            tr3.setRowFilter(null);
-        }
+//        String filtro = buscar3.getText();
+//        if (!filtro.equals("")) {
+//            tr3.setRowFilter(RowFilter.regexFilter(filtro));
+//        } else {
+//            tr3.setRowFilter(null);
+//        }
     }//GEN-LAST:event_buscar3KeyReleased
 
     private void NomprovKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NomprovKeyReleased
@@ -2014,16 +2040,19 @@ public class PC extends javax.swing.JFrame {
 
     private void modelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_modelKeyReleased
         // Busqueda Model:
-        if (!model.equals(null)) {
+        if (!model.equals("")) {
             p.setModeloPro(model.getText());
-            p = MN.BusquedaM(p,this);
-            System.out.println(p.getNombrePro()+","+p.getExistencia()+","+p.getPrecio());
+            try {
+                p = MN.BusquedaM(p, this);
+            } catch (Exception e) {
+            }
+            System.out.println(p.getNombrePro() + "," + p.getExistencia() + "," + p.getPrecio());
             nameProduct.setText(p.getNombrePro());
             storage.setText(Integer.toString(p.getExistencia()));
             priceOne.setText(Double.toString(p.getPrecio()));
             status.setText("");
-        }else{
-            System.out.println(p.getNombrePro()+","+p.getExistencia()+","+p.getPrecio());
+        } else {
+            System.out.println(p.getNombrePro() + "," + p.getExistencia() + "," + p.getPrecio());
             nameProduct.setText("");
             storage.setText("");
             priceOne.setText("");
@@ -2034,31 +2063,31 @@ public class PC extends javax.swing.JFrame {
 
     private void buscar3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar3KeyTyped
 //        // TODO add your handling code here:
-           buscar3.addKeyListener(new KeyAdapter(){
-           
+        String filtro = buscar3.getText();
+        buscar3.addKeyListener(new KeyAdapter() {
+
             @Override
-            public void keyReleased(KeyEvent ke){
-                tbfil.setRowFilter(RowFilter.regexFilter("(?i)"+buscar3.getText(),1));
+            public void keyReleased(KeyEvent ke) {
+                tbfil.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
             }
-            
-           
+
         });
-        tbfil=new TableRowSorter(agenda4.getModel());
+        tbfil = new TableRowSorter(agenda4.getModel());
         agenda4.setRowSorter(tbfil);
     }//GEN-LAST:event_buscar3KeyTyped
 
     private void buscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyTyped
         // TODO add your handling code here:
-        buscar1.addKeyListener(new KeyAdapter(){
-           
+        String filtro = buscar1.getText();
+        buscar1.addKeyListener(new KeyAdapter() {
+
             @Override
-            public void keyReleased(KeyEvent ke){
-                tbfil.setRowFilter(RowFilter.regexFilter("(?i)"+buscar1.getText(),1));
+            public void keyReleased(KeyEvent ke) {
+                tbfil.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
             }
-            
-           
+
         });
-        tbfil=new TableRowSorter(agenda1.getModel());
+        tbfil = new TableRowSorter(agenda1.getModel());
         agenda1.setRowSorter(tbfil);
     }//GEN-LAST:event_buscar1KeyTyped
 
@@ -2079,17 +2108,18 @@ public class PC extends javax.swing.JFrame {
 
     private void buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyTyped
         // TODO add your handling code here:
+        String filtro = buscar.getText();
 
-           buscar.addKeyListener(new KeyAdapter(){
-           
+        buscar.addKeyListener(new KeyAdapter() {
+
             @Override
-            public void keyReleased(KeyEvent ke){
-                tbfil.setRowFilter(RowFilter.regexFilter("(?i)"+buscar.getText(),0));
+            public void keyReleased(KeyEvent ke) {
+                tbfil.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
+                //  tbfil.setRowFilter(RowFilter.regexFilter("(?i)"+buscar.getText(),0));
             }
-            
-           
+
         });
-        tbfil=new TableRowSorter(agenda.getModel());
+        tbfil = new TableRowSorter(agenda.getModel());
         agenda.setRowSorter(tbfil);
     }//GEN-LAST:event_buscarKeyTyped
 
@@ -2117,6 +2147,33 @@ public class PC extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jArticulosActionPerformed
+
+    private void buscar2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar2KeyTyped
+        // TODO add your handling code here:
+        String filtro = buscar2.getText();
+        buscar2.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                tbfil.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
+            }
+
+        });
+        tbfil = new TableRowSorter(agenda3.getModel());
+        agenda3.setRowSorter(tbfil);
+    }//GEN-LAST:event_buscar2KeyTyped
+
+    private void NumNoteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NumNoteKeyReleased
+        // TODO add your handling code here:
+        p.setNo_nota(NumNote.getText());
+        if (MN.VerificacionNota(p, L)) {
+            System.out.println("Nota existe");
+            mj.error(this, "Error!\n No. de Nota existente intente con otro");
+            NumNote.setText("");
+        } else {
+            System.out.println("Nota no Exite");
+        }
+    }//GEN-LAST:event_NumNoteKeyReleased
     public void llenarclaseproductos() {
         cli = new clientes();
         cli.setModeloPro(name1.getText());
@@ -2200,11 +2257,11 @@ public class PC extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PC().setVisible(true);
+                new PC(mod).setVisible(true);
             }
         });
     }
@@ -2238,6 +2295,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JButton Shutdown;
     private javax.swing.JTable TNote;
     private javax.swing.JLabel Total;
+    private javax.swing.JLabel US;
     private javax.swing.JButton addProduct;
     private javax.swing.JTable agenda;
     private javax.swing.JTable agenda1;
@@ -2252,6 +2310,7 @@ public class PC extends javax.swing.JFrame {
     private javax.swing.JTextField buscar3;
     public static javax.swing.JRadioButton counted;
     public static javax.swing.JRadioButton credit;
+    private com.toedter.calendar.JDateChooser dateB;
     private com.toedter.calendar.JDateChooser dateofpurchase;
     private javax.swing.JTextField dirccprove;
     public static javax.swing.JTextField email1;

@@ -347,7 +347,7 @@ public class LogIn extends javax.swing.JFrame {
                         us=mod.getUser();
                             java.awt.EventQueue.invokeLater(new Runnable() {
                             public void run() {
-                                  new PC().setVisible(true);
+                                  new PC(mod).setVisible(true);
                             }
                           });
 //                        PC ir= new PC(mod);//Permitir acceso a PC

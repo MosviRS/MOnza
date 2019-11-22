@@ -207,6 +207,7 @@ public class Querys
             
         } catch (Exception e)
         {
+             reg.add("Sindatos");
              System.out.println("Exception, no hay datos");
         }
         return reg;

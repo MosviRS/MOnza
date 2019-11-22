@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
  */
 public class SqLNotas {
 
+    Mensaje mj = new Mensaje();
     PreparedStatement ps = null;//Objeto que permite usar declaraciones preparadas por la libreria para un facil acceso a MySql
     ResultSet rs = null;//Muestra Datos almacenados en la BD
     Connection con;//objeto que permite la conexion a la BD(MySql)
@@ -387,7 +388,7 @@ public class SqLNotas {
         Querys Qy = new Querys();
         String cond = "idmodelo=" + p.getModeloPro();
         dt = Qy.Seleccion(con, " idmodelo, nombre, existencia, precio ", "productos", cond);
-        if (dt.equals(null)) {
+        if (dt.get(0).equals("Sindatos")) {
             p.setNombrePro("");
             p.setExistencia(0);
             p.setPrecio(0.0);
@@ -409,4 +410,27 @@ public class SqLNotas {
 
         return p;
     }
+
+    public boolean VerificacionNota(clientes p, JFrame m) {
+        ArrayList dt = new ArrayList();
+        con = ManipulaDBC.conectaDB();
+        Querys Qy = new Querys();
+        String cond = "nota_abono=" + p.getNo_nota();
+        dt = Qy.Seleccion(con, " nota_abono ", "abono", cond);
+        if (dt.get(0).equals("Sindatos")) {
+            return false;
+        } else {
+            String cad=(String) dt.get(0);
+            cad=cad.replace(" ", "");
+            System.out.println("Cadena:"+cad);
+            System.out.println("Nota:"+p.getNo_nota());
+            if (cad.equals(p.getNo_nota())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    }
+
 }
