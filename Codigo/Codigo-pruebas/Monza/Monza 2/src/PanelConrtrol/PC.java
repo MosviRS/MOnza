@@ -1500,7 +1500,7 @@ public class PC extends javax.swing.JFrame {
         conn= ManipulaDBC.conectaDB();;
         
                     JasperReport reporte = null;
-            String path = "src\\reportes\\reportEntregasHz.jasper";
+            String path ="C:\\Monza 2\\src\\reportes\\reportEntregasHz.jasper";
             
             Map parametro = new HashMap();
             //parametro.put("id_estado", 36);
@@ -1891,7 +1891,7 @@ public class PC extends javax.swing.JFrame {
         conn= ManipulaDBC.conectaDB();;
         
                     JasperReport reporte = null;
-            String path = "src\\reportes\\reportbitacora.jasper";
+            String path = "C:\\Monza 2\\src\\reportes\\reportbitacora.jasper";
             
             Map parametro = new HashMap();
             //parametro.put("id_estado", 36);
