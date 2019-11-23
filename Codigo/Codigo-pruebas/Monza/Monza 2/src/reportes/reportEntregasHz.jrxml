@@ -30,8 +30,8 @@ FROM
 	<title>
 		<band height="80" splitType="Stretch">
 			<image>
-				<reportElement x="0" y="0" width="70" height="41" uuid="e6bfc2f5-a1c7-4a5c-8bdd-051515c2b9a2"/>
-				<imageExpression><![CDATA["C:\\Users\\uriel\\Documents\\Personal\\MonReport.jpg"]]></imageExpression>
+				<reportElement x="0" y="0" width="138" height="79" uuid="e6bfc2f5-a1c7-4a5c-8bdd-051515c2b9a2"/>
+				<imageExpression><![CDATA["C:\\Monza 2\\src\\Imagen\\MonReport.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="250" y="27" width="253" height="25" uuid="045f76c0-d708-4ee9-ba8e-4e689d3c6b19"/>

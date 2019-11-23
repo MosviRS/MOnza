@@ -24,8 +24,8 @@ FROM
 	<title>
 		<band height="79" splitType="Stretch">
 			<image>
-				<reportElement x="0" y="0" width="70" height="41" uuid="d34a719c-4953-4c25-8ecc-bd5e096b7860"/>
-				<imageExpression><![CDATA["C:\\Users\\uriel\\Documents\\Personal\\MonReport.jpg"]]></imageExpression>
+				<reportElement x="0" y="0" width="119" height="79" uuid="d34a719c-4953-4c25-8ecc-bd5e096b7860"/>
+				<imageExpression><![CDATA["C:\\Monza 2\\src\\Imagen\\MonReport.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="204" y="27" width="164" height="25" uuid="3b44d85e-428c-418d-93ca-9df53fe7b318"/>
