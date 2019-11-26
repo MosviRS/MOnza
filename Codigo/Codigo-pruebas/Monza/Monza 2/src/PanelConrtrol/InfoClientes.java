@@ -113,7 +113,7 @@ public class InfoClientes extends javax.swing.JFrame {
         jLabel3.setText("Nombre");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 250, 20));
 
-        Name.setBackground(new java.awt.Color(242, 242, 242));
+        Name.setBackground(new java.awt.Color(243, 240, 235));
         Name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Name.setForeground(new java.awt.Color(102, 102, 102));
         Name.setText("Inserte Nombre");
@@ -189,7 +189,7 @@ public class InfoClientes extends javax.swing.JFrame {
         jLabel4.setText("Apellido Paterno");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 250, 20));
 
-        Ap.setBackground(new java.awt.Color(242, 242, 242));
+        Ap.setBackground(new java.awt.Color(243, 240, 235));
         Ap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Ap.setForeground(new java.awt.Color(102, 102, 102));
         Ap.setText("Inserte Apellido Paterno");
@@ -219,7 +219,7 @@ public class InfoClientes extends javax.swing.JFrame {
         jLabel5.setText("Apellido Materno");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 250, 20));
 
-        Am.setBackground(new java.awt.Color(242, 242, 242));
+        Am.setBackground(new java.awt.Color(243, 240, 235));
         Am.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Am.setForeground(new java.awt.Color(102, 102, 102));
         Am.setText("Inserte Apellido Materno");
@@ -253,7 +253,7 @@ public class InfoClientes extends javax.swing.JFrame {
         jLabel7.setText("Teléfono");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 250, -1));
 
-        tel.setBackground(new java.awt.Color(242, 242, 242));
+        tel.setBackground(new java.awt.Color(243, 240, 235));
         tel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tel.setForeground(new java.awt.Color(102, 102, 102));
         tel.setText("Inserte Telefono");

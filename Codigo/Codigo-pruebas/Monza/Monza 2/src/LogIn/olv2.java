@@ -286,7 +286,6 @@ public class olv2 extends javax.swing.JFrame {
         if(!Answer.getText().equals("") && !Answer.getText().equals("Ingrese la respuesta correcta")){
             if(Answer.getText().equals(mod.getRespuesta())){                
                 //Asignar nuevo Password                
-                
                 String decodedString=PasswordGenerator.getPassword(PasswordGenerator.MINUSCULAS+PasswordGenerator. MAYUSCULAS + PasswordGenerator.ESPECIALES,6);                
                 System.out.println("PASSSS:    "+ decodedString);                                                
                 System.out.println("antes   "+mod.getPassword());                
@@ -300,7 +299,8 @@ public class olv2 extends javax.swing.JFrame {
                 
                 
             }else{
-                JOptionPane.showMessageDialog(null,"\tLo siento \nLos Datos NO Coinciden");                
+                JOptionPane.showMessageDialog(null,"\t\tLo siento \nLos Datos NO Coinciden");                
+                Answer.setText("Ingrese la respuesta correcta");
             }
         }else if(!email.getText().equals("") && !email.getText().equals("Ingrese un correo electronico")){
             if(email.getText().equals(mod.getCorreo())){///
